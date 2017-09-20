@@ -1,0 +1,105 @@
+        <div id="wrap">
+			<div id="main-nav" class="">
+				<div class="container-fluid">
+					<div class="nav-header">
+						<a href="index.html" class="nav-brand">STELLA <span>SHOP</span></a>
+						<a class="nav-icon pull-right visible-xs menu-link" href="#"><i class="icon-menu2"></i></a>
+						<a class="nav-icon-outline cart pull-right" href="#"><i class="icon-cart"></i><span class="badge">3</span></a>
+					</div>
+				</div>
+			</div>
+
+			<div class="container-fluid title">
+				<div class="row">
+					<div class="col-sm-12">
+						<h2>Shopping Cart</h2>
+					</div>
+				</div>
+			</div>
+
+			<div class="container-fluid cart-list" ng-controller="CartController">
+				<div class="row">
+					<div class="col-sm-8">
+						<table class="table">
+						  <thead>
+							<tr>
+							  <th>Item</th>
+							  <th>Unit Cost</th>
+							  <th class="text-center">Quantity</th>
+							  <th class="text-right">Total</th>
+							  <th></th>
+							</tr>
+						  </thead>
+						  <tbody>
+							<tr ng:repeat="item in vm.invoice.items">
+	  	 						<td class="vert-align"><a href="{{ item.url }}.html">{{ item.title }}</a></td>
+								<td class="vert-align">{{ item.cost | currency }}</td>
+								<td class="text-center vert-align"><input type="number" min="1" max="9" ng-model="item.qty" ng-required class="form-control form-control-inline" style="width: 52px!important;"></td>
+								<td class="text-right vert-align">{{ item.qty * item.cost | currency }}</td>
+								<td class="text-center vert-align"><a ng-click="vm.removeItem($index)" class="remove-item"><i class="icon-close"></i></a></td>
+							</tr>
+<!-- 							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr> -->
+							<tr ng-if="total() == 0">
+								<td colspan="5">
+									<h2 class="text-center">Your cart is empty.</h2>
+								</td>
+							</tr>
+						  </tbody>
+						</table>
+
+						<h4>INTERNATIONAL ORDERS</h4>
+						<p>Shipping costs for international orders will be displayed at checkout.<br>
+						All international orders must have a ship-to destination outside of the United States. We cannot support customers with international billing addresses shipping to U.S. addresses.
+						</p>
+
+					</div>
+					<div class="col-sm-4 "  ng-if="vm.total() > 0">
+							<table class="table">
+							  <thead>
+								<tr>
+								  <th colspan="3" class="text-center">Order sumary</th>
+								</tr>
+							  </thead>
+							  <tbody>
+								<tr>
+								  <td>Sub total:</td>
+								  <td></td>
+								  <td class="text-right"><b>{{ vm.total() | currency }}</b></td>
+								</tr>
+								<tr>
+								  <td>Shipping cost:</td>
+								  <td></td>
+								  <td class="text-right">{{ vm.shiping() | currency }}</td>
+								</tr>
+								<tr>
+								  <td>Tax:</td>
+								  <td></td>
+								  <td class="text-right">{{ vm.tax | currency }}</td>
+								</tr>
+								<tr>
+								  <td>Total:</td>
+								  <td></td>
+								  <td id="total" class="text-right">{{ vm.total() + vm.shiping() + vm.tax | currency }}</td>
+								</tr>
+							  </tbody>
+							</table>
+
+							<a href="checkout.html" class="btn btn-right">Checkout</a>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-sm-12 text-center show-more">
+						<a href="index.html" class="btn btn-outline">Cancel and return to store</a>
+					</div>
+				</div>
+
+			</div>
+
+		</div>
