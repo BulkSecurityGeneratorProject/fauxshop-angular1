@@ -31,7 +31,7 @@
 							</tr>
 						  </thead>
 						  <tbody>
-							<tr ng:repeat="item in vm.invoice.items">
+							<tr ng-repeat="item in vm.invoice.items">
 	  	 						<td class="vert-align"><a href="{{ item.url }}.html">{{ item.title }}</a></td>
 								<td class="vert-align">{{ item.cost | currency }}</td>
 								<td class="text-center vert-align"><input type="number" min="1" max="9" ng-model="item.qty" ng-required class="form-control form-control-inline" style="width: 52px!important;"></td>
@@ -90,7 +90,7 @@
 							  </tbody>
 							</table>
 
-							<a href="checkout.html" class="btn btn-right">Checkout</a>
+							<a ui-sref="checkout" class="btn btn-right">Checkout</a>
 					</div>
 				</div>
 
