@@ -33,7 +33,7 @@
 
             checkoutThing1.query();
             checkoutThing1.save();
-            checkoutThing1.get();
+//            checkoutThing1.get();
 
         }
     }
