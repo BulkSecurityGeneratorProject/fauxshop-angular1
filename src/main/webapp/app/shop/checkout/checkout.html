@@ -20,7 +20,7 @@
 			<div class="container-fluid cart-list">
 				<div class="row">
 					<div class="col-sm-6">
-						<form action="checkout.html" method="post" novalidate id="order-form" class="myform">
+                        <form class="form" role="form" ng-submit="vm.checkout($event)">
 							<h3 class="text-center">Delivery address</h3>
 							<div class="row">
 								<div class="col-sm-6">
@@ -124,7 +124,7 @@
 							  </tbody>
 							</table>
 
-							<a href="checkout2.html" class="btn btn-right">Continue to next step</a>
+							<a ui-sref="checkout2" class="btn btn-right">Continue to next step</a>
 					</div>
 				</div>
 

@@ -5,19 +5,17 @@
         .module('fauxshopApp')
         .controller('CheckoutController', CheckoutController);
 
-    CheckoutController.$inject = ['$stateParams', 'Auth', 'LoginService'];
+    CheckoutController.$inject = ['$stateParams', 'CheckoutService'];
 
-    function CheckoutController ($stateParams, Auth, LoginService) {
+    function CheckoutController ($stateParams, CheckoutService) {
         var vm = this;
 
-        Auth.activateAccount({key: $stateParams.key}).then(function () {
-            vm.error = null;
-            vm.success = 'OK';
-        }).catch(function () {
-            vm.success = null;
-            vm.error = 'ERROR';
-        });
+        vm.checkout = checkout;
 
-        vm.login = LoginService.open;
+        function checkout (event) {
+            console.log("FUCK YEAH");
+            CheckoutService.checkoutThing();
+            console.log("WE MADE IT");
+        }
     }
 })();
