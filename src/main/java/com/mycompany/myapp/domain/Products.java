@@ -9,10 +9,12 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.*;
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.HashSet;
 import java.util.Locale;
@@ -33,10 +35,48 @@ public class Products extends AbstractAuditingEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long productsId;
 
-    @NotNull
     @Size(min = 1, max = 4)
     @Column(length = 4, nullable = false)
     private Integer productsQuantity;
+
+    @Size(max = 12)
+    @Column(name = "products_model", length = 12)
+    private String productsModel;
+
+    @Size(max = 64)
+    @Column(name = "products_image", length = 64)
+    private String productsImage;
+
+    @Digits(integer = 10, fraction = 2)
+    @Column(name = "products_price", length = 64)
+    private BigDecimal productsPrice;
+
+    @Column(name = "products_date_added")
+    private Instant productsDateAdded = null;
+
+    @Column(name = "products_last_modified")
+    private Instant productsLastModified = null;
+
+    @Column(name = "products_date_available")
+    private Instant productsDateAvailable = null;
+
+    @Digits(integer = 5, fraction = 2)
+    @Column(name = "products_weight", length = 64)
+    private BigDecimal productsWeight;
+
+    @NotNull
+    @Column(name = "products_status", nullable = false)
+    private boolean productsStatus = false;
+
+    @NotNull
+    @Size(min = 1, max = 5)
+    @Column(name = "products_tax_class_id", length = 4, nullable = false)
+    private Integer productsTaxClassId;
+
+    @NotNull
+    @Size(min = 1, max = 5)
+    @Column(name = "manufacturers_id", length = 4, nullable = false)
+    private Integer manufacturersId;
 
     public Long getProductsId() {
         return productsId;
@@ -52,6 +92,46 @@ public class Products extends AbstractAuditingEntity implements Serializable {
 
     public void setProductsQuantity(Integer id) {
         this.productsQuantity = productsQuantity;
+    }
+
+    public String getProductsModel() {
+        return productsModel;
+    }
+
+    public String getProductsImage() {
+        return productsImage;
+    }
+
+    public BigDecimal getProductsPrice() {
+        return productsPrice;
+    }
+
+    public Instant getProductsDateAdded() {
+        return productsDateAdded;
+    }
+
+    public Instant getProductsLastModified() {
+        return productsLastModified;
+    }
+
+    public Instant getProductsDateAvailable() {
+        return productsDateAvailable;
+    }
+
+    public BigDecimal getProductsWeight() {
+        return productsWeight;
+    }
+
+    public boolean isProductsStatus() {
+        return productsStatus;
+    }
+
+    public Integer getProductsTaxClassId() {
+        return productsTaxClassId;
+    }
+
+    public Integer getManufacturersId() {
+        return manufacturersId;
     }
 
     @Override
@@ -71,5 +151,4 @@ public class Products extends AbstractAuditingEntity implements Serializable {
     public int hashCode() {
         return Objects.hashCode(getProductsId());
     }
-
 }
