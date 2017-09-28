@@ -3,19 +3,18 @@
 
     angular
         .module('fauxshopApp')
-        .controller('Product1Controller', ProductController);
+        .controller('ProductController', ProductController);
 
-    ProductController.$inject = ['$scope', 'Principal', '$state'];
+    ProductController.$inject = ['$scope', 'Principal', 'ProductsService', '$state'];
 
-    function ProductController ($scope, Principal, $state) {
+    function ProductController ($scope, Principal, ProductsService, $state) {
         var vm = this;
 
-        vm.account = null;
-        vm.isAuthenticated = null;
-        vm.login = LoginService.open;
-        vm.register = register;
-        $scope.$on('authenticationSuccess', function() {
-            getAccount();
-        });
+
+        vm.product = getProductsByProductsId();
+
+        function getProductsByProductsId () {
+            vm.product = ProductsService.getProductsByProductsId();
+        }
     }
 })();

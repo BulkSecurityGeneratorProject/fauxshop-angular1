@@ -43,7 +43,7 @@ public class ProductsService {
         this.productsRepository = productsRepository;
     }
 
-    public Optional<Products> getProductByProductId(Long productId) {
-        return productsRepository.findOneByProductId(productId);
+    public Optional<Products> getProductsByProductsId(Long productsId) {
+        return productsRepository.findOneByProductsId(productsId);
     }
 }

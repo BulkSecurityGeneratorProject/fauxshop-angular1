@@ -7,10 +7,8 @@ import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.*;
 
 /**
@@ -29,16 +27,16 @@ public class ProductsResource {
     }
 
     /**
-     * GET  /products/{productId} : activate the registered user.
+     * GET  /products/{productsId} : activate the registered user.
      *
-     * @param productId the productId (primary key)
-     * @return the ResponseEntity with status 200 (OK) and the activated user in body, or status 500 (Internal Server Error) if the user couldn't be activated
+     * @param productsId the productsId (primary key)
+     * @return the ResponseEntity with status 200 (OK) and the activated user in body, or status 500 (Internal Server Error)
      */
-    @GetMapping("/products/{productId}")
+    @GetMapping("/products/{productsId}")
     @Timed
-    public ResponseEntity<ProductsDTO> getProduct(@RequestParam(value = "productId") Long productId) {
+    public ResponseEntity<ProductsDTO> getProduct(@PathVariable("productsId") Long productsId) {
         return ResponseUtil.wrapOrNotFound(
-            productsService.getProductByProductId(productId)
+            productsService.getProductsByProductsId(productsId)
                 .map(ProductsDTO::new));
     }
 }

@@ -9,8 +9,8 @@ import java.util.Optional;
 /**
  * Spring Data JPA repository for the Authority entity.
  */
-public interface ProductsRepository extends JpaRepository<Authority, String> {
+public interface ProductsRepository extends JpaRepository<Products, String> {
 
-    Optional<Products> findOneByProductId(Long productId);
+    Optional<Products> findOneByProductsId(Long productsId);
 
 }
