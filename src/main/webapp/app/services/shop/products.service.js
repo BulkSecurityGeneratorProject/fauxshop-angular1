@@ -15,19 +15,18 @@
 
         return service;
 
-        function getProductsByProductsId () {
-            var getProductsByProductsId = $resource('api/products/1', {}, {
-                'get': { method: 'GET', params: {}, isArray: false,
-                    interceptor: {
-                        response: function(response) {
-                            // expose response
-                            return response;
-                        }
+        function getProductsByProductsId (productsId) {
+            var getProductsByProductsId = $resource('api/products/' + productsId, {}, {
+                'get': {
+                    method: 'GET',
+                    transformResponse: function (data) {
+                        data = angular.fromJson(data);
+                        return data;
                     }
                 }
             });
 
-            getProductsByProductsId.get();
+            return getProductsByProductsId;
         }
     }
 })();

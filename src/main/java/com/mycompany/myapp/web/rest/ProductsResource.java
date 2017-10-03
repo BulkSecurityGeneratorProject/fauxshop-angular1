@@ -35,8 +35,13 @@ public class ProductsResource {
     @GetMapping("/products/{productsId}")
     @Timed
     public ResponseEntity<ProductsDTO> getProduct(@PathVariable("productsId") Long productsId) {
-        return ResponseUtil.wrapOrNotFound(
+
+        ResponseEntity<ProductsDTO> productsDTO = ResponseUtil.wrapOrNotFound(
             productsService.getProductsByProductsId(productsId)
                 .map(ProductsDTO::new));
+
+        log.error(productsDTO.toString());
+
+        return productsDTO;
     }
 }
