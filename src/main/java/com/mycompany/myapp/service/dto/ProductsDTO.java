@@ -1,6 +1,7 @@
 package com.mycompany.myapp.service.dto;
 
 import com.mycompany.myapp.domain.Products;
+import com.mycompany.myapp.domain.ProductsDescription;
 
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
@@ -48,18 +49,41 @@ public class ProductsDTO {
     @Size(min = 1, max = 5)
     private Integer manufacturersId;
 
-    public ProductsDTO() {
+    private String productsDescription;
+
+    private String productsName;
+
+    private String productsURL;
+
+    private Integer productsViewed;
+
+    public ProductsDTO(Long productsId, Integer productsQuantity, String productsModel, String productsImage, BigDecimal productsPrice, Instant productsDateAdded, Instant productsLastModified, Instant productsDateAvailable, BigDecimal productsWeight, boolean productsStatus, Integer productsTaxClassId, Integer manufacturersId) {
         // Empty constructor needed for Jackson.
     }
 
     // This should have a .collect at the end. I'm not sure why that's not working.
-    public ProductsDTO(Products product) {
-        this(product.getProductsId(), product.getProductsQuantity(), product.getProductsModel(), product.getProductsImage(), product.getProductsPrice(),
-            product.getProductsDateAdded(), product.getProductsLastModified(), product.getProductsDateAvailable(), product.getProductsWeight(),
-            product.isProductsStatus(), product.getProductsTaxClassId(), product.getManufacturersId());
+    public ProductsDTO(Products products) {
+        this(products.getProductsId(), products.getProductsQuantity(), products.getProductsModel(), products.getProductsImage(), products.getProductsPrice(),
+            products.getProductsDateAdded(), products.getProductsLastModified(), products.getProductsDateAvailable(), products.getProductsWeight(),
+            products.isProductsStatus(), products.getProductsTaxClassId(), products.getManufacturersId());
     }
 
-    public ProductsDTO(Long productsId, Integer productsQuantity, String productsModel, String productsImage, BigDecimal productsPrice, Instant productsDateAdded, Instant productsLastModified, Instant productsDateAvailable, BigDecimal productsWeight, boolean productsStatus, Integer productsTaxClassId, Integer manufacturersId) {
+    public ProductsDTO(ProductsDescription prodDescription) {
+        this.productsDescription = prodDescription.getProductsDescription();
+        this.productsName = prodDescription.getProductsName();
+        this.productsURL = prodDescription.getProductsURL();
+        this.productsViewed = prodDescription.getProductsViewed();
+    }
+
+    public ProductsDTO(Products products, ProductsDescription productsDescription) {
+        this(products.getProductsId(), products.getProductsQuantity(), products.getProductsModel(), products.getProductsImage(), products.getProductsPrice(),
+            products.getProductsDateAdded(), products.getProductsLastModified(), products.getProductsDateAvailable(), products.getProductsWeight(),
+            products.isProductsStatus(), products.getProductsTaxClassId(), products.getManufacturersId(),
+            productsDescription.getProductsDescription(), productsDescription.getProductsName(), productsDescription.getProductsURL(),
+            productsDescription.getProductsViewed());
+    }
+
+    public ProductsDTO(Long productsId, Integer productsQuantity, String productsModel, String productsImage, BigDecimal productsPrice, Instant productsDateAdded, Instant productsLastModified, Instant productsDateAvailable, BigDecimal productsWeight, boolean productsStatus, Integer productsTaxClassId, Integer manufacturersId, String productsDescription, String productsName, String productsURL, Integer productsViewed) {
         this.productsId = productsId;
         this.productsQuantity = productsQuantity;
         this.productsModel = productsModel;
@@ -72,6 +96,10 @@ public class ProductsDTO {
         this.productsStatus = productsStatus;
         this.productsTaxClassId = productsTaxClassId;
         this.manufacturersId = manufacturersId;
+        this.productsDescription = productsDescription;
+        this.productsName = productsName;
+        this.productsURL = productsURL;
+        this.productsViewed = productsViewed;
     }
 
     public Long getProductsId() {
@@ -170,6 +198,39 @@ public class ProductsDTO {
         this.manufacturersId = manufacturersId;
     }
 
+
+    public String getProductsDescription() {
+        return productsDescription;
+    }
+
+    public void setProductsDescription(String productsDescription) {
+        this.productsDescription = productsDescription;
+    }
+
+    public String getProductsName() {
+        return productsName;
+    }
+
+    public void setProductsName(String productsName) {
+        this.productsName = productsName;
+    }
+
+    public String getProductsURL() {
+        return productsURL;
+    }
+
+    public void setProductsURL(String productsURL) {
+        this.productsURL = productsURL;
+    }
+
+    public Integer getProductsViewed() {
+        return productsViewed;
+    }
+
+    public void setProductsViewed(Integer productsViewed) {
+        this.productsViewed = productsViewed;
+    }
+
     @Override
     public String toString() {
         return "ProductsDTO{" +
@@ -185,6 +246,10 @@ public class ProductsDTO {
             ", productsStatus=" + productsStatus +
             ", productsTaxClassId=" + productsTaxClassId +
             ", manufacturersId=" + manufacturersId +
+            ", productsDescription='" + productsDescription + '\'' +
+            ", productsName='" + productsName + '\'' +
+            ", productsURL='" + productsURL + '\'' +
+            ", productsViewed=" + productsViewed +
             '}';
     }
 }

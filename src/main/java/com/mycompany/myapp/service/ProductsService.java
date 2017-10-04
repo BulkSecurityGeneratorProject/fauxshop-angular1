@@ -3,12 +3,15 @@ package com.mycompany.myapp.service;
 import com.mycompany.myapp.config.Constants;
 import com.mycompany.myapp.domain.Authority;
 import com.mycompany.myapp.domain.Products;
+import com.mycompany.myapp.domain.ProductsDescription;
 import com.mycompany.myapp.domain.User;
 import com.mycompany.myapp.repository.AuthorityRepository;
+import com.mycompany.myapp.repository.ProductsDescriptionRepository;
 import com.mycompany.myapp.repository.ProductsRepository;
 import com.mycompany.myapp.repository.UserRepository;
 import com.mycompany.myapp.security.AuthoritiesConstants;
 import com.mycompany.myapp.security.SecurityUtils;
+import com.mycompany.myapp.service.dto.ProductsDTO;
 import com.mycompany.myapp.service.dto.UserDTO;
 import com.mycompany.myapp.service.util.RandomUtil;
 import org.slf4j.Logger;
@@ -39,7 +42,7 @@ public class ProductsService {
 
     private final ProductsRepository productsRepository;
 
-    public ProductsService(ProductsRepository productsRepository) {
+    public ProductsService(ProductsRepository productsRepository, ProductsDescriptionRepository productsDescriptionRepository) {
         this.productsRepository = productsRepository;
     }
 
