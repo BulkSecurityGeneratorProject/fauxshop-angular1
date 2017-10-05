@@ -42,13 +42,6 @@
                               <td class="text-right vert-align">{{ cartInvoice.cartItemQuantity * cartInvoice.productsPrice | currency }}</td>
                               <td class="text-center vert-align"><a ng-click="vm.removeItem($index)" class="remove-item"><i class="icon-close"></i></a></td>
                           </tr>
-<!-- 							<tr>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr> -->
 							<tr ng-if="total() == 0">
 								<td colspan="5">
 									<h2 class="text-center">Your cart is empty.</h2>

@@ -17,7 +17,6 @@
         vm.cartInvoices = null;
         $scope.$on('authenticationSuccess', function() {
             getAccount();
-            getCartInvoices();
         });
 
         getAccount();
@@ -44,7 +43,9 @@
         Principal.identity().then(function(account) {
             vm.account = account;
             vm.isAuthenticated = Principal.isAuthenticated;
-            getCartInvoices();
+            if (vm.account != null){
+                getCartInvoices();
+            }
         });
     }
 
@@ -66,8 +67,8 @@
 
 	vm.total = function() {
 		var total = 0;
-		angular.forEach(vm.invoice.items, function(item) {
-				total += item.qty * item.cost;
+		angular.forEach(vm.cartInvoices, function(item) {
+				total += item.cartItemQuantity * item.productsPrice;
 		})
 		return total;
 	}
