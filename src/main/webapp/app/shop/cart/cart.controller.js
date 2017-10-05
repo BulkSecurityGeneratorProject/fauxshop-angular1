@@ -5,10 +5,22 @@
         .module('fauxshopApp')
         .controller('CartController', CartController);
 
-    CartController.$inject = ['$stateParams', 'Auth', 'LoginService'];
+    CartController.$inject = ['$stateParams', '$scope', 'Auth', 'LoginService', 'CartService', 'ProductsService', 'User', 'Principal'];
 
-    function CartController ($stateParams, Auth, LoginService) {
+    function CartController ($stateParams, $scope, Auth, LoginService, CartService, ProductsService, User, Principal) {
         var vm = this;
+
+        vm.account = null;
+        vm.isAuthenticated = null;
+        vm.login = LoginService.open;
+        vm.register = register;
+        vm.cartInvoices = null;
+        $scope.$on('authenticationSuccess', function() {
+            getAccount();
+            getCartInvoices();
+        });
+
+        getAccount();
 
     vm.tax = 20;
 	vm.invoice = {
@@ -27,6 +39,26 @@
 				url: 'product3'}
 				]
 	};
+
+    function getAccount() {
+        Principal.identity().then(function(account) {
+            vm.account = account;
+            vm.isAuthenticated = Principal.isAuthenticated;
+            getCartInvoices();
+        });
+    }
+
+    function register () {
+        $state.go('register');
+    }
+
+    function getCartInvoices() {
+        vm.cartInvoices = CartService.getCartByUserId(vm.account.id).get();
+    }
+
+    function getProductData(productId) {
+        vm.productData = ProductsService.getProductsByProductsId(productId).get();
+    }
 
 	vm.removeItem = function(index) {
 		vm.invoice.items.splice(index, 1);
