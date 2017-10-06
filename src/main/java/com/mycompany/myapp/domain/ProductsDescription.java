@@ -5,6 +5,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 import javax.validation.constraints.Digits;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
@@ -35,7 +36,7 @@ public class ProductsDescription extends AbstractAuditingEntity implements Seria
     @Column(name = "products_url", length = 255)
     private String productsURL;
 
-    @Size(min = 1, max = 5)
+    @Min(1)
     @Column(name = "products_viewed", length = 4, nullable = false)
     private Integer productsViewed;
 

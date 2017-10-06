@@ -50,7 +50,7 @@
                         <li>Small: 6.5" diameter, 7" high</li>
                     </ul>
                 </div>
-                <form  action="product1.html" method="POST" class="myform">
+                <form class="myform" role="form" ng-submit="vm.addToCart()">
                     <div class="form-group clearfix">
                         <label class="control-label">Size</label>
                         <select class="form-control">
@@ -70,7 +70,7 @@
                     </ul>
 
                     <div class="product-btn">
-                        <a href="" class="btn">Add To Cart</a>
+                        <button ng-click ng-click="vm.something" class="btn">Add To Cart</button>
                     </div>
                 </form>
             </div>

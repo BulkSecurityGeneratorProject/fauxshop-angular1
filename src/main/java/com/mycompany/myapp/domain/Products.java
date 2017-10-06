@@ -9,10 +9,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.*;
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.Instant;
@@ -35,7 +32,7 @@ public class Products extends AbstractAuditingEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long productsId;
 
-    @Size(min = 1, max = 4)
+    @Min(1)
     @Column(length = 4, nullable = false)
     private Integer productsQuantity;
 
@@ -69,12 +66,12 @@ public class Products extends AbstractAuditingEntity implements Serializable {
     private boolean productsStatus = false;
 
     @NotNull
-    @Size(min = 1, max = 5)
+    @Min(1)
     @Column(name = "products_tax_class_id", length = 4, nullable = false)
     private Integer productsTaxClassId;
 
     @NotNull
-    @Size(min = 1, max = 5)
+    @Min(1)
     @Column(name = "manufacturers_id", length = 4, nullable = false)
     private Integer manufacturersId;
 

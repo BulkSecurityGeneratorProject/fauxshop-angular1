@@ -9,7 +9,8 @@
 
     function CartService ($http, $resource) {
         var service = {
-            getCartByUserId: getCartByUserId
+            getCartByUserId: getCartByUserId,
+            addToCart: addToCart
         };
 
         return service;
@@ -27,6 +28,13 @@
             });
 
             return cartByUserId;
+        }
+
+        function addToCart(id, productId, productQuantity) {
+            var addToCart = $resource('api/cart/' + id + '/' + productId + '/' + productQuantity, {}, {
+                'save': { method:'POST' }
+            });
+            return addToCart
         }
     }
 })();

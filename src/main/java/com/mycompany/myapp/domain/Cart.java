@@ -4,9 +4,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.Instant;
@@ -31,7 +29,7 @@ public class Cart extends AbstractAuditingEntity implements Serializable {
     @JoinColumn(name = "productsId")
     private Long productsId;
 
-    @Size(min = 1, max = 4)
+    @Min(1)
     @Column(name = "cart_item_quantity", length = 4, nullable = false)
     private Integer cartItemQuantity;
 
@@ -63,6 +61,22 @@ public class Cart extends AbstractAuditingEntity implements Serializable {
         return cartItemTotalPrice;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setProductsId(Long productsId) {
+        this.productsId = productsId;
+    }
+
+    public void setCartItemQuantity(Integer cartItemQuantity) {
+        this.cartItemQuantity = cartItemQuantity;
+    }
+
+    public void setCartItemTotalPrice(BigDecimal cartItemTotalPrice) {
+        this.cartItemTotalPrice = cartItemTotalPrice;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -70,11 +84,15 @@ public class Cart extends AbstractAuditingEntity implements Serializable {
 
         Cart cart = (Cart) o;
 
-        return cartId != null ? cartId.equals(cart.cartId) : cart.cartId == null;
+        if (id != null ? !id.equals(cart.id) : cart.id != null) return false;
+        return productsId != null ? productsId.equals(cart.productsId) : cart.productsId == null;
     }
 
     @Override
     public int hashCode() {
-        return cartId != null ? cartId.hashCode() : 0;
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (productsId != null ? productsId.hashCode() : 0);
+        return result;
     }
+
 }

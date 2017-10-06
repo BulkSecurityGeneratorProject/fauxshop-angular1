@@ -1,10 +1,7 @@
 package com.mycompany.myapp.service;
 
 import com.mycompany.myapp.domain.Cart;
-import com.mycompany.myapp.domain.Products;
 import com.mycompany.myapp.repository.CartRepository;
-import com.mycompany.myapp.repository.ProductsDescriptionRepository;
-import com.mycompany.myapp.repository.ProductsRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -32,4 +29,7 @@ public class CartService {
         return cartRepository.findAllById(id);
     }
 
+    public Cart save(Cart cartRecord) {
+        return cartRepository.save(cartRecord);
+    }
 }
