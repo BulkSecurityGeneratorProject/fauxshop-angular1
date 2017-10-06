@@ -34,8 +34,8 @@
         });
     }
 
-    function addToCart() {
-        CartService.addToCart(vm.account.id, 1, 1).save();
+    function addToCart(productId) {
+        CartService.addToCart(vm.account.id, productId, 1).save();
     }
 
     }
