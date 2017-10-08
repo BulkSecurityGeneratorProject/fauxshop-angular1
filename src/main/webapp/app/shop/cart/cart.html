@@ -72,7 +72,7 @@
 								<tr>
 								  <td>Shipping cost:</td>
 								  <td></td>
-								  <td class="text-right">{{ vm.shiping() | currency }}</td>
+								  <td class="text-right">{{ vm.shipping() | currency }}</td>
 								</tr>
 								<tr>
 								  <td>Tax:</td>
@@ -82,7 +82,7 @@
 								<tr>
 								  <td>Total:</td>
 								  <td></td>
-								  <td id="total" class="text-right">{{ vm.total() + vm.shiping() + vm.tax | currency }}</td>
+								  <td id="total" class="text-right">{{ vm.total() + vm.shipping() + vm.tax | currency }}</td>
 								</tr>
 							  </tbody>
 							</table>

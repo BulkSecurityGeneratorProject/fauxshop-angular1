@@ -79,15 +79,15 @@
 		return total;
 	}
 
-	vm.shiping = function() {
-		var shiping = 0;
+	vm.shipping = function() {
+		var shipping = 0;
 
 		if(vm.total() < 100) {
-			shiping = 25;
+			shipping = 25;
 		} else {
-			shiping = 0;
+			shipping = 0;
 		}
-		return shiping;
+		return shipping;
 	}
 
         Auth.activateAccount({key: $stateParams.key}).then(function () {

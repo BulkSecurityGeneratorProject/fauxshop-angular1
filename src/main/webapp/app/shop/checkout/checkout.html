@@ -26,32 +26,28 @@
 								<div class="col-sm-6">
 									<div class="form-group">
 										<label class="control-label">First name</label>
-										<input name="name" placeholder="First Name" class="form-control" type="text">
+										<input ng-model="vm.firstName" name="firstName" placeholder="First Name" class="form-control" type="text">
 									</div>
 								</div>
 								<div class="col-sm-6">
 									<div class="form-group">
 										<label class="control-label">Last Name</label>
-										<input name="name2" placeholder="Last Name" class="form-control" type="text">
+										<input ng-model="vm.lastName" name="lastName" placeholder="Last Name" class="form-control" type="text">
 									</div>
 								</div>
 							</div>
 
 							<div class="form-group">
 								<label class="control-label">Email</label>
-								<input name="email" placeholder="Email" class="form-control" type="text">
-							</div>
-							<div class="form-group">
-								<label class="control-label">Company</label>
-								<input name="Company" placeholder="Company" class="form-control" type="text">
+								<input ng-model="vm.email" name="email" placeholder="Email" class="form-control" type="text">
 							</div>
 							<div class="form-group">
 								<label class="control-label">Address</label>
-								<input name="street" placeholder="Address" class="form-control" type="text">
+								<input ng-model="vm.address1" name="address1" placeholder="Address" class="form-control" type="text">
 							</div>
 							<div class="form-group">
 								<label class="control-label">Address2</label>
-								<input name="street" placeholder="Address2" class="form-control" type="text">
+								<input ng-model="vm.address2" name="address2" placeholder="Address2" class="form-control" type="text">
 							</div>
 							<div class="form-group">
 								<label class="control-label">City</label>
@@ -85,41 +81,32 @@
 								</tr>
 							  </thead>
 
+                                <tr ng-repeat="cartInvoice in vm.cartInvoices">
+                                    <td class="vert-align">{{cartInvoice.productsName}}</td>
+                                    <td class="vert-align">{{cartInvoice.cartItemQuantity}}x</td>
+                                    <td class="vert-align text-right">{{cartInvoice.cartItemTotalPrice | currency }}</td>
+                                </tr>
+
 							  <tbody>
-								<tr>
-								  <td class="vert-align">Tuscan urns</td>
-								  <td class="vert-align">1x</td>
-								  <td class="vert-align text-right">$14.00</td>
-								</tr>
-								<tr>
-								  <td class="vert-align">Bosphorus bowls</td>
-								  <td class="vert-align">2x</td>
-								  <td class="vert-align text-right">$28.00</td>
-								</tr>
-								<tr>
-								  <td class="vert-align">Langdon vases</td>
-								  <td class="vert-align">1x</td>
-								  <td class="vert-align text-right">$24.00</td>
-								</tr>
 								<tr>
 								  <td class="vert-align"><b>Cart subtotal</b></td>
 								  <td class="vert-align"></td>
-								  <td class="vert-align text-right"><b>$94.00</b></td>
+								  <td class="vert-align text-right"><b>{{ vm.total() | currency }}</b></td>
 								</tr>
 								<tr>
 								  <td class="vert-align">Shipping cost:</td>
 								  <td class="vert-align"></td>
-								  <td class="vert-align text-right">$25.00</td>
+								  <td class="vert-align text-right">{{ vm.shipping() | currency }}</td>
 								</tr>
 								<tr>
 								  <td class="vert-align">Tax:</td>
 								  <td class="vert-align"></td>
-								  <td class="vert-align text-right">$20.00</td>
+								  <td class="vert-align text-right">{{ vm.tax | currency }}</td>
 								</tr>
 								<tr>
 								  <td class="vert-align">Total:</td>
 								  <td class="vert-align"></td>
-								  <td class="vert-align text-right" id="total">$139.00</td>
+								  <td class="vert-align text-right" id="total">{{ vm.total() + vm.shipping() + vm.tax | currency }}</td>
 								</tr>
 							  </tbody>
 							</table>
