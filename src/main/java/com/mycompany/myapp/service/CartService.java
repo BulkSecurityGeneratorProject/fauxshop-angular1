@@ -29,7 +29,16 @@ public class CartService {
         return cartRepository.findAllById(id);
     }
 
+    public Cart findOneById(Long cartId) {
+        return cartRepository.findOneByCartId(cartId);
+    }
+
     public Cart save(Cart cartRecord) {
         return cartRepository.save(cartRecord);
     }
+
+    public void remove(Cart cartRecord) {
+        cartRepository.delete(cartRecord);
+    }
+
 }
