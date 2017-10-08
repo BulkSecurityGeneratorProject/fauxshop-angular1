@@ -10,7 +10,8 @@
     function CartService ($http, $resource) {
         var service = {
             getCartByUserId: getCartByUserId,
-            addToCart: addToCart
+            addToCart: addToCart,
+            removeFromCart: removeFromCart
         };
 
         return service;
@@ -35,6 +36,13 @@
                 'save': { method:'POST' }
             });
             return addToCart
+        }
+
+        function removeFromCart(cartId) {
+            var removeFromCart = $resource('api/cart/' + cartId, {}, {
+                'post': { method:'POST' }
+            });
+            return removeFromCart
         }
     }
 })();

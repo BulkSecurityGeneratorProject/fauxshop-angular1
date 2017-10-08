@@ -36,11 +36,12 @@
 						  <tbody>
                           {{cartInvoice}}
                           <tr ng-repeat="cartInvoice in vm.cartInvoices">
-                              <td class="vert-align"><a href="{{ item.url }}.html">{{cartInvoice.productsName}}</a></td>
+                              <td class="vert-align"><a ui-sref="{{cartInvoice.productsURL}}">{{cartInvoice.productsName}}</a></td>
                               <td class="vert-align">{{ cartInvoice.productsPrice | currency }}</td>
                               <td class="text-center vert-align"><input type="number" min="1" max="100" ng-model="cartInvoice.cartItemQuantity" ng-required class="form-control form-control-inline" style="width: 52px!important;"></td>
                               <td class="text-right vert-align">{{ cartInvoice.cartItemQuantity * cartInvoice.productsPrice | currency }}</td>
-                              <td class="text-center vert-align"><a ng-click="vm.removeItem($index)" class="remove-item"><i class="icon-close"></i></a></td>
+                              <td class="text-center vert-align"><a ng-click="vm.removeFromCart($index, cartInvoice.cartId)" class="remove-item"><i class="icon-close"></i></a></td>
+                              <!--ng-click="vm.removeItem($index)"-->
                           </tr>
 							<tr ng-if="total() == 0">
 								<td colspan="5">
