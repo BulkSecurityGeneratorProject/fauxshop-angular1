@@ -36,8 +36,12 @@ public class Orders extends AbstractAuditingEntity implements Serializable {
     private String customerName;
 
     @Size(max = 64)
-    @Column(name = "customer_street_address", length = 64)
-    private String customerStreetAddress;
+    @Column(name = "customer_address_1", length = 64)
+    private String customerAddress1;
+
+    @Size(max = 64)
+    @Column(name = "customer_address_2", length = 64)
+    private String customerAddress2;
 
     @Size(max = 32)
     @Column(name = "customer_suburb", length = 32)
@@ -72,12 +76,12 @@ public class Orders extends AbstractAuditingEntity implements Serializable {
     private String deliveryName;
 
     @Size(max = 64)
-    @Column(name = "delivery_street_address", length = 64)
-    private String deliveryStreetAddress;
+    @Column(name = "delivery_address_1", length = 64)
+    private String deliveryAddress1;
 
-    @Size(max = 32)
-    @Column(name = "delivery_suburb", length = 32)
-    private String deliverySuburb;
+    @Size(max = 64)
+    @Column(name = "delivery_address_2", length = 64)
+    private String deliveryAddress2;
 
     @Size(max = 32)
     @Column(name = "delivery_city", length = 32)
@@ -135,7 +139,7 @@ public class Orders extends AbstractAuditingEntity implements Serializable {
     @LastModifiedDate
     @Column(name = "order_date_finished")
     @JsonIgnore
-    private Instant order_date_finished;
+    private Instant orderDateFinished;
 
     @Size(max = 5000)
     @Column(name = "comments", length = 5000)
@@ -165,12 +169,20 @@ public class Orders extends AbstractAuditingEntity implements Serializable {
         this.customerName = customerName;
     }
 
-    public String getCustomerStreetAddress() {
-        return customerStreetAddress;
+    public String getCustomerAddress1() {
+        return customerAddress1;
     }
 
-    public void setCustomerStreetAddress(String customerStreetAddress) {
-        this.customerStreetAddress = customerStreetAddress;
+    public void setCustomerAddress1(String customerAddress1) {
+        this.customerAddress1 = customerAddress1;
+    }
+
+    public String getCustomerAddress2() {
+        return customerAddress2;
+    }
+
+    public void setCustomerAddress2(String customerAddress2) {
+        this.customerAddress2 = customerAddress2;
     }
 
     public String getCustomerSuburb() {
@@ -237,20 +249,20 @@ public class Orders extends AbstractAuditingEntity implements Serializable {
         this.deliveryName = deliveryName;
     }
 
-    public String getDeliveryStreetAddress() {
-        return deliveryStreetAddress;
+    public String getDeliveryAddress1() {
+        return deliveryAddress1;
     }
 
-    public void setDeliveryStreetAddress(String deliveryStreetAddress) {
-        this.deliveryStreetAddress = deliveryStreetAddress;
+    public void setDeliveryAddress1(String deliveryAddress1) {
+        this.deliveryAddress1 = deliveryAddress1;
     }
 
-    public String getDeliverySuburb() {
-        return deliverySuburb;
+    public String getDeliveryAddress2() {
+        return deliveryAddress2;
     }
 
-    public void setDeliverySuburb(String deliverySuburb) {
-        this.deliverySuburb = deliverySuburb;
+    public void setDeliveryAddress2(String deliveryAddress2) {
+        this.deliveryAddress2 = deliveryAddress2;
     }
 
     public String getDeliveryCity() {
@@ -357,12 +369,12 @@ public class Orders extends AbstractAuditingEntity implements Serializable {
         this.orderStatus = orderStatus;
     }
 
-    public Instant getOrder_date_finished() {
-        return order_date_finished;
+    public Instant getOrderDateFinished() {
+        return orderDateFinished;
     }
 
-    public void setOrder_date_finished(Instant order_date_finished) {
-        this.order_date_finished = order_date_finished;
+    public void setOrderDateFinished(Instant orderDateFinished) {
+        this.orderDateFinished = orderDateFinished;
     }
 
     public String getComments() {
@@ -387,4 +399,5 @@ public class Orders extends AbstractAuditingEntity implements Serializable {
     public int hashCode() {
         return orderId != null ? orderId.hashCode() : 0;
     }
+
 }

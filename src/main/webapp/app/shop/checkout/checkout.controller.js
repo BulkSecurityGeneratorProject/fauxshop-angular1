@@ -5,20 +5,24 @@
         .module('fauxshopApp')
         .controller('CheckoutController', CheckoutController);
 
-    CheckoutController.$inject = ['$stateParams', '$scope', 'CheckoutService', 'Auth', 'LoginService', 'CartService', 'ProductsService', 'User', 'Principal'];
+    CheckoutController.$inject = ['$stateParams', '$scope', '$state', 'CheckoutService', 'Auth', 'LoginService', 'CartService', 'ProductsService', 'User', 'Principal'];
 
-    function CheckoutController ($stateParams, $scope, CheckoutService, Auth, LoginService, CartService, ProductsService, User, Principal) {
+    function CheckoutController ($stateParams, $scope, $state, CheckoutService, Auth, LoginService, CartService, ProductsService, User, Principal) {
         var vm = this;
 
-        vm.firstName = null;
-        vm.lastName = null;
-        vm.email = null;
-        vm.address1 = null;
-        vm.address2 = null;
-        vm.deliveryStreetAddress = vm.address1 + " " + vm.address2;
+        vm.formData = loadFormVariables();
+        $scope.firstName = vm.formData.firstName;
+        $scope.lastName = vm.formData.lastName;
+        $scope.email = vm.formData.email;
+        $scope.address1 = vm.formData.address1;
+        $scope.address2 = vm.formData.address2;
+        $scope.city = vm.formData.city;
+        $scope.postcode = vm.formData.postcode;
+        $scope.phone = vm.formData.phone;
 
         vm.tax = 20;
         vm.checkout = checkout;
+        vm.goToCheckout2 = goToCheckout2;
         vm.account = null;
         vm.isAuthenticated = null;
         vm.login = LoginService.open;
@@ -30,10 +34,18 @@
 
         getAccount();
 
+        function goToCheckout2() {
+            CheckoutService.goToCheckout2($scope);
+        }
+
         function checkout (event) {
             console.log("FUCK YEAH");
             CheckoutService.checkoutThing();
             console.log("WE MADE IT");
+        }
+
+        function loadFormVariables(){
+            return CheckoutService.loadFormVariables();
         }
 
         function getAccount() {
@@ -51,7 +63,7 @@
         }
 
         function register () {
-            $state.go('register');
+            $state.transitionTo('register');
         }
 
         vm.total = function() {

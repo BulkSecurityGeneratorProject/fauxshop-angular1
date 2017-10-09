@@ -9,7 +9,7 @@
 
     function stateConfig($stateProvider) {
         $stateProvider.state('checkout2', {
-            parent: 'app',
+            parent: 'checkout',
             url: '/checkout2',
             data: {
                 authorities: [],

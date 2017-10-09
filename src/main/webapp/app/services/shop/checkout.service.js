@@ -5,16 +5,36 @@
         .module('fauxshopApp')
         .factory('CheckoutService', CheckoutService);
 
-    CheckoutService.$inject = ['$http','$resource'];
+    CheckoutService.$inject = ['$http','$resource', '$state'];
 
-    function CheckoutService ($http, $resource) {
+    function CheckoutService ($http, $resource, $state) {
             console.log("INSIDE CheckoutService");
 
+        var formData = [];
+
         var service = {
-            checkoutThing: checkoutThing
+            checkoutThing: checkoutThing,
+            goToCheckout2: goToCheckout2,
+            loadFormVariables: loadFormVariables
         };
 
         return service;
+
+        function goToCheckout2($scope) {
+            formData.firstName = $scope.firstName;
+            formData.lastName = $scope.lastName;
+            formData.email = $scope.email
+            formData.address1 = $scope.address1;
+            formData.address2 = $scope.address2;
+            formData.city = $scope.city;
+            formData.postcode = $scope.postcode;
+            formData.phone = $scope.phone;
+            $state.go('checkout2');
+        }
+
+        function loadFormVariables(){
+            return formData;
+        }
 
         function checkoutThing() {
             console.log("inside checkoutThing()");
