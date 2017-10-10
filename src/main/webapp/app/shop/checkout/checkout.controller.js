@@ -5,9 +5,9 @@
         .module('fauxshopApp')
         .controller('CheckoutController', CheckoutController);
 
-    CheckoutController.$inject = ['$stateParams', '$scope', '$state', 'CheckoutService', 'Auth', 'LoginService', 'CartService', 'ProductsService', 'User', 'Principal'];
+    CheckoutController.$inject = ['$stateParams', '$scope', '$state', 'CheckoutService', 'Auth', 'LoginService', 'CartService', 'ProductsService', 'StripeService', 'User', 'Principal'];
 
-    function CheckoutController ($stateParams, $scope, $state, CheckoutService, Auth, LoginService, CartService, ProductsService, User, Principal) {
+    function CheckoutController ($stateParams, $scope, $state, CheckoutService, Auth, LoginService, CartService, ProductsService, StripeService, User, Principal) {
         var vm = this;
 
         vm.formData = loadFormVariables();

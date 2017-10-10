@@ -20,7 +20,7 @@
                 'post': { method:'POST' }
             });
 
-            return getProductsByProductsId;
+            return charge;
         }
     }
-})();g
+})();

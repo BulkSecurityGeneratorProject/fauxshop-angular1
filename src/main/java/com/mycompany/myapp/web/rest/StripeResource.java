@@ -1,8 +1,11 @@
 package com.mycompany.myapp.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
-import com.stripe.exception.StripeException;
+import com.mycompany.myapp.service.dto.CardDTO;
+import com.stripe.Stripe;
+import com.stripe.exception.*;
 import com.stripe.model.Charge;
+import com.stripe.model.Token;
 import com.stripe.net.RequestOptions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,12 +33,24 @@ public class StripeResource {
     /**
      * POST  /charge/{amount}/{token}
      *
-     * @return the ResponseEntity with status 201 (Created) if the user is registered or 400 (Bad Request) if the login or email is already in use
+     * @return the ResponseEntity with status 201 (Created) and the chargeMap if it worked, or 500 (Internal Server Error) if it failed
      */
-    @PostMapping(path = "/charge/{amount}/{token}",
+    @PostMapping(path = "/charge/{amount}/{cardInfo}",
         produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.TEXT_PLAIN_VALUE})
     @Timed
-    public ResponseEntity checkout(@PathVariable("cartId") BigDecimal amount, @PathVariable("token") String token) {
+    public ResponseEntity checkout(@PathVariable("cartId") BigDecimal amount, @PathVariable("cardInfo") CardDTO cardInfo) throws CardException, APIException, AuthenticationException, InvalidRequestException, APIConnectionException {
+        Stripe.apiKey = "sk_test_pJRywYDR2jqqKi9nn7qQ5ADy";
+
+        Map<String, Object> tokenParams = new HashMap<String, Object>();
+        Map<String, Object> cardParams = new HashMap<String, Object>();
+        cardParams.put("number", cardInfo.getNumber());
+        cardParams.put("exp_month", cardInfo.getExpMonth());
+        cardParams.put("exp_year", cardInfo.getExpYear());
+        cardParams.put("cvc", cardInfo.getCvc());
+        tokenParams.put("card", cardParams);
+
+        Token token = Token.create(tokenParams);
+
         RequestOptions requestOptions = (new RequestOptions.RequestOptionsBuilder()).setApiKey("sk_test_pJRywYDR2jqqKi9nn7qQ5ADy").build();
         Map<String, Object> chargeMap = new HashMap<String, Object>();
         chargeMap.put("amount", amount);

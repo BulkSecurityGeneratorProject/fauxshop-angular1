@@ -37,16 +37,10 @@
 									  <div class="panel-body">
 
 										<div class="row">
-											<div class="col-sm-6">
+                                            <div class="col-sm-8 col-md-12">
 												<div class="form-group">
 													<label class="control-label">First name</label>
-													<input name="name" placeholder="First Name" class="form-control" type="text">
-												</div>
-											</div>
-											<div class="col-sm-6">
-												<div class="form-group">
-													<label class="control-label">Last Name</label>
-													<input name="name2" placeholder="Last Name" class="form-control" type="text">
+													<input ng-model="ccOwner" name="ccOwner" placeholder="Name on Card" class="form-control" type="text">
 												</div>
 											</div>
 										</div>
@@ -54,7 +48,7 @@
 											<div class="col-sm-8 col-md-8">
 												<div class="form-group">
 													<label class="control-label">Name</label>
-													<input name="Card number" placeholder="Card number" class="form-control input-lg" type="text">
+													<input ng-model="ccNumber" name="ccNumber" placeholder="Card number" class="form-control input-lg" type="text">
 												</div>
 											</div>
 											<div class="col-sm-4 col-md-4">
