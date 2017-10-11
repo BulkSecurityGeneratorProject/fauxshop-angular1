@@ -39,9 +39,15 @@
         }
 
         function checkout (event) {
-            console.log("FUCK YEAH");
+            console.log("entering checkout() method in controller");
+            var cardInfo = createCardInfo();
             CheckoutService.checkoutThing();
-            console.log("WE MADE IT");
+            StripeService.charge(vm.total() * 100, cardInfo);
+            console.log("WE MADE IT. existing checkout() method in controller");
+        }
+
+        function createCardInfo() {
+            return JSON.stringify({type:"CardDTO", number:$scope.ccNumber, expMonth:$scope.ccExpMonth, expYear:$scope.ccExpYear, cvc:$scope.ccCvc});
         }
 
         function loadFormVariables(){

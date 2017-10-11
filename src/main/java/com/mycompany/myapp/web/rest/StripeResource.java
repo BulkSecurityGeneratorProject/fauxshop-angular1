@@ -31,14 +31,14 @@ public class StripeResource {
     }
 
     /**
-     * POST  /charge/{amount}/{token}
+     * POST  /charge/{amount}/{cardInfo}
      *
      * @return the ResponseEntity with status 201 (Created) and the chargeMap if it worked, or 500 (Internal Server Error) if it failed
      */
-    @PostMapping(path = "/charge/{amount}/{cardInfo}",
+    @PostMapping(path = "/charge/{amount}",
         produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.TEXT_PLAIN_VALUE})
     @Timed
-    public ResponseEntity checkout(@PathVariable("cartId") BigDecimal amount, @PathVariable("cardInfo") CardDTO cardInfo) throws CardException, APIException, AuthenticationException, InvalidRequestException, APIConnectionException {
+    public ResponseEntity charge(@PathVariable("amount") BigDecimal amount, @RequestBody CardDTO cardInfo) throws CardException, APIException, AuthenticationException, InvalidRequestException, APIConnectionException {
         Stripe.apiKey = "sk_test_pJRywYDR2jqqKi9nn7qQ5ADy";
 
         Map<String, Object> tokenParams = new HashMap<String, Object>();
@@ -55,7 +55,7 @@ public class StripeResource {
         Map<String, Object> chargeMap = new HashMap<String, Object>();
         chargeMap.put("amount", amount);
         chargeMap.put("currency", "usd");
-        chargeMap.put("source", token); // obtained via Stripe.js
+        chargeMap.put("source", token.getId()); // obtained via Stripe.js
         try {
             Charge charge = Charge.create(chargeMap, requestOptions);
             log.debug(charge.toString());

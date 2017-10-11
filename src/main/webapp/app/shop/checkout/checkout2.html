@@ -54,7 +54,7 @@
 											<div class="col-sm-4 col-md-4">
 												<div class="form-group">
 													<label class="control-label">Code</label>
-													<input name="Code" placeholder="Code" class="form-control input-lg" type="text" >
+													<input ng-model="ccCvc" name="Code" placeholder="Code" class="form-control input-lg" type="text" >
 												</div>
 											</div>
 										</div>
@@ -63,10 +63,10 @@
 												<div class="form-group">
 													<label class="control-label">month</label>
 													<div class=" controls">
-														<select class="form-control">
-														  <option>January</option>
-														  <option>February</option>
-														  <option>March</option>
+														<select ng-model="ccExpMonth" class="form-control">
+														  <option>1</option>
+														  <option>2</option>
+														  <option>3</option>
 														</select>
 													</div>
 												</div>
@@ -75,7 +75,7 @@
 												<div class="form-group">
 													<label class="control-label">year</label>
 													<div class=" controls">
-														<select class="form-control">
+														<select ng-model="ccExpYear" class="form-control">
 														  <option>2014</option>
 														  <option>2015</option>
 														  <option>2016</option>
