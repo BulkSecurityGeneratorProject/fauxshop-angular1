@@ -1,6 +1,8 @@
 package com.mycompany.myapp.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.mycompany.myapp.service.dto.OrderDTO;
 import org.hibernate.annotations.*;
 import org.springframework.data.annotation.LastModifiedDate;
 
@@ -144,6 +146,18 @@ public class Orders extends AbstractAuditingEntity implements Serializable {
     @Size(max = 5000)
     @Column(name = "comments", length = 5000)
     private String comments;
+
+    public Orders(OrderDTO orderDTO) {
+        this.deliveryAddress1 = orderDTO.getDeliveryAddress1();
+        this.deliveryAddress2 = orderDTO.getDeliveryAddress2();
+        this.deliveryCity = orderDTO.getDeliveryCity();
+        this.deliveryCountry = orderDTO.getDeliveryCountry();
+        this.deliveryName = orderDTO.getDeliveryName();
+        this.deliveryPostcode = orderDTO.getDeliveryPostcode();
+        this.deliveryState = orderDTO.getDeliveryState();
+        this.id = orderDTO.getId();
+        this.shippingCost = orderDTO.getShippingCost();
+    }
 
     public Long getOrderId() {
         return orderId;

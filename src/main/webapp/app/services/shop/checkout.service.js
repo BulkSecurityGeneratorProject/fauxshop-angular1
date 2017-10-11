@@ -13,12 +13,13 @@
         var formData = [];
 
         var service = {
-            checkoutThing: checkoutThing,
+            createOrder: createOrder,
             goToCheckout2: goToCheckout2,
             loadFormVariables: loadFormVariables
         };
 
         return service;
+
 
         function goToCheckout2($scope) {
             formData.firstName = $scope.firstName;
@@ -36,25 +37,15 @@
             return formData;
         }
 
-        function checkoutThing() {
-            console.log("inside checkoutThing()");
+        function createOrder(orderDTO) {
+            $http.post('api/checkout', orderDTO).
+            success(function(data, status, headers, config) {
+                console.log(data);
+                }).
+              error(function(data, status, headers, config) {
+                });
 
-        var checkoutThing1 = $resource('api/checkout', {}, {
-            'query': {method: 'GET', isArray: true},
-            'get': {
-                method: 'GET',
-                transformResponse: function (data) {
-                    data = angular.fromJson(data);
-                    return data;
-                }
-            },
-            'save': { method:'POST' }
-        });
-
-            checkoutThing1.query();
-            checkoutThing1.save();
-//            checkoutThing1.get();
-
+            return createOrder;
         }
     }
 })();
