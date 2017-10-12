@@ -16,14 +16,12 @@
         return service;
 
         function charge (amount, cardInfo) {
-            $http.post('api/charge/' + amount, cardInfo).
+            return $http.post('api/charge/' + amount, cardInfo).
             success(function(data, status, headers, config) {
                 console.log(data);
                 }).
               error(function(data, status, headers, config) {
                 });
-
-            return charge;
         }
     }
 })();

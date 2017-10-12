@@ -105,21 +105,9 @@ public class Orders extends AbstractAuditingEntity implements Serializable {
     @Column(name = "payment_method", length = 12)
     private String paymentMethod;
 
-    @Size(max = 20)
-    @Column(name = "cc_type", length = 20)
-    private String ccType;
-
     @Size(max = 64)
-    @Column(name = "cc_owner", length = 64)
-    private String ccOwner;
-
-    @Size(max = 32)
-    @Column(name = "cc_number", length = 32)
-    private String ccNumber;
-
-    @Size(max = 4)
-    @Column(name = "cc_expires", length = 4)
-    private String ccExpires;
+    @Column(name = "stripe_charge_id", length = 64)
+    private String stripeChargeId;
 
     @LastModifiedDate
     @Column(name = "date_purchased")
@@ -157,6 +145,7 @@ public class Orders extends AbstractAuditingEntity implements Serializable {
         this.deliveryState = orderDTO.getDeliveryState();
         this.id = orderDTO.getId();
         this.shippingCost = orderDTO.getShippingCost();
+        this.stripeChargeId = orderDTO.getStripeChargeId();
     }
 
     public Long getOrderId() {
@@ -319,36 +308,12 @@ public class Orders extends AbstractAuditingEntity implements Serializable {
         this.paymentMethod = paymentMethod;
     }
 
-    public String getCcType() {
-        return ccType;
+    public String getStripeChargeId() {
+        return stripeChargeId;
     }
 
-    public void setCcType(String ccType) {
-        this.ccType = ccType;
-    }
-
-    public String getCcOwner() {
-        return ccOwner;
-    }
-
-    public void setCcOwner(String ccOwner) {
-        this.ccOwner = ccOwner;
-    }
-
-    public String getCcNumber() {
-        return ccNumber;
-    }
-
-    public void setCcNumber(String ccNumber) {
-        this.ccNumber = ccNumber;
-    }
-
-    public String getCcExpires() {
-        return ccExpires;
-    }
-
-    public void setCcExpires(String ccExpires) {
-        this.ccExpires = ccExpires;
+    public void setStripeChargeId(String ccType) {
+        this.stripeChargeId = stripeChargeId;
     }
 
     public Instant getDatePurchased() {

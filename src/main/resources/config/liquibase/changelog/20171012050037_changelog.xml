@@ -1,6 +1,6 @@
 <?xml version="1.1" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
-    <changeSet author="derekzuk (generated)" id="1507526822906-1">
+    <changeSet author="derekzuk (generated)" id="1507784440555-1">
         <createTable tableName="orders">
             <column autoIncrement="true" name="order_id" type="BIGINT">
                 <constraints primaryKey="true" primaryKeyName="ordersPK"/>
@@ -13,10 +13,6 @@
             </column>
             <column name="last_modified_by" type="VARCHAR(50)"/>
             <column name="last_modified_date" type="TINYBLOB"/>
-            <column name="cc_expires" type="VARCHAR(4)"/>
-            <column name="cc_number" type="VARCHAR(32)"/>
-            <column name="cc_owner" type="VARCHAR(64)"/>
-            <column name="cc_type" type="VARCHAR(20)"/>
             <column name="comments" type="VARCHAR(5000)"/>
             <column name="customer_address_1" type="VARCHAR(64)"/>
             <column name="customer_address_2" type="VARCHAR(64)"/>
@@ -37,11 +33,12 @@
             <column name="delivery_postcode" type="VARCHAR(10)"/>
             <column name="delivery_state" type="VARCHAR(32)"/>
             <column name="id" type="BIGINT"/>
-            <column name="order_status" type="VARCHAR(32)"/>
             <column name="order_date_finished" type="TINYBLOB"/>
+            <column name="order_status" type="VARCHAR(32)"/>
             <column name="payment_method" type="VARCHAR(12)"/>
             <column name="shipping_cost" type="DECIMAL(19, 2)"/>
             <column name="shipping_method" type="VARCHAR(32)"/>
+            <column name="stripe_charge_id" type="VARCHAR(64)"/>
         </createTable>
     </changeSet>
 </databaseChangeLog>

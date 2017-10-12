@@ -59,7 +59,7 @@ public class StripeResource {
         try {
             Charge charge = Charge.create(chargeMap, requestOptions);
             log.debug(charge.toString());
-            return new ResponseEntity<>(HttpStatus.CREATED);
+            return new ResponseEntity<>(charge, HttpStatus.CREATED);
         } catch (StripeException e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
