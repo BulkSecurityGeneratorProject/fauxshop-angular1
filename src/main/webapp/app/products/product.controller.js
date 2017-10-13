@@ -36,6 +36,7 @@
 
     function addToCart(productId) {
         CartService.addToCart(vm.account.id, productId, 1).save();
+        $state.go('cart');
     }
 
     }

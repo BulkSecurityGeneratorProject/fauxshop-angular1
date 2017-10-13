@@ -48,7 +48,7 @@
                         <li>Small: 6.5" diameter, 7" high</li>
                     </ul>
                 </div>
-                <form action="product3.html" method="POST" class="myform">
+                <form class="myform" role="form" ng-submit="vm.addToCart(3)">
                     <div class="form-group clearfix">
                         <label class="control-label" >Size</label>
                         <select class="form-control">
@@ -68,7 +68,7 @@
                     </ul>
 
                     <div class="product-btn">
-                        <a href="" class="btn">Add To Cart</a>
+                        <button class="btn">Add To Cart</button>
                     </div>
                 </form>
             </div>
