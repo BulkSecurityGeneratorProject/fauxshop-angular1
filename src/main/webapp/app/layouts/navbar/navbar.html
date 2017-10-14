@@ -1,4 +1,5 @@
-<nav class="navbar navbar-default" role="navigation">
+<div ng-switch="vm.account.login == 'admin'">
+<nav class="navbar navbar-default" role="navigation" ng-switch-when="true">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" ng-click="vm.toggleNavbar()">
@@ -150,3 +151,4 @@
         </div>
     </div>
 </nav>
+</div>

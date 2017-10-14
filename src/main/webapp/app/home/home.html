@@ -1,117 +1,116 @@
-
-    <div id="main-nav" class="">
-        <div class="container-fluid">
-            <div class="nav-header">
-                <a href="index.html" class="nav-brand">STELLA <span>SHOP</span></a>
-                <a class="nav-icon pull-right visible-xs menu-link" href="#"><i class="icon-menu2"></i></a>
-                    <div ng-switch="vm.isAuthenticated()">
-                        <a class="pull-right" ng-switch-when="true">You are logged in as {{vm.account.login}}</a>
-                    </div>
-                <a class="nav-icon-outline cart pull-right" ui-sref="cart"><i class="icon-cart"></i><span class="badge">{{vm.cartInvoices.length}}</span></a>
-            </div>
+<div id="main-nav" class="">
+    <div class="container-fluid">
+        <div class="nav-header">
+            <a href="index.html" class="nav-brand">STELLA <span>SHOP</span></a>
+            <a class="nav-icon pull-right visible-xs menu-link" href="#"><i class="icon-menu2"></i></a>
+                <div ng-switch="vm.isAuthenticated()">
+                    <a class="pull-right" ng-switch-when="true">You are logged in as {{vm.account.login}}</a>
+                </div>
+            <a class="nav-icon-outline cart pull-right" ui-sref="cart"><i class="icon-cart"></i><span class="badge">{{vm.cartInvoices.length}}</span></a>
         </div>
     </div>
-    <div class="container-fluid productlist">
-        <div class="row">
-            <div class="col-sm-8">
-                <a class="alert-link" ui-sref="product1">
-                    <img src="img/vase_1a.jpg" class="img-responsive" alt="item">
-                    <span class="productlist-price-container">
-                        <span class="product-price">
-                            <span class="price">14.00</span>
-                        </span>
+</div>
+<div class="container-fluid productlist">
+    <div class="row">
+        <div class="col-sm-8">
+            <a class="alert-link" ui-sref="product1">
+                <img src="img/vase_1a.jpg" class="img-responsive" alt="item">
+                <span class="productlist-price-container">
+                    <span class="product-price">
+                        <span class="price">14.00</span>
                     </span>
-                </a>
-            </div>
-            <div class="col-sm-4">
-                <a class="alert-link" ui-sref="product2">
-                    <img src="img/vase_2a.jpg"  class="img-responsive" alt="item">
-                    <span class="productlist-price-container">
-                        <span class="product-price">
-                            <span class="price">28.00</span>
-                        </span>
-                    </span>
-                </a>
-            </div>
-            <div class="col-sm-4">
-                <a class="alert-link" ui-sref="product3">
-                    <img src="img/vase_3a.jpg"  class="img-responsive" alt="item">
-                    <span class="productlist-price-container">
-                        <span class="product-price">
-                            <span class="price">24.00</span>
-                        </span>
-                    </span>
-                </a>
-            </div>
+                </span>
+            </a>
         </div>
-        <div class="row">
-            <div class="col-sm-4 special">
-                <div class="col-sm-12">
-                    <a class="alert-link" ui-sref="product4">
-                        <img src="img/vase_4a.jpg"  class="img-responsive" alt="item">
-                        <span class="productlist-price-container">
-                            <span class="product-price">
-                                <span class="price">16.00</span>
-                            </span>
+        <div class="col-sm-4">
+            <a class="alert-link" ui-sref="product2">
+                <img src="img/vase_2a.jpg"  class="img-responsive" alt="item">
+                <span class="productlist-price-container">
+                    <span class="product-price">
+                        <span class="price">28.00</span>
+                    </span>
+                </span>
+            </a>
+        </div>
+        <div class="col-sm-4">
+            <a class="alert-link" ui-sref="product3">
+                <img src="img/vase_3a.jpg"  class="img-responsive" alt="item">
+                <span class="productlist-price-container">
+                    <span class="product-price">
+                        <span class="price">24.00</span>
+                    </span>
+                </span>
+            </a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4 special">
+            <div class="col-sm-12">
+                <a class="alert-link" ui-sref="product4">
+                    <img src="img/vase_4a.jpg"  class="img-responsive" alt="item">
+                    <span class="productlist-price-container">
+                        <span class="product-price">
+                            <span class="price">16.00</span>
                         </span>
-                    </a>
-                </div>
-                <div class="col-sm-12">
-                    <a class="alert-link" ui-sref="product5">
-                        <img src="img/vase_5a.jpg"  class="img-responsive" alt="item">
-                        <div class="productlist-label">
-                            <span class="sale-label">Sale</span>
-                        </div>
-                        <span class="productlist-price-container">
-                            <span class="product-price">
-                                <span class="price">54.00</span>
-                                <span class="original-price">
-                                    <span class="price">65.00</span>
-                                </span>
-                            </span>
-                        </span>
-                    </a>
-                </div>
+                    </span>
+                </a>
             </div>
-            <div class="col-sm-8">
-                <a class="alert-link" ui-sref="product6">
-                    <img src="img/vase_6a.jpg" class="img-responsive" alt="item">
+            <div class="col-sm-12">
+                <a class="alert-link" ui-sref="product5">
+                    <img src="img/vase_5a.jpg"  class="img-responsive" alt="item">
                     <div class="productlist-label">
-                        <span class="sold-out-label">Sold Out</span>
+                        <span class="sale-label">Sale</span>
                     </div>
                     <span class="productlist-price-container">
                         <span class="product-price">
-                            <span class="price">38.00</span>
+                            <span class="price">54.00</span>
+                            <span class="original-price">
+                                <span class="price">65.00</span>
+                            </span>
                         </span>
                     </span>
                 </a>
             </div>
         </div>
-        <div class="row" id="more-items">
-            <div class="col-sm-6">
-                <a class="alert-link" ui-sref="product7">
-                    <img src="img/vase_7a.jpg"  class="img-responsive" alt="item">
-                    <span class="productlist-price-container">
-                        <span class="product-price">
-                            <span class="price">17.00</span>
-                        </span>
+        <div class="col-sm-8">
+            <a class="alert-link" ui-sref="product6">
+                <img src="img/vase_6a.jpg" class="img-responsive" alt="item">
+                <div class="productlist-label">
+                    <span class="sold-out-label">Sold Out</span>
+                </div>
+                <span class="productlist-price-container">
+                    <span class="product-price">
+                        <span class="price">38.00</span>
                     </span>
-                </a>
-            </div>
-            <div class="col-sm-6">
-                <a class="alert-link" ui-sref="product8">
-                    <img src="img/vase_8a.jpg"  class="img-responsive" alt="item">
-                    <span class="productlist-price-container">
-                        <span class="product-price">
-                            <span class="price">21.00</span>
-                        </span>
-                    </span>
-                </a>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-12 text-center show-more">
-                <a href="#" class="btn btn-outline" id="showmore">Show more</a>
-            </div>
+                </span>
+            </a>
         </div>
     </div>
+    <div class="row" id="more-items">
+        <div class="col-sm-6">
+            <a class="alert-link" ui-sref="product7">
+                <img src="img/vase_7a.jpg"  class="img-responsive" alt="item">
+                <span class="productlist-price-container">
+                    <span class="product-price">
+                        <span class="price">17.00</span>
+                    </span>
+                </span>
+            </a>
+        </div>
+        <div class="col-sm-6">
+            <a class="alert-link" ui-sref="product8">
+                <img src="img/vase_8a.jpg"  class="img-responsive" alt="item">
+                <span class="productlist-price-container">
+                    <span class="product-price">
+                        <span class="price">21.00</span>
+                    </span>
+                </span>
+            </a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 text-center show-more">
+            <a href="#" class="btn btn-outline" id="showmore">Show more</a>
+        </div>
+    </div>
+</div>
