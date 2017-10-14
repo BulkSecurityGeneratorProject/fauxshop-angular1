@@ -4,7 +4,7 @@
             <div class="nav-header">
                 <a href="index.html" class="nav-brand">STELLA <span>SHOP</span></a>
                 <a class="nav-icon pull-right visible-xs menu-link" href="#"><i class="icon-menu2"></i></a>
-                <a class="nav-icon-outline cart pull-right" href="cart.html"><i class="icon-cart"></i><span class="badge">3</span></a>
+                <a class="nav-icon-outline cart pull-right" href="cart.html"><i class="icon-cart"></i><span class="badge">{{vm.cartInvoices.length}}</span></a>
             </div>
         </div>
     </div>
@@ -33,12 +33,12 @@
                 <img src="img/vase_2b.jpg" class="product-img img-responsive" alt="item">
             </div>
             <div class="col-sm-4 ">
-                <h2 class="product-title hidden-xs">Bosphorus bowls</h2>
+                <h2 class="product-title hidden-xs">{{vm.product.productsName}}</h2>
                 <div class="product-price hidden-xs">
-                    <span class="price">28.00</span>
+                    <span class="price">{{vm.product.productsPrice.toFixed(2)}}</span>
                 </div>
                 <div class="product-detail">
-                    <p>Collect all of our hand-thrown vessels for endless arrangement possibilities, whether filled with flowers or dressed with beads.</p>
+                    <p>{{vm.product.productsDescription}}</p>
                     <ul>
                         <li>Holds objects, collections of stones or shells, or candles (sold separately) for a striking display.</li>
                         <li>Weighty bases are designed to counterbalance top-heavy stems.</li>
