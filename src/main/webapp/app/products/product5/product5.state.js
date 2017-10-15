@@ -25,6 +25,9 @@
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate,$translatePartialLoader) {
                     $translatePartialLoader.addPart('product5');
                     return $translate.refresh();
+                }],
+                productToDisplay: ['ProductsService', function(ProductsService) {
+                    return ProductsService.getProductsByProductsId(5).get();
                 }]
             }
         });

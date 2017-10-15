@@ -13,7 +13,7 @@
         <div class="row">
             <ol class="breadcrumb">
                 <li><a href="index.html">Shop</a></li>
-                <li class="active">Privilege</li>
+                <li class="active">{{vm.product.productsName}}</li>
             </ol>
         </div>
     </div>
@@ -33,7 +33,7 @@
                 <img src="img/vase_4b.jpg" class="product-img img-responsive" alt="item">
             </div>
             <div class="col-sm-4 ">
-                <h2 class="product-title hidden-xs">Privilege</h2>
+                <h2 class="product-title hidden-xs">{{vm.product.productsName}}</h2>
                 <div class="product-price hidden-xs">
                     <span class="price">{{vm.product.productsPrice.toFixed(2)}}</span>
                 </div>

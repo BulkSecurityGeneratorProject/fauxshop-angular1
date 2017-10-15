@@ -21,9 +21,9 @@
     <div class="container-fluid product">
         <div class="row visible-xs product-mobile">
             <div class="col-xs-12 text-center">
-                <h2 class="product-title">Bambeco</h2>
+                <h2 class="product-title hidden-xs">{{vm.product.productsName}}</h2>
                 <div class="product-price">
-                    <span class="price">54.00</span> <span class="original-price"><span class="price">65.00</span></span>
+                    <span class="price">{{vm.product.productsPrice.toFixed(2)}}</span> <span class="original-price"><span class="price">65.00</span></span>
                 </div>
                 <div class="product-mark">
                     <span class="sale-label">Sale</span>
@@ -37,15 +37,15 @@
                 <img src="img/vase_5c.jpg" class="product-img img-responsive" alt="item">
             </div>
             <div class="col-sm-4 ">
-                <h2 class="product-title hidden-xs">Bambeco</h2>
+                <h2 class="product-title hidden-xs">{{vm.product.productsName}}</h2>
                 <div class="product-price hidden-xs">
-                    <span class="price">54.00</span> <span class="original-price"><span class="price">65.00</span></span>
+                    <span class="price">{{vm.product.productsPrice.toFixed(2)}}</span> <span class="original-price"><span class="price">65.00</span></span>
                 </div>
                 <div class="product-mark hidden-xs">
                     <span class="sale-label">Sale</span>
                 </div>
                 <div class="product-detail">
-                    <p>Collect all of our hand-thrown vessels for endless arrangement possibilities, whether filled with flowers or dressed with beads.</p>
+                    <p>{{vm.product.productsDescription}}</p>
                     <ul>
                         <li>Holds objects, collections of stones or shells, or candles (sold separately) for a striking display.</li>
                         <li>Weighty bases are designed to counterbalance top-heavy stems.</li>
@@ -55,7 +55,7 @@
                         <li>Small: 6.5" diameter, 7" high</li>
                     </ul>
                 </div>
-                <form  action="product5.html" method="POST" class="myform">
+                <form class="myform" role="form" ng-submit="vm.addToCart(5)">
                     <div class="form-group clearfix">
                         <label class="control-label">Size</label>
                         <select class="form-control">
