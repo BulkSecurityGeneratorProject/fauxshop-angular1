@@ -11,6 +11,7 @@
         var vm = this;
 
         vm.product = productToDisplay;
+        vm.cartInvoices = null;
         vm.account = null;
         vm.isAuthenticated = null;
         vm.login = LoginService.open;
@@ -31,12 +32,19 @@
         Principal.identity().then(function(account) {
             vm.account = account;
             vm.isAuthenticated = Principal.isAuthenticated;
+            if (vm.account != null){
+                getCartInvoices();
+            }
         });
     }
 
     function addToCart(productId) {
         CartService.addToCart(vm.account.id, productId, 1).save();
         $state.go('cart');
+    }
+
+    function getCartInvoices() {
+        vm.cartInvoices = CartService.getCartByUserId(vm.account.id).get();
     }
 
     }
