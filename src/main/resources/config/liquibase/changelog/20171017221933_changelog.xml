@@ -1,0 +1,147 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="derekzuk (generated)" id="1508278777021-1">
+        <createTable tableName="cart">
+            <column autoIncrement="true" name="cart_id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="cartPK"/>
+            </column>
+            <column name="created_by" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_modified_by" type="VARCHAR(50)"/>
+            <column name="last_modified_date" type="timestamp"/>
+            <column name="cart_item_quantity" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="cart_item_total_price" type="DECIMAL(19, 2)"/>
+            <column name="id" type="BIGINT"/>
+            <column name="products_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="derekzuk (generated)" id="1508278777021-2">
+        <createTable tableName="orders">
+            <column autoIncrement="true" name="order_id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="ordersPK"/>
+            </column>
+            <column name="created_by" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_modified_by" type="VARCHAR(50)"/>
+            <column name="last_modified_date" type="timestamp"/>
+            <column name="comments" type="VARCHAR(5000)"/>
+            <column name="customer_address_1" type="VARCHAR(64)"/>
+            <column name="customer_address_2" type="VARCHAR(64)"/>
+            <column name="customer_city" type="VARCHAR(32)"/>
+            <column name="customer_country" type="VARCHAR(32)"/>
+            <column name="customer_email" type="VARCHAR(96)"/>
+            <column name="customer_name" type="VARCHAR(64)"/>
+            <column name="customer_postcode" type="VARCHAR(10)"/>
+            <column name="customer_state" type="VARCHAR(32)"/>
+            <column name="customer_suburb" type="VARCHAR(32)"/>
+            <column name="customer_telephone" type="VARCHAR(32)"/>
+            <column name="date_purchased" type="timestamp"/>
+            <column name="delivery_address_1" type="VARCHAR(64)"/>
+            <column name="delivery_address_2" type="VARCHAR(64)"/>
+            <column name="delivery_city" type="VARCHAR(32)"/>
+            <column name="delivery_country" type="VARCHAR(32)"/>
+            <column name="delivery_name" type="VARCHAR(64)"/>
+            <column name="delivery_postcode" type="VARCHAR(10)"/>
+            <column name="delivery_state" type="VARCHAR(32)"/>
+            <column name="id" type="BIGINT"/>
+            <column name="order_date_finished" type="timestamp"/>
+            <column name="order_status" type="VARCHAR(32)"/>
+            <column name="payment_method" type="VARCHAR(12)"/>
+            <column name="shipping_cost" type="DECIMAL(19, 2)"/>
+            <column name="shipping_method" type="VARCHAR(32)"/>
+            <column name="stripe_charge_id" type="VARCHAR(64)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="derekzuk (generated)" id="1508278777021-3">
+        <createTable tableName="orders_products">
+            <column autoIncrement="true" name="orders_products_id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="orders_productsPK"/>
+            </column>
+            <column name="created_by" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_modified_by" type="VARCHAR(50)"/>
+            <column name="last_modified_date" type="timestamp"/>
+            <column name="final_price" type="DECIMAL(19, 2)"/>
+            <column name="order_id" type="BIGINT"/>
+            <column name="products_id" type="BIGINT"/>
+            <column name="products_name" type="VARCHAR(64)"/>
+            <column name="products_price" type="DECIMAL(19, 2)"/>
+            <column name="products_quantity" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="products_tax" type="DECIMAL(19, 2)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="derekzuk (generated)" id="1508278777021-4">
+        <createTable tableName="products">
+            <column autoIncrement="true" name="products_id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="productsPK"/>
+            </column>
+            <column name="created_by" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_modified_by" type="VARCHAR(50)"/>
+            <column name="last_modified_date" type="timestamp"/>
+            <column name="manufacturers_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="products_date_added" type="timestamp"/>
+            <column name="products_date_available" type="timestamp"/>
+            <column name="products_image" type="VARCHAR(64)"/>
+            <column name="products_last_modified" type="timestamp"/>
+            <column name="products_model" type="VARCHAR(12)"/>
+            <column name="products_price" type="DECIMAL(19, 2)"/>
+            <column name="products_quantity" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="products_status" type="BIT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="products_tax_class_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="products_weight" type="DECIMAL(19, 2)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="derekzuk (generated)" id="1508278777021-5">
+        <createTable tableName="products_description">
+            <column name="products_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_modified_by" type="VARCHAR(50)"/>
+            <column name="last_modified_date" type="timestamp"/>
+            <column name="products_description" type="VARCHAR(255)"/>
+            <column name="products_name" type="VARCHAR(64)"/>
+            <column name="products_url" type="VARCHAR(255)"/>
+            <column name="products_viewed" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="derekzuk (generated)" id="1508278777021-6">
+        <addPrimaryKey columnNames="products_id" constraintName="products_descriptionPK" tableName="products_description"/>
+    </changeSet>
+</databaseChangeLog>
