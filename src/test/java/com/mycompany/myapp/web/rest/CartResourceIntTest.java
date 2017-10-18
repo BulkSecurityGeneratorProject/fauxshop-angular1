@@ -42,7 +42,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
- * Test class for the AccountResource REST controller.
+ * Test class for the CartResource REST controller.
  *
  * @see CartResource
  */
