@@ -57,24 +57,6 @@ public class ProductsDTO {
 
     private Integer productsViewed;
 
-    public ProductsDTO(Long productsId, Integer productsQuantity, String productsModel, String productsImage, BigDecimal productsPrice, Instant productsDateAdded, Instant productsLastModified, Instant productsDateAvailable, BigDecimal productsWeight, boolean productsStatus, Integer productsTaxClassId, Integer manufacturersId) {
-        // Empty constructor needed for Jackson.
-    }
-
-    // This should have a .collect at the end. I'm not sure why that's not working.
-    public ProductsDTO(Products products) {
-        this(products.getProductsId(), products.getProductsQuantity(), products.getProductsModel(), products.getProductsImage(), products.getProductsPrice(),
-            products.getProductsDateAdded(), products.getProductsLastModified(), products.getProductsDateAvailable(), products.getProductsWeight(),
-            products.isProductsStatus(), products.getProductsTaxClassId(), products.getManufacturersId());
-    }
-
-    public ProductsDTO(ProductsDescription prodDescription) {
-        this.productsDescription = prodDescription.getProductsDescription();
-        this.productsName = prodDescription.getProductsName();
-        this.productsURL = prodDescription.getProductsURL();
-        this.productsViewed = prodDescription.getProductsViewed();
-    }
-
     public ProductsDTO(Products products, ProductsDescription productsDescription) {
         this(products.getProductsId(), products.getProductsQuantity(), products.getProductsModel(), products.getProductsImage(), products.getProductsPrice(),
             products.getProductsDateAdded(), products.getProductsLastModified(), products.getProductsDateAvailable(), products.getProductsWeight(),

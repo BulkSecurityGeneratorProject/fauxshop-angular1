@@ -53,8 +53,8 @@ public class CartResource {
         if (cart.isPresent()) {
             for (Cart cartItem : cart.get()) {
                 CartDTO cartRecord;
-                Products product = productsService.getProductsByProductsId(cartItem.getProductsId()).get();
-                ProductsDescription productsDescription = productsDescriptionService.getProductsDescriptionByProductsId(cartItem.getProductsId()).get();
+                Products product = productsService.getProductsByProductsId(cartItem.getProductsId()).orElse(null);
+                ProductsDescription productsDescription = productsDescriptionService.getProductsDescriptionByProductsId(cartItem.getProductsId()).orElse(null);
                 cartRecord = new CartDTO(cartItem, product, productsDescription);
                 cartRecords.add(cartRecord);
             }
@@ -74,7 +74,7 @@ public class CartResource {
     @Timed
     public ResponseEntity<Cart> addToCart(@PathVariable("id") Long id, @PathVariable("productsId") Long productsId, @PathVariable("cartItemQuantity") Integer cartItemQuantity) {
         Cart cartRecord = new Cart();
-        Products product = productsService.getProductsByProductsId(productsId).get();
+        Products product = productsService.getProductsByProductsId(productsId).orElse(null);
 
         cartRecord.setId(id);
         cartRecord.setProductsId(productsId);
