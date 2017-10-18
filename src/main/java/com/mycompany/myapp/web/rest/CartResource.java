@@ -8,8 +8,6 @@ import com.mycompany.myapp.service.CartService;
 import com.mycompany.myapp.service.ProductsDescriptionService;
 import com.mycompany.myapp.service.ProductsService;
 import com.mycompany.myapp.service.dto.CartDTO;
-import com.mycompany.myapp.service.dto.ProductsDTO;
-import org.hibernate.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -109,21 +107,16 @@ public class CartResource {
     }
 
     /**
-     * POST  /cart/{cartId} : saves the given cart record
+     * POST  /cart/{cartId} : removes the given cart record
      *
      * @param cartId
-     * @return the ResponseEntity with status 200 (OK) and the Cart record that was saved, or status 500 (Internal Server Error)
+     * @return the ResponseEntity with status 200 (OK)
      */
     @PostMapping("/cart/{cartId}")
     @Timed
     public ResponseEntity<Cart> removeFromCart(@PathVariable("cartId") Long cartId) {
         Cart cartRecord = cartService.findOneById(cartId);
-
-        try {
-            cartService.remove(cartRecord);
-            return new ResponseEntity<Cart>(HttpStatus.OK);
-        } catch( Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        cartService.remove(cartRecord);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

@@ -1,16 +1,13 @@
 package com.mycompany.myapp.web.rest;
 
 import com.mycompany.myapp.FauxshopApp;
-import com.mycompany.myapp.domain.*;
-import com.mycompany.myapp.repository.AuthorityRepository;
-import com.mycompany.myapp.repository.UserRepository;
-import com.mycompany.myapp.security.AuthoritiesConstants;
-import com.mycompany.myapp.service.*;
-import com.mycompany.myapp.service.dto.CartDTO;
-import com.mycompany.myapp.service.dto.UserDTO;
-import com.mycompany.myapp.web.rest.vm.KeyAndPasswordVM;
-import com.mycompany.myapp.web.rest.vm.ManagedUserVM;
-import org.apache.commons.lang3.RandomStringUtils;
+import com.mycompany.myapp.domain.Cart;
+import com.mycompany.myapp.domain.Products;
+import com.mycompany.myapp.domain.ProductsDescription;
+import com.mycompany.myapp.service.CartService;
+import com.mycompany.myapp.service.MailService;
+import com.mycompany.myapp.service.ProductsDescriptionService;
+import com.mycompany.myapp.service.ProductsService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,24 +15,19 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataRetrievalFailureException;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.sound.midi.SysexMessage;
 import java.math.BigDecimal;
-import java.time.Instant;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
@@ -254,5 +246,23 @@ public class CartResourceIntTest {
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
             .accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isInternalServerError());
+    }
+
+    @Test
+    @Transactional
+    public void testRemoveFromCart() throws Exception {
+        Cart cart = new Cart();
+        cart.setCartId(1L);
+        cart.setId(2L);
+        cart.setProductsId(3L);
+        cart.setCartItemQuantity(5);
+        cart.setCartItemTotalPrice(BigDecimal.TEN);
+
+        when(mockCartService.findOneById(1L)).thenReturn(cart);
+
+        restUserMockMvc.perform(post("/api/cart/2")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .accept(MediaType.APPLICATION_JSON))
+            .andExpect(status().isOk());
     }
 }
