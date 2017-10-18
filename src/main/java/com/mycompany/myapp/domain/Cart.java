@@ -61,6 +61,8 @@ public class Cart extends AbstractAuditingEntity implements Serializable {
         return cartItemTotalPrice;
     }
 
+    public void setCartId(Long cartId) { this.cartId = cartId; }
+
     public void setId(Long id) {
         this.id = id;
     }

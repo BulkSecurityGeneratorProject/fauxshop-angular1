@@ -79,7 +79,7 @@ public class Products extends AbstractAuditingEntity implements Serializable {
         return productsId;
     }
 
-    public void setProductsId(Long id) {
+    public void setProductsId(Long productsId) {
         this.productsId = productsId;
     }
 
@@ -87,7 +87,7 @@ public class Products extends AbstractAuditingEntity implements Serializable {
         return productsQuantity;
     }
 
-    public void setProductsQuantity(Integer id) {
+    public void setProductsQuantity(Integer productsQuantity) {
         this.productsQuantity = productsQuantity;
     }
 

@@ -62,7 +62,7 @@ public class CartResource {
             }
             return new ResponseEntity<List<CartDTO>>(cartRecords, HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
