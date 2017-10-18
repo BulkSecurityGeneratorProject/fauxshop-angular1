@@ -97,7 +97,7 @@ public class CartResourceIntTest {
 
     @Test
     @Transactional
-    public void testGetEmptyCartById() throws Exception {
+    public void testGetCartById() throws Exception {
         List<Cart> cartList = new ArrayList<>();
         Cart cart = new Cart();
         cart.setCartId(1L);
@@ -132,5 +132,15 @@ public class CartResourceIntTest {
             .andExpect(jsonPath("$[0].id").value("2"))
             .andExpect(jsonPath("$[0].productsName").value("productsName"))
             .andExpect(jsonPath("$[0].productsQuantity").value("55"));
+    }
+
+    @Test
+    @Transactional
+    public void testGetCartByIdInternalServerError() throws Exception {
+        when(mockCartService.findAllById(1L)).thenReturn(Optional.empty());
+
+        restUserMockMvc.perform(get("/api/cart/1")
+            .accept(MediaType.APPLICATION_JSON))
+            .andExpect(status().isInternalServerError());
     }
 }
