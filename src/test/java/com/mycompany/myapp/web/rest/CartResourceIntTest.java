@@ -250,6 +250,17 @@ public class CartResourceIntTest {
 
     @Test
     @Transactional
+    public void testAddToCartProductDoesNotExist() throws Exception {
+        when(mockProductsService.getProductsByProductsId(3L)).thenReturn(Optional.empty());
+
+        restUserMockMvc.perform(post("/api/cart/2/3/5")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .accept(MediaType.APPLICATION_JSON))
+            .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    @Transactional
     public void testRemoveFromCart() throws Exception {
         Cart cart = new Cart();
         cart.setCartId(1L);

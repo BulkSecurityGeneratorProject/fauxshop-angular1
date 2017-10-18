@@ -68,27 +68,30 @@ public class CartResource {
      * POST  /cart/{id}/{productsId}/{cartItemQuantity} : saves the given cart record
      *
      * @param id the user id
-     * @return the ResponseEntity with status 200 (OK) and the Cart record that was saved, or status 500 (Internal Server Error)
+     * @return the ResponseEntity with status 200 (OK) and the Cart record that was saved, or status 500 (Internal Server Error), or status 400 (Bad Request) if the product does not exist
      */
     @PostMapping("/cart/{id}/{productsId}/{cartItemQuantity}")
     @Timed
     public ResponseEntity<Cart> addToCart(@PathVariable("id") Long id, @PathVariable("productsId") Long productsId, @PathVariable("cartItemQuantity") Integer cartItemQuantity) {
         Cart cartRecord = new Cart();
-        Products product = productsService.getProductsByProductsId(productsId).orElse(null);
+        Optional<Products> productOptional = productsService.getProductsByProductsId(productsId);
 
-        cartRecord.setId(id);
-        cartRecord.setProductsId(productsId);
-        cartRecord.setCartItemQuantity(cartItemQuantity);
-        cartRecord.setCartItemTotalPrice(product.getProductsPrice());
+        if (productOptional.isPresent()){
+            cartRecord.setId(id);
+            cartRecord.setProductsId(productsId);
+            cartRecord.setCartItemQuantity(cartItemQuantity);
+            cartRecord.setCartItemTotalPrice(productOptional.get().getProductsPrice());
 
-        Cart cartRecordToPersist = examineExistingCartRecords(cartRecord, cartItemQuantity);
+            Cart cartRecordToPersist = examineExistingCartRecords(cartRecord, cartItemQuantity);
 
-        try {
-            return new ResponseEntity<Cart>(cartService.save(cartRecordToPersist), HttpStatus.OK);
-        } catch( Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            try {
+                return new ResponseEntity<Cart>(cartService.save(cartRecordToPersist), HttpStatus.OK);
+            } catch( Exception e) {
+                return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+        } else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-
     }
 
     private Cart examineExistingCartRecords(Cart cartRecord, Integer cartItemQuantity) {
