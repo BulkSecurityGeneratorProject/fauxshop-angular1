@@ -103,6 +103,8 @@ public class Products extends AbstractAuditingEntity implements Serializable {
         return productsPrice;
     }
 
+    public void setProductsPrice(BigDecimal productsPrice) { this.productsPrice = productsPrice; }
+
     public Instant getProductsDateAdded() {
         return productsDateAdded;
     }
