@@ -18,6 +18,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DataRetrievalFailureException;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -216,5 +218,41 @@ public class CartResourceIntTest {
             .andExpect(jsonPath("$.productsId").value("3"))
             .andExpect(jsonPath("$.cartItemQuantity").value("10"))
             .andExpect(jsonPath("$.cartItemTotalPrice").value("20"));
+    }
+
+    @Test
+    @Transactional
+    public void testAddToCartInternalServiceError() throws Exception {
+        List<Cart> cartList = new ArrayList<>();
+        Cart cart = new Cart();
+        cart.setCartId(1L);
+        cart.setId(2L);
+        cart.setProductsId(3L);
+        cart.setCartItemQuantity(5);
+        cart.setCartItemTotalPrice(BigDecimal.TEN);
+        cartList.add(cart);
+        Optional<List<Cart>> cartOptional = Optional.of(cartList);
+
+        Cart updatedCart = new Cart();
+        updatedCart.setCartId(1L);
+        updatedCart.setId(2L);
+        updatedCart.setProductsId(3L);
+        updatedCart.setCartItemQuantity(10);
+        updatedCart.setCartItemTotalPrice(BigDecimal.valueOf(20));
+
+        Products products = new Products();
+        products.setProductsId(3L);
+        products.setProductsQuantity(55);
+        products.setProductsPrice(BigDecimal.TEN);
+        Optional<Products> productsOptional = Optional.of(products);
+
+        when(mockProductsService.getProductsByProductsId(3L)).thenReturn(productsOptional);
+        when(mockCartService.findAllById(2L)).thenReturn(cartOptional);
+        when(mockCartService.save(updatedCart)).thenThrow(new DataRetrievalFailureException("reason"));
+
+        restUserMockMvc.perform(post("/api/cart/2/3/5")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .accept(MediaType.APPLICATION_JSON))
+            .andExpect(status().isInternalServerError());
     }
 }
