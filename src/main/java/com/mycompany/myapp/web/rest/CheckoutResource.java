@@ -108,16 +108,13 @@ public class CheckoutResource {
         Optional<Orders> optionalOrderRecord =  checkoutService.getOrdersByOrdersId(orderDTO.getOrderId());
 
         if (optionalOrderRecord.isPresent()){
-            orderRecordToPersist = new Orders(orderDTO);
-            orderRecordToPersist.setOrderId(optionalOrderRecord.get().getOrderId());
+            orderRecordToPersist = optionalOrderRecord.get();
             orderRecordToPersist.setOrderStatus("paid");
             Orders savedOrderRecord = checkoutService.save(orderRecordToPersist);
-
             return new ResponseEntity<>(savedOrderRecord, HttpStatus.CREATED);
         } else {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-
     }
 
 

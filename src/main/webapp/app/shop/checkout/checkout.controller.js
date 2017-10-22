@@ -71,16 +71,8 @@
         }
 
         function createOrderDTOWithChargeId(chargeRecord) {
-            return JSON.stringify({type:"OrderDTO", deliveryAddress1:$scope.address1,
-            deliveryAddress2:$scope.address2,
-            deliveryCity:$scope.city,
-            deliveryCountry:$scope.country,
-            deliveryName:$scope.firstName + " " + $scope.lastName,
-            deliveryPostcode:$scope.postcode,
-            deliveryState:$scope.state,
-            id:vm.account.id,
+            return JSON.stringify({type:"OrderDTO",
             orderId:$scope.createdOrdersRecordId,
-            shippingCost:vm.shipping(),
             stripeChargeId:chargeRecord.data.id});
         }
 
