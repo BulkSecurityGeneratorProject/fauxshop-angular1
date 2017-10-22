@@ -42,22 +42,35 @@
         }
 
         function checkout (event) {
-            console.log("entering checkout() method in controller");
             var cardInfo = createCardInfo();
-            StripeService.charge(vm.total() * 100, cardInfo).then(function(result) {
-            var orderDTO = createOrderDTO(result);
-            CheckoutService.createOrder(orderDTO);
+            var orderDTO = createOrderDTO();
+            CheckoutService.createOrder(orderDTO).then(function() {
+                StripeService.charge(vm.total() * 100, cardInfo).then(function(result) {
+                var orderDTOWithChargeId = createOrderDTOWithChargeId(result);
+                CheckoutService.updateChargeId(orderDTOWithChargeId);
+                });
             })
-
-            console.log("WE MADE IT. existing checkout() method in controller");
         }
 
         function createCardInfo() {
             return JSON.stringify({type:"CardDTO", number:$scope.ccNumber, expMonth:$scope.ccExpMonth, expYear:$scope.ccExpYear, cvc:$scope.ccCvc});
         }
 
-        function createOrderDTO(chargeRecord) {
-                    console.log("last step: " + $scope.createdOrdersRecordId);
+        function createOrderDTO() {
+            return JSON.stringify({type:"OrderDTO", deliveryAddress1:$scope.address1,
+            deliveryAddress2:$scope.address2,
+            deliveryCity:$scope.city,
+            deliveryCountry:$scope.country,
+            deliveryName:$scope.firstName + " " + $scope.lastName,
+            deliveryPostcode:$scope.postcode,
+            deliveryState:$scope.state,
+            id:vm.account.id,
+            orderId:$scope.createdOrdersRecordId,
+            shippingCost:vm.shipping()
+            });
+        }
+
+        function createOrderDTOWithChargeId(chargeRecord) {
             return JSON.stringify({type:"OrderDTO", deliveryAddress1:$scope.address1,
             deliveryAddress2:$scope.address2,
             deliveryCity:$scope.city,

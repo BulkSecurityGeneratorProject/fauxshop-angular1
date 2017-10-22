@@ -16,7 +16,8 @@
             createOrder: createOrder,
             goToCheckout2: goToCheckout2,
             loadCheckoutData: loadCheckoutData,
-            createOrdersRecord: createOrdersRecord
+            createOrdersRecord: createOrdersRecord,
+            updateChargeId: updateChargeId
         };
 
         return service;
@@ -49,14 +50,24 @@
         }
 
         function createOrder(orderDTO) {
-            $http.post('api/checkout', orderDTO).
+            return $http.post('api/checkout', orderDTO).
+            success(function(data, status, headers, config) {
+                console.log(data);
+                }).
+              error(function(data, status, headers, config) {
+                });
+        }
+
+        function updateChargeId(orderDTO) {
+            $http.post('api/updateChargeId', orderDTO).
             success(function(data, status, headers, config) {
                 console.log(data);
                 }).
               error(function(data, status, headers, config) {
                 });
 
-            return createOrder;
+            return updateChargeId;
         }
+
     }
 })();

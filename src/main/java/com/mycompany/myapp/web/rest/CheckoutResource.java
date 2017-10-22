@@ -49,9 +49,9 @@ public class CheckoutResource {
     }
 
     /**
-     * POST  /checkout : checkout.
+     * POST  /createOrdersRecord : createOrdersRecord.
      *
-     * @return the ResponseEntity with status 201 (Created) if the user is registered or 400 (Bad Request) if the login or email is already in use
+     * @return
      */
     @PostMapping(path = "/createOrdersRecord",
         produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.TEXT_PLAIN_VALUE})
@@ -79,6 +79,31 @@ public class CheckoutResource {
         produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.TEXT_PLAIN_VALUE})
     @Timed
     public ResponseEntity checkout(@RequestBody OrderDTO orderDTO) {
+        Orders orderRecordToPersist;
+        Optional<Orders> optionalOrderRecord =  checkoutService.getOrdersByOrdersId(orderDTO.getOrderId());
+
+        if (optionalOrderRecord.isPresent()){
+            orderRecordToPersist = new Orders(orderDTO);
+            orderRecordToPersist.setOrderId(optionalOrderRecord.get().getOrderId());
+            orderRecordToPersist.setOrderStatus("payment_pending");
+            Orders savedOrderRecord = checkoutService.save(orderRecordToPersist);
+
+            return new ResponseEntity<>(savedOrderRecord, HttpStatus.CREATED);
+        } else {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+    }
+
+    /**
+     * POST  /updateChargeId : updateChargeId.
+     *
+     * @return the ResponseEntity with status 201 (Created) if the checkout processed successfully, or 500 (Internal Server Error) if there was no order record found at the time of checkout.
+     */
+    @PostMapping(path = "/updateChargeId",
+        produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.TEXT_PLAIN_VALUE})
+    @Timed
+    public ResponseEntity updateChargeId(@RequestBody OrderDTO orderDTO) {
         Orders orderRecordToPersist;
         Optional<Orders> optionalOrderRecord =  checkoutService.getOrdersByOrdersId(orderDTO.getOrderId());
 
