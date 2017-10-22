@@ -22,7 +22,7 @@ public class ProductsDescriptionService {
 
     private final ProductsDescriptionRepository productsDescriptionRepository;
 
-    public ProductsDescriptionService(ProductsRepository productsRepository, ProductsDescriptionRepository productsDescriptionRepository) {
+    public ProductsDescriptionService(ProductsDescriptionRepository productsDescriptionRepository) {
         this.productsDescriptionRepository = productsDescriptionRepository;
     }
 
