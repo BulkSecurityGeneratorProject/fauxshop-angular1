@@ -2,7 +2,9 @@ package com.mycompany.myapp.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 
+import com.mycompany.myapp.domain.Cart;
 import com.mycompany.myapp.domain.Orders;
+import com.mycompany.myapp.domain.OrdersProducts;
 import com.mycompany.myapp.domain.User;
 import com.mycompany.myapp.repository.UserRepository;
 import com.mycompany.myapp.security.SecurityUtils;
@@ -51,12 +53,37 @@ public class CheckoutResource {
      *
      * @return the ResponseEntity with status 201 (Created) if the user is registered or 400 (Bad Request) if the login or email is already in use
      */
+    @PostMapping(path = "/createOrdersRecord",
+        produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.TEXT_PLAIN_VALUE})
+    @Timed
+    public ResponseEntity createOrdersRecord(@RequestBody List<Cart> cartInvoices) {
+        Orders orderRecordToPersist =  new Orders();
+        orderRecordToPersist.setOrderStatus("initiated");
+        Orders savedOrderRecord = checkoutService.save(orderRecordToPersist);
+
+        for (Cart cartInvoice : cartInvoices) {
+            OrdersProducts ordersProductsRecordToPersist = new OrdersProducts(cartInvoice);
+            ordersProductsRecordToPersist.setOrderId(savedOrderRecord.getOrderId());
+            checkoutService.saveOrdersProducts(ordersProductsRecordToPersist);
+        }
+
+        return new ResponseEntity<>(savedOrderRecord, HttpStatus.CREATED);
+    }
+
+    /**
+     * POST  /checkout : checkout.
+     *
+     * @return the ResponseEntity with status 201 (Created) if the user is registered or 400 (Bad Request) if the login or email is already in use
+     */
     @PostMapping(path = "/checkout",
         produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.TEXT_PLAIN_VALUE})
     @Timed
     public ResponseEntity checkout(@RequestBody OrderDTO orderDTO) {
-        Orders orderRecordToPersist =  new Orders(orderDTO);
+        Optional<Orders> optionalOrderRecord =  checkoutService.getOrdersByOrdersId(orderDTO.getOrderId());
 
+        Orders orderRecordToPersist = optionalOrderRecord.orElseGet(() -> new Orders(orderDTO));
+
+        orderRecordToPersist.setOrderStatus("paid");
         Orders savedOrderRecord = checkoutService.save(orderRecordToPersist);
 
         return new ResponseEntity<>(savedOrderRecord, HttpStatus.CREATED);

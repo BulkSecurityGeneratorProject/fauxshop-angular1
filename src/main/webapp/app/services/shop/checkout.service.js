@@ -11,11 +11,13 @@
             console.log("INSIDE CheckoutService");
 
         var formData = [];
+        var createdOrdersRecordId;
 
         var service = {
             createOrder: createOrder,
             goToCheckout2: goToCheckout2,
-            loadFormVariables: loadFormVariables
+            loadFormVariables: loadFormVariables,
+            createOrdersRecord: createOrdersRecord
         };
 
         return service;
@@ -35,6 +37,15 @@
 
         function loadFormVariables(){
             return formData;
+        }
+
+        function createOrdersRecord(cartInvoices) {
+            return $http.post('api/createOrdersRecord', cartInvoices).
+            success(function(data, status, headers, config) {
+                createdOrdersRecordId = data.orderId;
+                }).
+              error(function(data, status, headers, config) {
+                });
         }
 
         function createOrder(orderDTO) {

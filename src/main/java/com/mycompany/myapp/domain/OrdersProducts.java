@@ -53,6 +53,15 @@ public class OrdersProducts extends AbstractAuditingEntity implements Serializab
     @Column(length = 4, nullable = false)
     private Integer productsQuantity;
 
+    public OrdersProducts(Cart cartInvoice) {
+        this.productsId = cartInvoice.getProductsId();
+        // products name
+        // products price
+        this.finalPrice = cartInvoice.getCartItemTotalPrice();
+        // products tax
+        this.productsQuantity = cartInvoice.getCartItemQuantity();
+    }
+
     public Long getOrdersProductsId() {
         return ordersProductsId;
     }

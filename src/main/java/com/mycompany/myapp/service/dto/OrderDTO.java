@@ -40,6 +40,9 @@ public class OrderDTO {
     @JsonProperty("id")
     private Long id;
 
+    @JsonProperty("orderId")
+    private Long orderId;
+
     @JsonProperty("shippingCost")
     private BigDecimal shippingCost;
 
@@ -76,6 +79,10 @@ public class OrderDTO {
 
     public Long getId() {
         return id;
+    }
+
+    public Long getOrderId() {
+        return orderId;
     }
 
     public BigDecimal getShippingCost() {

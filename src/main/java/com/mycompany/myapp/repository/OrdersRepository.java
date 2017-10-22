@@ -12,4 +12,5 @@ import java.util.Optional;
  */
 public interface OrdersRepository extends JpaRepository<Orders, String> {
 
+    Optional<Orders> findOneByOrderId(Long orderId);
 }

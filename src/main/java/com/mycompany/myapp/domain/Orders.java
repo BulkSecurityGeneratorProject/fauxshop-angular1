@@ -135,6 +135,10 @@ public class Orders extends AbstractAuditingEntity implements Serializable {
     @Column(name = "comments", length = 5000)
     private String comments;
 
+    public Orders() {
+        // empty constructor
+    }
+
     public Orders(OrderDTO orderDTO) {
         this.deliveryAddress1 = orderDTO.getDeliveryAddress1();
         this.deliveryAddress2 = orderDTO.getDeliveryAddress2();
@@ -144,6 +148,7 @@ public class Orders extends AbstractAuditingEntity implements Serializable {
         this.deliveryPostcode = orderDTO.getDeliveryPostcode();
         this.deliveryState = orderDTO.getDeliveryState();
         this.id = orderDTO.getId();
+        this.orderId = orderDTO.getOrderId();
         this.shippingCost = orderDTO.getShippingCost();
         this.stripeChargeId = orderDTO.getStripeChargeId();
     }

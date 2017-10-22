@@ -63,6 +63,7 @@
             deliveryPostcode:$scope.postcode,
             deliveryState:$scope.state,
             id:vm.account.id,
+            orderId:$scope.createOrdersRecord.data.orderId,
             shippingCost:vm.shipping(),
             stripeChargeId:chargeRecord.data.id});
         }
