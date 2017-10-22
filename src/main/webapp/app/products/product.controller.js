@@ -5,9 +5,9 @@
         .module('fauxshopApp')
         .controller('ProductController', ProductController);
 
-    ProductController.$inject = ['$scope', 'Principal', 'ProductsService', 'LoginService', 'CartService', 'productToDisplay', '$state'];
+    ProductController.$inject = ['$q', '$scope', 'Principal', 'ProductsService', 'LoginService', 'CartService', 'productToDisplay', '$state'];
 
-    function ProductController ($scope, Principal, ProductsService, LoginService, CartService, productToDisplay, $state) {
+    function ProductController ($q, $scope, Principal, ProductsService, LoginService, CartService, productToDisplay, $state) {
         var vm = this;
 
         vm.product = productToDisplay;
@@ -39,7 +39,9 @@
     }
 
     function addToCart(productId) {
-        CartService.addToCart(vm.account.id, productId, 1).save();
+        var deferred = $q.defer();
+        var savedCart = CartService.addToCart(vm.account.id, productId, 1).save();
+        deferred.resolve(savedCart);
         $state.go('cart');
     }
 

@@ -33,7 +33,13 @@
 
         function addToCart(id, productId, productQuantity) {
             var addToCart = $resource('api/cart/' + id + '/' + productId + '/' + productQuantity, {}, {
-                'save': { method:'POST' }
+                'save': {
+                    method: 'POST',
+                    transformResponse: function (data) {
+                        data = angular.fromJson(data);
+                        return data;
+                    }
+                }
             });
             return addToCart
         }
