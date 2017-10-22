@@ -10,13 +10,12 @@
     function CheckoutService ($http, $resource, $state) {
             console.log("INSIDE CheckoutService");
 
-        var formData = [];
-        var createdOrdersRecordId;
+        var checkoutData = [];
 
         var service = {
             createOrder: createOrder,
             goToCheckout2: goToCheckout2,
-            loadFormVariables: loadFormVariables,
+            loadCheckoutData: loadCheckoutData,
             createOrdersRecord: createOrdersRecord
         };
 
@@ -24,25 +23,26 @@
 
 
         function goToCheckout2($scope) {
-            formData.firstName = $scope.firstName;
-            formData.lastName = $scope.lastName;
-            formData.email = $scope.email
-            formData.address1 = $scope.address1;
-            formData.address2 = $scope.address2;
-            formData.city = $scope.city;
-            formData.postcode = $scope.postcode;
-            formData.phone = $scope.phone;
+            checkoutData.firstName = $scope.firstName;
+            checkoutData.lastName = $scope.lastName;
+            checkoutData.email = $scope.email
+            checkoutData.address1 = $scope.address1;
+            checkoutData.address2 = $scope.address2;
+            checkoutData.city = $scope.city;
+            checkoutData.postcode = $scope.postcode;
+            checkoutData.phone = $scope.phone;
             $state.go('checkout2');
         }
 
-        function loadFormVariables(){
-            return formData;
+        function loadCheckoutData(){
+            console.log(checkoutData);
+            return checkoutData;
         }
 
         function createOrdersRecord(cartInvoices) {
             return $http.post('api/createOrdersRecord', cartInvoices).
             success(function(data, status, headers, config) {
-                createdOrdersRecordId = data.orderId;
+                checkoutData.createdOrdersRecordId = data.orderId;
                 }).
               error(function(data, status, headers, config) {
                 });

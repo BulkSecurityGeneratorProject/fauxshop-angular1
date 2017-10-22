@@ -10,16 +10,18 @@
     function CheckoutController ($stateParams, $scope, $state, CheckoutService, Auth, LoginService, CartService, ProductsService, StripeService, User, Principal) {
         var vm = this;
 
-        vm.formData = loadFormVariables();
-        $scope.firstName = vm.formData.firstName;
-        $scope.lastName = vm.formData.lastName;
-        $scope.email = vm.formData.email;
-        $scope.address1 = vm.formData.address1;
-        $scope.address2 = vm.formData.address2;
-        $scope.city = vm.formData.city;
-        $scope.country = vm.formData.country;
-        $scope.postcode = vm.formData.postcode;
-        $scope.phone = vm.formData.phone;
+        vm.checkoutData = loadCheckoutData();
+        $scope.firstName = vm.checkoutData.firstName;
+        $scope.lastName = vm.checkoutData.lastName;
+        $scope.email = vm.checkoutData.email;
+        $scope.address1 = vm.checkoutData.address1;
+        $scope.address2 = vm.checkoutData.address2;
+        $scope.city = vm.checkoutData.city;
+        $scope.country = vm.checkoutData.country;
+        $scope.postcode = vm.checkoutData.postcode;
+        $scope.phone = vm.checkoutData.phone;
+        $scope.createdOrdersRecordId = vm.checkoutData.createdOrdersRecordId;
+
 
         vm.tax = 20;
         vm.checkout = checkout;
@@ -55,6 +57,7 @@
         }
 
         function createOrderDTO(chargeRecord) {
+                    console.log("last step: " + $scope.createdOrdersRecordId);
             return JSON.stringify({type:"OrderDTO", deliveryAddress1:$scope.address1,
             deliveryAddress2:$scope.address2,
             deliveryCity:$scope.city,
@@ -63,13 +66,13 @@
             deliveryPostcode:$scope.postcode,
             deliveryState:$scope.state,
             id:vm.account.id,
-            orderId:$scope.createOrdersRecord.data.orderId,
+            orderId:$scope.createdOrdersRecordId,
             shippingCost:vm.shipping(),
             stripeChargeId:chargeRecord.data.id});
         }
 
-        function loadFormVariables(){
-            return CheckoutService.loadFormVariables();
+        function loadCheckoutData(){
+            return CheckoutService.loadCheckoutData();
         }
 
         function getAccount() {
