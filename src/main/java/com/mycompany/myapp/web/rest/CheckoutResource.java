@@ -43,9 +43,11 @@ public class CheckoutResource {
     private final Logger log = LoggerFactory.getLogger(CheckoutResource.class);
 
     private final CheckoutService checkoutService;
+    private final CartService cartService;
 
-    public CheckoutResource(CheckoutService checkoutService) {
+    public CheckoutResource(CheckoutService checkoutService, CartService cartService) {
         this.checkoutService = checkoutService;
+        this.cartService = cartService;
     }
 
     /**
@@ -111,10 +113,18 @@ public class CheckoutResource {
             orderRecordToPersist = optionalOrderRecord.get();
             orderRecordToPersist.setOrderStatus("paid");
             Orders savedOrderRecord = checkoutService.save(orderRecordToPersist);
+
+            // Clear the user's cart now that the payment has been processed
+            clearCart(orderRecordToPersist.getId());
+
             return new ResponseEntity<>(savedOrderRecord, HttpStatus.CREATED);
         } else {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    public void clearCart(Long id) {
+        cartService.deleteById(id);
     }
 
 

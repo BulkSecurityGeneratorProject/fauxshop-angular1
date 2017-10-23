@@ -45,10 +45,14 @@
             var cardInfo = createCardInfo();
             var orderDTO = createOrderDTO();
             CheckoutService.createOrder(orderDTO).then(function() {
-                StripeService.charge(vm.total() * 100, cardInfo).then(function(result) {
-                var orderDTOWithChargeId = createOrderDTOWithChargeId(result);
-                CheckoutService.updateChargeId(orderDTOWithChargeId);
-                });
+                StripeService.charge(vm.total() * 100, cardInfo)
+                .then(function(result) {
+                    var orderDTOWithChargeId = createOrderDTOWithChargeId(result);
+                    CheckoutService.updateChargeId(orderDTOWithChargeId);
+                })
+                .then(function() {
+                    $state.transitionTo('home');
+                })
             })
         }
 
