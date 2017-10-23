@@ -44,12 +44,17 @@
         function checkout (event) {
             var cardInfo = createCardInfo();
             var orderDTO = createOrderDTO();
-            CheckoutService.createOrder(orderDTO).then(function() {
-                StripeService.charge(vm.total() * 100, cardInfo)
+            // Create the order
+            CheckoutService.createOrder(orderDTO)
+            // Then charge using Stripe payment
+                .then(function() {
+                    StripeService.charge(vm.total() * 100, cardInfo)
+            // Then update the status of the order to 'paid'
                 .then(function(result) {
                     var orderDTOWithChargeId = createOrderDTOWithChargeId(result);
                     CheckoutService.updateChargeId(orderDTOWithChargeId);
                 })
+            // Then navigate back to the home page
                 .then(function() {
                     $state.transitionTo('home');
                 })
