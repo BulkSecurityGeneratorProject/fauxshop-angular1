@@ -11,6 +11,7 @@ import com.mycompany.myapp.service.dto.CartDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -118,8 +119,31 @@ public class CartResource {
     @PostMapping("/cart/{cartId}")
     @Timed
     public ResponseEntity<Cart> removeFromCart(@PathVariable("cartId") Long cartId) {
-        Cart cartRecord = cartService.findOneById(cartId);
+        Cart cartRecord = cartService.findOneByCartId(cartId);
         cartService.remove(cartRecord);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    /**
+     * POST  /cart/updateCartQuantity : updateCartQuantity.
+     *
+     * @return
+     */
+    @PostMapping(path = "/cart/updateCartQuantity",
+        produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.TEXT_PLAIN_VALUE})
+    @Timed
+    public ResponseEntity updateCartQuantity(@RequestBody List<Cart> cartInvoices) {
+        for (Cart cartRecord : cartInvoices) {
+            Optional<Products> product = productsService.getProductsByProductsId(cartRecord.getProductsId());
+            if (product.isPresent()){
+                cartRecord.setCartItemQuantity(cartRecord.getCartItemQuantity());
+                cartRecord.setCartItemTotalPrice(product.get().getProductsPrice().multiply(BigDecimal.valueOf(cartRecord.getCartItemQuantity())));
+                cartService.save(cartRecord);
+            } else {
+                return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+        }
+
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

@@ -29,7 +29,7 @@ public class CartService {
         return cartRepository.findAllById(id);
     }
 
-    public Cart findOneById(Long cartId) {
+    public Cart findOneByCartId(Long cartId) {
         return cartRepository.findOneByCartId(cartId);
     }
 

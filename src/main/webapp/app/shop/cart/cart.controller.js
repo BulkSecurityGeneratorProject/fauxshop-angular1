@@ -24,22 +24,6 @@
         getAccount();
 
     vm.tax = 20;
-	vm.invoice = {
-		items: [{
-				qty: 1,
-				title: 'Tuscan urns',
-				cost: 14,
-				url: 'product1'},
-				{qty: 1,
-				title: 'Bosphorus bowls',
-				cost: 28,
-				url: 'product2'},
-				{qty: 2,
-				title: 'Langdon vases ',
-				cost: 24,
-				url: 'product3'}
-				]
-	};
 
     function getAccount() {
         Principal.identity().then(function(account) {
@@ -60,6 +44,8 @@
     }
 
     function createOrdersRecord() {
+        CartService.updateCartQuantity(vm.cartInvoices);
+
         CheckoutService.createOrdersRecord(vm.cartInvoices)
             .then(function(result) {
             $scope.createOrdersRecord = result;

@@ -11,7 +11,8 @@
         var service = {
             getCartByUserId: getCartByUserId,
             addToCart: addToCart,
-            removeFromCart: removeFromCart
+            removeFromCart: removeFromCart,
+            updateCartQuantity: updateCartQuantity
         };
 
         return service;
@@ -49,6 +50,15 @@
                 'post': { method:'POST' }
             });
             return removeFromCart
+        }
+
+        function updateCartQuantity(cartList) {
+            return $http.post('api/cart/updateCartQuantity', cartList).
+            success(function(data, status, headers, config) {
+                console.log(data);
+                }).
+              error(function(data, status, headers, config) {
+                });
         }
     }
 })();

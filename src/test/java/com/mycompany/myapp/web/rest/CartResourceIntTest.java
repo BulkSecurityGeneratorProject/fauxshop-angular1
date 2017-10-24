@@ -269,7 +269,7 @@ public class CartResourceIntTest {
         cart.setCartItemQuantity(5);
         cart.setCartItemTotalPrice(BigDecimal.TEN);
 
-        when(mockCartService.findOneById(1L)).thenReturn(cart);
+        when(mockCartService.findOneByCartId(1L)).thenReturn(cart);
 
         restUserMockMvc.perform(post("/api/cart/2")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)

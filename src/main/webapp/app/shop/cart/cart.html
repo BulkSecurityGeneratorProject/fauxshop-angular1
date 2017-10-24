@@ -34,7 +34,6 @@
 							</tr>
 						  </thead>
 						  <tbody>
-                          {{cartInvoice}}
                           <tr ng-repeat="cartInvoice in vm.cartInvoices">
                               <td class="vert-align"><a ui-sref="{{cartInvoice.productsURL}}">{{cartInvoice.productsName}}</a></td>
                               <td class="vert-align">{{ cartInvoice.productsPrice | currency }}</td>

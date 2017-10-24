@@ -36,7 +36,6 @@
         }
 
         function loadCheckoutData(){
-            console.log(checkoutData);
             return checkoutData;
         }
 
