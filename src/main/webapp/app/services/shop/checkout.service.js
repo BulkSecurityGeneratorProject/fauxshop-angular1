@@ -8,7 +8,6 @@
     CheckoutService.$inject = ['$http','$resource', '$state'];
 
     function CheckoutService ($http, $resource, $state) {
-            console.log("INSIDE CheckoutService");
 
         var checkoutData = [];
 

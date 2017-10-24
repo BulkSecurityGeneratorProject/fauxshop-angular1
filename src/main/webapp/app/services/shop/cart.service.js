@@ -55,7 +55,6 @@
         function updateCartQuantity(cartList) {
             return $http.post('api/cart/updateCartQuantity', cartList).
             success(function(data, status, headers, config) {
-                console.log(data);
                 }).
               error(function(data, status, headers, config) {
                 });
