@@ -4,6 +4,9 @@
 					<div class="nav-header">
 						<a href="index.html" class="nav-brand">STELLA <span>SHOP</span></a>
 						<a class="nav-icon pull-right visible-xs menu-link" href="#"><i class="icon-menu2"></i></a>
+                        <div ng-switch="vm.isAuthenticated()">
+                            <a class="pull-right" ng-switch-when="true">You are logged in as {{vm.account.login}}</a>
+                        </div>
 						<a class="nav-icon-outline cart pull-right" href="#"><i class="icon-cart"></i><span class="badge">{{vm.cartInvoices.length}}</span></a>
 					</div>
 				</div>
