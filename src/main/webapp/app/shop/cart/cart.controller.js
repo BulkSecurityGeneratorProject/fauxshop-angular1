@@ -60,10 +60,10 @@
     }
 
     function createOrdersRecord() {
-        var ordersRecord = CheckoutService.createOrdersRecord(vm.cartInvoices).then(function(result) {
-        console.log("result.data.orderId: " + result.data.orderId);
-        $scope.createOrdersRecord = result;
-        $state.go('checkout');
+        CheckoutService.createOrdersRecord(vm.cartInvoices)
+            .then(function(result) {
+            $scope.createOrdersRecord = result;
+            $state.go('checkout');
         })
     }
 

@@ -56,7 +56,7 @@
                 })
             // Then navigate back to the home page
                 .then(function() {
-                    $state.transitionTo('home');
+                    $state.transitionTo('home', {}, { reload: true});
                 })
             })
         }

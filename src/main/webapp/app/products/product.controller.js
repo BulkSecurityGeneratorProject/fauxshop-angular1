@@ -42,7 +42,7 @@
         var deferred = $q.defer();
         var savedCart = CartService.addToCart(vm.account.id, productId, 1).save();
         deferred.resolve(savedCart);
-        $state.go('cart');
+        $state.go('cart', {}, { reload: true});
     }
 
     function getCartInvoices() {
