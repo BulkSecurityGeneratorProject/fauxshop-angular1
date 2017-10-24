@@ -1,0 +1,72 @@
+<div id="wrap">
+    <div id="main-nav" class="">
+        <div class="container-fluid">
+            <div class="nav-header">
+                <a href="index.html" class="nav-brand">STELLA <span>SHOP</span></a>
+                <a class="nav-icon pull-right visible-xs menu-link" href="#"><i class="icon-menu2"></i></a>
+                <div ng-switch="vm.isAuthenticated()">
+                    <a class="pull-right" ng-switch-when="true">You are logged in as {{vm.account.login}}</a>
+                </div>
+                <a class="nav-icon-outline cart pull-right" href="#"><i class="icon-cart"></i><span class="badge">{{vm.cartInvoices.length}}</span></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid title">
+        <div class="row">
+            <div class="col-sm-12">
+                <h2>Contact us</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid contact product">
+        <div class="row">
+            <div class="col-xs-12 col-sm-4">
+                <address>
+                    <p>Take me to your leader! Morbo can't understand his teleprompter because he forgot how you say that letter that's shaped like a man wearing a hat.</p>
+                    <br><strong>Stella Shop</strong><br>
+                    72 State Road 88<br>
+                    City, State 248139<br>
+                    (123) 256 - 7690<br>
+                    contact@company.com
+                </address>
+            </div>
+            <div class="col-xs-12 col-sm-8">
+
+                <form action="contact.html" class="myform" method="post" novalidate id="mycomment">
+                    <div class="row clearfix">
+                        <div class="col-xs-12 col-sm-6">
+                            <div class="form-group">
+                                <label class="control-label">Name</label>
+                                <div class="controls">
+                                    <input name="contactName" placeholder="Your name" class="form-control input-lg requiredField" type="text" data-error-empty="Enter name">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6">
+                            <div class="form-group">
+                                <label class="control-label">Email</label>
+                                <div class=" controls">
+                                    <input name="email" placeholder="Your email" class="form-control input-lg requiredField" type="email" data-error-invalid="Invalid email address" data-error-empty="Enter email">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Message</label>
+                        <div class="controls">
+                            <textarea name="comments" placeholder="Your message" class="form-control input-lg requiredField" rows="5" data-error-empty="Enter message"></textarea>
+                        </div>
+                    </div>
+                    <p><button name="submit" type="submit" class="btn btn-store btn-block" data-error-message="Error!" data-sending-message="Sending..." data-ok-message="Email Sent">Send Message</button></p>
+                    <input type="hidden" name="submitted" id="submitted3" value="true">
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="gmap" style="height:300px;"></div>
+
+</div>
