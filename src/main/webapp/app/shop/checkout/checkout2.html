@@ -1,214 +1,231 @@
-        <div id="wrap">
-			<div id="main-nav" class="">
-				<div class="container-fluid">
-					<div class="nav-header">
-						<a href="index.html" class="nav-brand">STELLA <span>SHOP</span></a>
-						<a class="nav-icon pull-right visible-xs menu-link" href="#"><i class="icon-menu2"></i></a>
-                        <div ng-switch="vm.isAuthenticated()">
-                            <a class="pull-right" ng-switch-when="true">You are logged in as {{vm.account.login}}</a>
+<div ng-switch="vm.account.login != 'admin'">
+    <div class="container-fluid" ng-switch-when="true">
+        <div class="menu-wrapper">
+            <a href="#" class="close-menu visible-xs"><i class="icon-close"></i></a>
+            <h3 class="visible-xs">Navigation</h3>
+            <ul class="nav-list text-center effect">
+                <li><a ui-sref="home">Shop</a></li>
+                <li><a ui-sref="about">About</a></li>
+                <li><a ui-sref="blog">Blog</a></li>
+                <li><a ui-sref="contact">Contact</a></li>
+                <li><a class="alert-link" ui-sref="register">Register</a></li>
+                <li><a class="alert-link" id="login" href="" ng-click="vm.login()">Login</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div id="wrap">
+    <div id="main-nav" class="">
+        <div class="container-fluid">
+            <div class="nav-header">
+                <a href="index.html" class="nav-brand">STELLA <span>SHOP</span></a>
+                <a class="nav-icon pull-right visible-xs menu-link" href="#"><i class="icon-menu2"></i></a>
+                <div ng-switch="vm.isAuthenticated()">
+                    <a class="pull-right" ng-switch-when="true">You are logged in as {{vm.account.login}}</a>
+                </div>
+                <a class="nav-icon-outline cart pull-right" ui-sref="cart"><i class="icon-cart"></i><span class="badge">{{vm.cartInvoices.length}}</span></a>
+            </div>
+        </div>
+    </div>
+    firstName: {{vm.checkoutData.firstName}}
+    lastName: {{vm.checkoutData.lastName}}
+    <div class="container-fluid title">
+        <div class="row">
+            <div class="col-sm-12">
+                <h2>Checkout / Step 2 of 2</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid cart-list">
+        <div class="row">
+            <div class="col-sm-6">
+                <form action="checkout2.html" method="post" novalidate class="myform">
+                    <h3 class="text-center">Payment Method</h3>
+
+                        <div class="panel-group" id="accordion">
+                         <div class="panel panel-default">
+                            <div class="panel-heading">
+                              <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                                  MasterCard
+                                </a>
+                              </h4>
+                            </div>
+                            <div id="collapseOne" class="panel-collapse collapse in">
+                              <div class="panel-body">
+
+                                <div class="row">
+                                    <div class="col-sm-8 col-md-12">
+                                        <div class="form-group">
+                                            <label class="control-label">First name</label>
+                                            <input ng-model="ccOwner" name="ccOwner" placeholder="Name on Card" class="form-control" type="text">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-8 col-md-8">
+                                        <div class="form-group">
+                                            <label class="control-label">Name</label>
+                                            <input ng-model="ccNumber" name="ccNumber" placeholder="Card number" class="form-control input-lg" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 col-md-4">
+                                        <div class="form-group">
+                                            <label class="control-label">Code</label>
+                                            <input ng-model="ccCvc" name="Code" placeholder="Code" class="form-control input-lg" type="text" >
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6 col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">month</label>
+                                            <div class=" controls">
+                                                <select ng-model="ccExpMonth" class="form-control">
+                                                  <option>1</option>
+                                                  <option>2</option>
+                                                  <option>3</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">year</label>
+                                            <div class=" controls">
+                                                <select ng-model="ccExpYear" class="form-control">
+                                                  <option>2014</option>
+                                                  <option>2015</option>
+                                                  <option>2016</option>
+                                                  <option>2017</option>
+                                                  <option>2018</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                           <div class="panel panel-default">
+                            <div class="panel-heading">
+                              <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                                  Cash on Delivery
+                                </a>
+                              </h4>
+                            </div>
+                            <div id="collapseTwo" class="panel-collapse collapse">
+                              <div class="panel-body">
+                                <div class="form-group">
+                                    <label class="control-label" for="contact-message">Message</label>
+                                    <div class="controls">
+                                        <textarea id="contact-message" name="comments" placeholder="Add Comments About Your Order" class="form-control input-lg requiredField" rows="5"></textarea>
+                                    </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="panel panel-default">
+                            <div class="panel-heading">
+                              <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                                  PayPal
+                                </a>
+                              </h4>
+                            </div>
+                            <div id="collapseThree" class="panel-collapse collapse">
+                              <div class="panel-body">
+                                <div class="form-group">
+                                    <label class="control-label">PayPal Account</label>
+                                    <input name="email" placeholder="PayPal Account" class="form-control" type="text">
+                                </div>
+                              </div>
+                            </div>
+                          </div>
                         </div>
-						<a class="nav-icon-outline cart pull-right" ui-sref="cart"><i class="icon-cart"></i><span class="badge">{{vm.cartInvoices.length}}</span></a>
-					</div>
-				</div>
-			</div>
-            firstName: {{vm.checkoutData.firstName}}
-            lastName: {{vm.checkoutData.lastName}}
-			<div class="container-fluid title">
-				<div class="row">
-					<div class="col-sm-12">
-						<h2>Checkout / Step 2 of 2</h2>
-					</div>
-				</div>
-			</div>
+                </form>
+                <form action="checkout2.html" method="post" novalidate id="order-form" class="myform">
+                    <h3 class="text-center">If you have Coupon code</h3>
+                    <div class="input-group ">
+                        <input placeholder="Coupon code" class="form-control input-lg" type="text" >
+                        <span class="input-group-btn">
+                            <button name="submit" type="submit" class="btn btn-store">Check!</button>
+                        </span>
+                    </div>
+                </form>
+            </div>
 
-			<div class="container-fluid cart-list">
-				<div class="row">
-					<div class="col-sm-6">
-						<form action="checkout2.html" method="post" novalidate class="myform">
-							<h3 class="text-center">Payment Method</h3>
+            <form class="form" role="form" ng-submit="vm.checkout($event)">
+            <div class="col-sm-6 ">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th colspan="3" class="text-center">You're purchasing this…</th>
+                        </tr>
+                      </thead>
 
-								<div class="panel-group" id="accordion">
-								 <div class="panel panel-default">
-									<div class="panel-heading">
-									  <h4 class="panel-title">
-										<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-										  MasterCard
-										</a>
-									  </h4>
-									</div>
-									<div id="collapseOne" class="panel-collapse collapse in">
-									  <div class="panel-body">
+                       <tbody>
+                        <tr>
+                          <td class="vert-align">Tuscan urns</td>
+                          <td class="vert-align">1x</td>
+                          <td class="vert-align text-right">$14.00</td>
+                        </tr>
+                        <tr>
+                          <td class="vert-align">Bosphorus bowls</td>
+                          <td class="vert-align">2x</td>
+                          <td class="vert-align text-right">$28.00</td>
+                        </tr>
+                        <tr>
+                          <td class="vert-align">Langdon vases</td>
+                          <td class="vert-align">1x</td>
+                          <td class="vert-align text-right">$24.00</td>
+                        </tr>
+                        <tr>
+                          <td class="vert-align"><b>Cart subtotal</b></td>
+                          <td class="vert-align"></td>
+                          <td class="vert-align text-right"><b>$94.00</b></td>
+                        </tr>
+                        <tr>
+                          <td class="vert-align">Shipping cost:</td>
+                          <td class="vert-align"></td>
+                          <td class="vert-align text-right">$25.00</td>
+                        </tr>
+                        <tr>
+                          <td class="vert-align">Tax:</td>
+                          <td class="vert-align"></td>
+                          <td class="vert-align text-right">$20.00</td>
+                        </tr>
+                        <tr>
+                          <td class="vert-align">Coupon:</td>
+                          <td class="vert-align"></td>
+                          <td class="vert-align text-right">- $15.00</td>
+                        </tr>
+                        <tr>
+                          <td class="vert-align">Total:</td>
+                          <td class="vert-align"></td>
+                          <td class="vert-align text-right" id="total">$124.00</td>
+                        </tr>
+                      </tbody>
+                    </table>
 
-										<div class="row">
-                                            <div class="col-sm-8 col-md-12">
-												<div class="form-group">
-													<label class="control-label">First name</label>
-													<input ng-model="ccOwner" name="ccOwner" placeholder="Name on Card" class="form-control" type="text">
-												</div>
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-sm-8 col-md-8">
-												<div class="form-group">
-													<label class="control-label">Name</label>
-													<input ng-model="ccNumber" name="ccNumber" placeholder="Card number" class="form-control input-lg" type="text">
-												</div>
-											</div>
-											<div class="col-sm-4 col-md-4">
-												<div class="form-group">
-													<label class="control-label">Code</label>
-													<input ng-model="ccCvc" name="Code" placeholder="Code" class="form-control input-lg" type="text" >
-												</div>
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-sm-6 col-md-6">
-												<div class="form-group">
-													<label class="control-label">month</label>
-													<div class=" controls">
-														<select ng-model="ccExpMonth" class="form-control">
-														  <option>1</option>
-														  <option>2</option>
-														  <option>3</option>
-														</select>
-													</div>
-												</div>
-											</div>
-											<div class="col-sm-6 col-md-6">
-												<div class="form-group">
-													<label class="control-label">year</label>
-													<div class=" controls">
-														<select ng-model="ccExpYear" class="form-control">
-														  <option>2014</option>
-														  <option>2015</option>
-														  <option>2016</option>
-														  <option>2017</option>
-														  <option>2018</option>
-														</select>
-													</div>
-												</div>
-											</div>
-										</div>
-									  </div>
-									</div>
-								  </div>
-
-								   <div class="panel panel-default">
-									<div class="panel-heading">
-									  <h4 class="panel-title">
-										<a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-										  Cash on Delivery
-										</a>
-									  </h4>
-									</div>
-									<div id="collapseTwo" class="panel-collapse collapse">
-									  <div class="panel-body">
-										<div class="form-group">
-											<label class="control-label" for="contact-message">Message</label>
-											<div class="controls">
-												<textarea id="contact-message" name="comments" placeholder="Add Comments About Your Order" class="form-control input-lg requiredField" rows="5"></textarea>
-											</div>
-										</div>
-									  </div>
-									</div>
-								  </div>
-
-								  <div class="panel panel-default">
-									<div class="panel-heading">
-									  <h4 class="panel-title">
-										<a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-										  PayPal
-										</a>
-									  </h4>
-									</div>
-									<div id="collapseThree" class="panel-collapse collapse">
-									  <div class="panel-body">
-										<div class="form-group">
-											<label class="control-label">PayPal Account</label>
-											<input name="email" placeholder="PayPal Account" class="form-control" type="text">
-										</div>
-									  </div>
-									</div>
-								  </div>
-								</div>
-						</form>
-						<form action="checkout2.html" method="post" novalidate id="order-form" class="myform">
-							<h3 class="text-center">If you have Coupon code</h3>
-							<div class="input-group ">
-								<input placeholder="Coupon code" class="form-control input-lg" type="text" >
-								<span class="input-group-btn">
-									<button name="submit" type="submit" class="btn btn-store">Check!</button>
-								</span>
-							</div>
-						</form>
-					</div>
-
-                    <form class="form" role="form" ng-submit="vm.checkout($event)">
-					<div class="col-sm-6 ">
-							<table class="table">
-							  <thead>
-								<tr>
-								  <th colspan="3" class="text-center">You're purchasing this…</th>
-								</tr>
-							  </thead>
-
-							   <tbody>
-								<tr>
-								  <td class="vert-align">Tuscan urns</td>
-								  <td class="vert-align">1x</td>
-								  <td class="vert-align text-right">$14.00</td>
-								</tr>
-								<tr>
-								  <td class="vert-align">Bosphorus bowls</td>
-								  <td class="vert-align">2x</td>
-								  <td class="vert-align text-right">$28.00</td>
-								</tr>
-								<tr>
-								  <td class="vert-align">Langdon vases</td>
-								  <td class="vert-align">1x</td>
-								  <td class="vert-align text-right">$24.00</td>
-								</tr>
-								<tr>
-								  <td class="vert-align"><b>Cart subtotal</b></td>
-								  <td class="vert-align"></td>
-								  <td class="vert-align text-right"><b>$94.00</b></td>
-								</tr>
-								<tr>
-								  <td class="vert-align">Shipping cost:</td>
-								  <td class="vert-align"></td>
-								  <td class="vert-align text-right">$25.00</td>
-								</tr>
-								<tr>
-								  <td class="vert-align">Tax:</td>
-								  <td class="vert-align"></td>
-								  <td class="vert-align text-right">$20.00</td>
-								</tr>
-								<tr>
-								  <td class="vert-align">Coupon:</td>
-								  <td class="vert-align"></td>
-								  <td class="vert-align text-right">- $15.00</td>
-								</tr>
-								<tr>
-								  <td class="vert-align">Total:</td>
-								  <td class="vert-align"></td>
-								  <td class="vert-align text-right" id="total">$124.00</td>
-								</tr>
-							  </tbody>
-							</table>
-
-							<!--<a ng-click="vm.checkout($event)" class="btn btn-right">Complete my purchase</a>-->
-                        <button type="submit" class="btn btn-right">Complete my purchase</button>
-					</div>
-                    </form>
+                    <!--<a ng-click="vm.checkout($event)" class="btn btn-right">Complete my purchase</a>-->
+                <button type="submit" class="btn btn-right">Complete my purchase</button>
+            </div>
+            </form>
 
 
-				</div>
+        </div>
 
-				<div class="row">
-					<div class="col-sm-12 text-center show-more">
-						<a href="index.html" class="btn btn-outline">Cancel and return to store</a>
-					</div>
-				</div>
+        <div class="row">
+            <div class="col-sm-12 text-center show-more">
+                <a href="index.html" class="btn btn-outline">Cancel and return to store</a>
+            </div>
+        </div>
 
-			</div>
-		</div>
+    </div>
+</div>

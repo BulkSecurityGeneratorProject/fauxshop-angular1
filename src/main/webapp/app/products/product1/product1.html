@@ -1,3 +1,20 @@
+<div ng-switch="vm.account.login != 'admin'">
+    <div class="container-fluid" ng-switch-when="true">
+        <div class="menu-wrapper">
+            <a href="#" class="close-menu visible-xs"><i class="icon-close"></i></a>
+            <h3 class="visible-xs">Navigation</h3>
+            <ul class="nav-list text-center effect">
+                <li><a ui-sref="home">Shop</a></li>
+                <li><a ui-sref="about">About</a></li>
+                <li><a ui-sref="blog">Blog</a></li>
+                <li><a ui-sref="contact">Contact</a></li>
+                <li><a class="alert-link" ui-sref="register">Register</a></li>
+                <li><a class="alert-link" id="login" href="" ng-click="vm.login()">Login</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
 <div id="wrap">
     <div id="main-nav" class="">
         <div class="container-fluid">

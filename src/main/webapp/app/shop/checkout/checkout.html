@@ -1,127 +1,144 @@
-        <div id="wrap">
-			<div id="main-nav" class="">
-				<div class="container-fluid">
-					<div class="nav-header">
-						<a href="index.html" class="nav-brand">STELLA <span>SHOP</span></a>
-						<a class="nav-icon pull-right visible-xs menu-link" href="#"><i class="icon-menu2"></i></a>
-                        <div ng-switch="vm.isAuthenticated()">
-                            <a class="pull-right" ng-switch-when="true">You are logged in as {{vm.account.login}}</a>
+<div ng-switch="vm.account.login != 'admin'">
+    <div class="container-fluid" ng-switch-when="true">
+        <div class="menu-wrapper">
+            <a href="#" class="close-menu visible-xs"><i class="icon-close"></i></a>
+            <h3 class="visible-xs">Navigation</h3>
+            <ul class="nav-list text-center effect">
+                <li><a ui-sref="home">Shop</a></li>
+                <li><a ui-sref="about">About</a></li>
+                <li><a ui-sref="blog">Blog</a></li>
+                <li><a ui-sref="contact">Contact</a></li>
+                <li><a class="alert-link" ui-sref="register">Register</a></li>
+                <li><a class="alert-link" id="login" href="" ng-click="vm.login()">Login</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div id="wrap">
+    <div id="main-nav" class="">
+        <div class="container-fluid">
+            <div class="nav-header">
+                <a href="index.html" class="nav-brand">STELLA <span>SHOP</span></a>
+                <a class="nav-icon pull-right visible-xs menu-link" href="#"><i class="icon-menu2"></i></a>
+                <div ng-switch="vm.isAuthenticated()">
+                    <a class="pull-right" ng-switch-when="true">You are logged in as {{vm.account.login}}</a>
+                </div>
+                <a class="nav-icon-outline cart pull-right" ui-sref="cart"><i class="icon-cart"></i><span class="badge">{{vm.cartInvoices.length}}</span></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid title">
+        <div class="row">
+            <div class="col-sm-12">
+                <h2>Checkout / Step 1 of 2</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid cart-list">
+        <div class="row">
+            <form class="form" role="form" ng-submit="vm.goToCheckout2()">
+                <div class="col-sm-6">
+                        <h3 class="text-center">Delivery address</h3>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="control-label">First name</label>
+                                    <input ng-model="firstName" name="firstName" placeholder="First Name" class="form-control" type="text">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="control-label">Last Name</label>
+                                    <input ng-model="lastName" name="lastName" placeholder="Last Name" class="form-control" type="text">
+                                </div>
+                            </div>
                         </div>
-						<a class="nav-icon-outline cart pull-right" ui-sref="cart"><i class="icon-cart"></i><span class="badge">{{vm.cartInvoices.length}}</span></a>
-					</div>
-				</div>
-			</div>
 
-			<div class="container-fluid title">
-				<div class="row">
-					<div class="col-sm-12">
-						<h2>Checkout / Step 1 of 2</h2>
-					</div>
-				</div>
-			</div>
-
-			<div class="container-fluid cart-list">
-				<div class="row">
-                    <form class="form" role="form" ng-submit="vm.goToCheckout2()">
-                        <div class="col-sm-6">
-                                <h3 class="text-center">Delivery address</h3>
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label class="control-label">First name</label>
-                                            <input ng-model="firstName" name="firstName" placeholder="First Name" class="form-control" type="text">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label class="control-label">Last Name</label>
-                                            <input ng-model="lastName" name="lastName" placeholder="Last Name" class="form-control" type="text">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="control-label">Email</label>
-                                    <input ng-model="email" name="email" placeholder="Email" class="form-control" type="text">
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">Address</label>
-                                    <input ng-model="address1" name="address1" placeholder="Address" class="form-control" type="text">
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">Address2</label>
-                                    <input ng-model="address2" name="address2" placeholder="Address2" class="form-control" type="text">
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">City</label>
-                                    <input ng-model="city" name="city" placeholder="City" class="form-control" type="text">
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">Postal/ZIP Code</label>
-                                    <input ng-model="postcode" name="zip" placeholder="Postal/ZIP Code" class="form-control" type="text">
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">Country</label>
-                                    <select ng-model="country" id="country" class="form-control" tabindex="9"><option disabled="disabled" selected="selected" value="">Country</option><option value="USA">USA</option></select>
-
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">State / Province</label>
-                                    <input ng-model="state" name="state" placeholder="State / Province" class="form-control" type="text">
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">Phone</label>
-                                    <input ng-model="phone" name="phone" placeholder="Phone" class="form-control" type="text">
-                                </div>
+                        <div class="form-group">
+                            <label class="control-label">Email</label>
+                            <input ng-model="email" name="email" placeholder="Email" class="form-control" type="text">
                         </div>
-                        <div class="col-sm-6 ">
-                                <table class="table">
-                                  <thead>
-                                    <tr>
-                                      <th colspan="3" class="text-center">You're purchasing this…</th>
-                                    </tr>
-                                  </thead>
-
-                                    <tr ng-repeat="cartInvoice in vm.cartInvoices">
-                                        <td class="vert-align">{{cartInvoice.productsName}}</td>
-                                        <td class="vert-align">{{cartInvoice.cartItemQuantity}}x</td>
-                                        <td class="vert-align text-right">{{cartInvoice.cartItemTotalPrice | currency }}</td>
-                                    </tr>
-
-                                  <tbody>
-                                    <tr>
-                                      <td class="vert-align"><b>Cart subtotal</b></td>
-                                      <td class="vert-align"></td>
-                                      <td class="vert-align text-right"><b>{{ vm.total() | currency }}</b></td>
-                                    </tr>
-                                    <tr>
-                                      <td class="vert-align">Shipping cost:</td>
-                                      <td class="vert-align"></td>
-                                      <td class="vert-align text-right">{{ vm.shipping() | currency }}</td>
-                                    </tr>
-                                    <tr>
-                                      <td class="vert-align">Tax:</td>
-                                      <td class="vert-align"></td>
-                                      <td class="vert-align text-right">{{ vm.tax | currency }}</td>
-                                    </tr>
-                                    <tr>
-                                      <td class="vert-align">Total:</td>
-                                      <td class="vert-align"></td>
-                                      <td class="vert-align text-right" id="total">{{ vm.total() + vm.shipping() + vm.tax | currency }}</td>
-                                    </tr>
-                                  </tbody>
-                                </table>
-
-                                <!--<a ui-sref="checkout2" class="btn btn-right">Continue to next step</a>-->
+                        <div class="form-group">
+                            <label class="control-label">Address</label>
+                            <input ng-model="address1" name="address1" placeholder="Address" class="form-control" type="text">
                         </div>
-                        <button type="submit" class="btn btn-right">Continue to next step</button>
-                    </form>
-				</div>
+                        <div class="form-group">
+                            <label class="control-label">Address2</label>
+                            <input ng-model="address2" name="address2" placeholder="Address2" class="form-control" type="text">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">City</label>
+                            <input ng-model="city" name="city" placeholder="City" class="form-control" type="text">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Postal/ZIP Code</label>
+                            <input ng-model="postcode" name="zip" placeholder="Postal/ZIP Code" class="form-control" type="text">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Country</label>
+                            <select ng-model="country" id="country" class="form-control" tabindex="9"><option disabled="disabled" selected="selected" value="">Country</option><option value="USA">USA</option></select>
 
-				<div class="row">
-					<div class="col-sm-12 text-center show-more">
-						<a href="index.html" class="btn btn-outline">Cancel and return to store</a>
-					</div>
-				</div>
-			</div>
-		</div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">State / Province</label>
+                            <input ng-model="state" name="state" placeholder="State / Province" class="form-control" type="text">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Phone</label>
+                            <input ng-model="phone" name="phone" placeholder="Phone" class="form-control" type="text">
+                        </div>
+                </div>
+                <div class="col-sm-6 ">
+                        <table class="table">
+                          <thead>
+                            <tr>
+                              <th colspan="3" class="text-center">You're purchasing this…</th>
+                            </tr>
+                          </thead>
+
+                            <tr ng-repeat="cartInvoice in vm.cartInvoices">
+                                <td class="vert-align">{{cartInvoice.productsName}}</td>
+                                <td class="vert-align">{{cartInvoice.cartItemQuantity}}x</td>
+                                <td class="vert-align text-right">{{cartInvoice.cartItemTotalPrice | currency }}</td>
+                            </tr>
+
+                          <tbody>
+                            <tr>
+                              <td class="vert-align"><b>Cart subtotal</b></td>
+                              <td class="vert-align"></td>
+                              <td class="vert-align text-right"><b>{{ vm.total() | currency }}</b></td>
+                            </tr>
+                            <tr>
+                              <td class="vert-align">Shipping cost:</td>
+                              <td class="vert-align"></td>
+                              <td class="vert-align text-right">{{ vm.shipping() | currency }}</td>
+                            </tr>
+                            <tr>
+                              <td class="vert-align">Tax:</td>
+                              <td class="vert-align"></td>
+                              <td class="vert-align text-right">{{ vm.tax | currency }}</td>
+                            </tr>
+                            <tr>
+                              <td class="vert-align">Total:</td>
+                              <td class="vert-align"></td>
+                              <td class="vert-align text-right" id="total">{{ vm.total() + vm.shipping() + vm.tax | currency }}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+
+                        <!--<a ui-sref="checkout2" class="btn btn-right">Continue to next step</a>-->
+                </div>
+                <button type="submit" class="btn btn-right">Continue to next step</button>
+            </form>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12 text-center show-more">
+                <a href="index.html" class="btn btn-outline">Cancel and return to store</a>
+            </div>
+        </div>
+    </div>
+</div>
