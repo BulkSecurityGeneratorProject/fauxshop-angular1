@@ -5,7 +5,6 @@
         .module('fauxshopApp')
         .controller('RegisterController', RegisterController);
 
-
     RegisterController.$inject = ['$translate', '$timeout', 'Auth', 'LoginService'];
 
     function RegisterController ($translate, $timeout, Auth, LoginService) {

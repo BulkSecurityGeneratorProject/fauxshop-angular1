@@ -430,7 +430,6 @@ input[type="checkbox"]:checked + span:before {
   background-color: #000000;
   color: #ffffff;
   text-decoration: none;
-  padding: 0px 10px;
 }
 .nav-brand span {
   font-weight: 700;
