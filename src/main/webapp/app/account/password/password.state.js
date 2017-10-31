@@ -9,7 +9,7 @@
 
     function stateConfig($stateProvider) {
         $stateProvider.state('password', {
-            parent: 'account',
+            parent: 'accountState',
             url: '/password',
             data: {
                 authorities: ['ROLE_USER'],

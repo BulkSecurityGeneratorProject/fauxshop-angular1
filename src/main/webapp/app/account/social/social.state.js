@@ -9,7 +9,7 @@
 
     function stateConfig($stateProvider) {
         $stateProvider.state('social-register', {
-            parent: 'account',
+            parent: 'accountState',
             url: '/social-register/:provider?{success:boolean}',
             data: {
                 authorities: [],
@@ -30,7 +30,7 @@
             }
         })
         .state('social-auth', {
-            parent: 'account',
+            parent: 'accountState',
             url: '/social-auth',
             data: {
                 authorities: []
