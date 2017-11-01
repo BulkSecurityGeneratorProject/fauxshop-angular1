@@ -18,7 +18,7 @@
         $scope.address2 = vm.checkoutData.address2;
         $scope.city = vm.checkoutData.city;
         $scope.country = vm.checkoutData.country;
-        $scope.country.default = "USA";
+        $scope.country = "USA";
         $scope.postcode = vm.checkoutData.postcode;
         $scope.phone = vm.checkoutData.phone;
         $scope.createdOrdersRecordId = vm.checkoutData.createdOrdersRecordId;
