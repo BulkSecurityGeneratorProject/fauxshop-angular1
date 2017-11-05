@@ -39,10 +39,9 @@
     }
 
     function addToCart(productId) {
-        var deferred = $q.defer();
         var savedCart = CartService.addToCart(vm.account.id, productId, 1).save();
-        deferred.resolve(savedCart);
-        $state.go('cart', {}, { reload: true});
+        $q.when(savedCart)
+            .then($state.go('cart', {}, { reload: true}));
     }
 
     function getCartInvoices() {
