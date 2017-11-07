@@ -126,19 +126,5 @@ public class CheckoutResource {
     public void clearCart(Long id) {
         cartService.deleteById(id);
     }
-
-
-    /**
-     * GET  /checkout : checkout.
-     *
-     * @return the ResponseEntity with status 201 (Created) if the user is registered or 400 (Bad Request) if the login or email is already in use
-     */
-    @GetMapping(path = "/checkout",
-        produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.TEXT_PLAIN_VALUE})
-    @Timed
-    public ResponseEntity checkoutGet() {
-
-        log.error("made it to the end of the checkoutGet method");
-        return new ResponseEntity<>(HttpStatus.CREATED);
-    }
+    
 }
