@@ -90,4 +90,8 @@ public class OrderDTO {
     }
 
     public String getStripeChargeId() { return stripeChargeId; }
+
+    public void setOrderId(Long orderId) {
+        this.orderId = orderId;
+    }
 }

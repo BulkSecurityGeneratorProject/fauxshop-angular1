@@ -3,6 +3,7 @@ package com.mycompany.myapp.web.rest;
 import com.mycompany.myapp.FauxshopApp;
 import com.mycompany.myapp.domain.*;
 import com.mycompany.myapp.service.*;
+import com.mycompany.myapp.service.dto.OrderDTO;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -93,13 +94,30 @@ public class CheckoutResourceIntTest {
         Orders orderRecordToPersist =  new Orders();
         orderRecordToPersist.setOrderStatus("initiated");
 
-        OrdersProducts ordersProductsRecordToPersist = new OrdersProducts(cart);
-
         when(mockCheckoutService.save(orderRecordToPersist)).thenReturn(orderRecordToPersist);
 
         restCheckoutMockMvc.perform(post("/api/createOrdersRecord")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
             .content(TestUtil.convertObjectToJsonBytes(cartList)))
+            .andExpect(status().isCreated());
+    }
+
+    @Test
+    @Transactional
+    public void testCheckout() throws Exception {
+
+        OrderDTO orderDTO = new OrderDTO();
+        orderDTO.setOrderId(1L);
+
+        Orders order = new Orders();
+        order.setOrderId(1L);
+        Optional<Orders> optionalOrder = Optional.of(order);
+
+        when(mockCheckoutService.getOrdersByOrdersId(1L)).thenReturn(optionalOrder);
+
+        restCheckoutMockMvc.perform(post("/api/checkout")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(orderDTO)))
             .andExpect(status().isCreated());
     }
 }
