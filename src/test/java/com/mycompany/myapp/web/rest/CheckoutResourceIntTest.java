@@ -105,7 +105,6 @@ public class CheckoutResourceIntTest {
     @Test
     @Transactional
     public void testCheckout() throws Exception {
-
         OrderDTO orderDTO = new OrderDTO();
         orderDTO.setOrderId(1L);
 
@@ -120,4 +119,24 @@ public class CheckoutResourceIntTest {
             .content(TestUtil.convertObjectToJsonBytes(orderDTO)))
             .andExpect(status().isCreated());
     }
+
+    @Test
+    @Transactional
+    public void testUpdateChargeId() throws Exception {
+        OrderDTO orderDTO = new OrderDTO();
+        orderDTO.setOrderId(1L);
+
+        Orders order = new Orders();
+        order.setOrderId(1L);
+        Optional<Orders> optionalOrder = Optional.of(order);
+
+        when(mockCheckoutService.getOrdersByOrdersId(1L)).thenReturn(optionalOrder);
+
+        restCheckoutMockMvc.perform(post("/api/updateChargeId")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(orderDTO)))
+            .andExpect(status().isCreated());
+    }
+
+
 }
