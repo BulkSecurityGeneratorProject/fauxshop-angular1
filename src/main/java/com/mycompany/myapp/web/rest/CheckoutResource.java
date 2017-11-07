@@ -126,5 +126,5 @@ public class CheckoutResource {
     public void clearCart(Long id) {
         cartService.deleteById(id);
     }
-    
+
 }

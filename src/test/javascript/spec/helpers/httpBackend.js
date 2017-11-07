@@ -4,6 +4,12 @@ function mockApiAccountCall() {
     });
 }
 
+function mockApiCartGet() {
+    inject(function($httpBackend) {
+        $httpBackend.whenGET(/api\/cart\/.*/).respond(["apiCartGetArrayResult"]);
+    });
+}
+
 function mockI18nCalls() {
     inject(function($httpBackend) {
         $httpBackend.whenGET(/i18n\/.*\/.+\.json/).respond({});

@@ -23,7 +23,6 @@
         $scope.phone = vm.checkoutData.phone;
         $scope.createdOrdersRecordId = vm.checkoutData.createdOrdersRecordId;
 
-
         vm.tax = 20;
         vm.checkout = checkout;
         vm.goToCheckout2 = goToCheckout2;
