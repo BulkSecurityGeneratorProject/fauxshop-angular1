@@ -5,9 +5,10 @@ describe('Controller Tests', function () {
     beforeEach(module('fauxshopApp'));
 
     describe('CheckoutController', function () {
-        var $scope, authService;
+        var $scope, authService, CheckoutController;
 
-        beforeEach(inject(function ($rootScope, $controller, Auth) {
+        beforeEach(inject(function ($injector, $rootScope, $controller, Auth) {
+            CheckoutController = $injector.get('CheckoutController');
             $scope = $rootScope.$new();
             authService = Auth;
             $controller('CheckoutController as vm',
