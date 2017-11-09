@@ -1,25 +1,18 @@
-<div class="container-fluid">
-<div class="menu-wrapper">
-    <a href="#" class="close-menu visible-xs"><i class="icon-close"></i></a>
-    <h3 class="visible-xs">Navigation</h3>
-    <ul class="nav-list text-center effect">
-        <li><a href="index.html">Shop</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="blog.html">Blog</a></li>
-        <li><a href="contact.html">Contact</a></li>
-        <li><a href="login.html">Register</a></li>
-        <li><a href="login.html">Login</a></li>
-    </ul>
-    <div class="visible-xs mt-info">
-        <h3>Latest news</h3>
-        <ul>
-            <li><a href="blog-article.html">New collection</a></li>
-            <li><a href="blog-article.html">Home Sweet Home: Turn...</a></li>
-            <li><a href="blog-article.html">The Prisoner of Benda</a></li>
-        </ul>
-        <a href="http://demo.angelostudio.net" class="btn btn-outline-w">More Templates</a>
+<div ng-switch="vm.account.login != 'admin'">
+    <div class="container-fluid" ng-switch-when="true">
+        <div class="menu-wrapper">
+            <a href="#" class="close-menu visible-xs"><i class="icon-close"></i></a>
+            <h3 class="visible-xs">Navigation</h3>
+            <ul class="nav-list text-center effect">
+                <li><a ui-sref="home">Shop</a></li>
+                <li><a ui-sref="about">About</a></li>
+                <li><a ui-sref="blog">Blog</a></li>
+                <li><a ui-sref="contact">Contact</a></li>
+                <li><a class="alert-link" ui-sref="register">Register</a></li>
+                <li><a id="login" ng-click="vm.login()">Login</a></li>
+            </ul>
+        </div>
     </div>
-</div>
 </div>
 
 <div id="wrap">
