@@ -40,7 +40,7 @@
 
     function addToCart(productId) {
         var savedCart = CartService.addToCart(vm.account.id, productId, 1).save();
-        $q.when(savedCart)
+        $q.when(savedCart != null)
             .then($state.go('cart', {}, { reload: true}));
     }
 
