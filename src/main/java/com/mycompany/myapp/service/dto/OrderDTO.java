@@ -46,6 +46,9 @@ public class OrderDTO {
     @JsonProperty("shippingCost")
     private BigDecimal shippingCost;
 
+    @JsonProperty("stripeCardOwner")
+    private String stripeCardOwner;
+
     @JsonProperty("stripeChargeId")
     private String stripeChargeId;
 
@@ -88,6 +91,8 @@ public class OrderDTO {
     public BigDecimal getShippingCost() {
         return shippingCost;
     }
+
+    public String getStripeCardOwner() { return stripeCardOwner; }
 
     public String getStripeChargeId() { return stripeChargeId; }
 

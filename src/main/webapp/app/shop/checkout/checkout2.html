@@ -28,8 +28,7 @@
             </div>
         </div>
     </div>
-    firstName: {{vm.checkoutData.firstName}}
-    lastName: {{vm.checkoutData.lastName}}
+
     <div class="container-fluid title">
         <div class="row">
             <div class="col-sm-12">
@@ -49,7 +48,7 @@
                             <div class="panel-heading">
                               <h4 class="panel-title">
                                 <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                                  MasterCard
+                                  Credit Card
                                 </a>
                               </h4>
                             </div>
@@ -59,7 +58,7 @@
                                 <div class="row">
                                     <div class="col-sm-8 col-md-12">
                                         <div class="form-group">
-                                            <label class="control-label">First name</label>
+                                            <label class="control-label">Name</label>
                                             <input ng-model="ccOwner" name="ccOwner" placeholder="Name on Card" class="form-control" type="text">
                                         </div>
                                     </div>
@@ -67,7 +66,7 @@
                                 <div class="row">
                                     <div class="col-sm-8 col-md-8">
                                         <div class="form-group">
-                                            <label class="control-label">Name</label>
+                                            <label class="control-label">Card Number</label>
                                             <input ng-model="ccNumber" name="ccNumber" placeholder="Card number" class="form-control input-lg" type="text">
                                         </div>
                                     </div>
@@ -84,9 +83,19 @@
                                             <label class="control-label">month</label>
                                             <div class=" controls">
                                                 <select ng-model="ccExpMonth" class="form-control">
+                                                  <option value="" disabled selected>Expiration Month</option>
                                                   <option>1</option>
                                                   <option>2</option>
                                                   <option>3</option>
+                                                  <option>4</option>
+                                                  <option>5</option>
+                                                  <option>6</option>
+                                                  <option>7</option>
+                                                  <option>8</option>
+                                                  <option>9</option>
+                                                  <option>10</option>
+                                                  <option>11</option>
+                                                  <option>12</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -96,11 +105,21 @@
                                             <label class="control-label">year</label>
                                             <div class=" controls">
                                                 <select ng-model="ccExpYear" class="form-control">
-                                                  <option>2014</option>
-                                                  <option>2015</option>
-                                                  <option>2016</option>
+                                                  <option value="" disabled selected>Expiration Year</option>
                                                   <option>2017</option>
                                                   <option>2018</option>
+                                                  <option>2019</option>
+                                                  <option>2020</option>
+                                                  <option>2021</option>
+                                                  <option>2022</option>
+                                                  <option>2023</option>
+                                                  <option>2024</option>
+                                                  <option>2025</option>
+                                                  <option>2025</option>
+                                                  <option>2026</option>
+                                                  <option>2027</option>
+                                                  <option>2028</option>
+                                                  <option>2029</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -111,13 +130,6 @@
                           </div>
 
                            <div class="panel panel-default">
-                            <div class="panel-heading">
-                              <h4 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-                                  Cash on Delivery
-                                </a>
-                              </h4>
-                            </div>
                             <div id="collapseTwo" class="panel-collapse collapse">
                               <div class="panel-body">
                                 <div class="form-group">
@@ -130,33 +142,7 @@
                             </div>
                           </div>
 
-                          <div class="panel panel-default">
-                            <div class="panel-heading">
-                              <h4 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-                                  PayPal
-                                </a>
-                              </h4>
-                            </div>
-                            <div id="collapseThree" class="panel-collapse collapse">
-                              <div class="panel-body">
-                                <div class="form-group">
-                                    <label class="control-label">PayPal Account</label>
-                                    <input name="email" placeholder="PayPal Account" class="form-control" type="text">
-                                </div>
-                              </div>
-                            </div>
-                          </div>
                         </div>
-                </form>
-                <form action="checkout2.html" method="post" novalidate id="order-form" class="myform">
-                    <h3 class="text-center">If you have Coupon code</h3>
-                    <div class="input-group ">
-                        <input placeholder="Coupon code" class="form-control input-lg" type="text" >
-                        <span class="input-group-btn">
-                            <button name="submit" type="submit" class="btn btn-store">Check!</button>
-                        </span>
-                    </div>
                 </form>
             </div>
 

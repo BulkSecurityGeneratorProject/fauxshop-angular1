@@ -112,6 +112,8 @@ public class CheckoutResource {
         if (optionalOrderRecord.isPresent()){
             orderRecordToPersist = optionalOrderRecord.get();
             orderRecordToPersist.setOrderStatus("paid");
+            orderRecordToPersist.setStripeCardOwner(orderDTO.getStripeCardOwner());
+            orderRecordToPersist.setStripeChargeId(orderDTO.getStripeChargeId());
             Orders savedOrderRecord = checkoutService.save(orderRecordToPersist);
 
             // Clear the user's cart now that the payment has been processed

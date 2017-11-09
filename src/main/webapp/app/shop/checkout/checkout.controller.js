@@ -82,6 +82,7 @@
         function createOrderDTOWithChargeId(chargeRecord) {
             return JSON.stringify({type:"OrderDTO",
             orderId:$scope.createdOrdersRecordId,
+            stripeCardOwner:$scope.ccOwner,
             stripeChargeId:chargeRecord.data.id});
         }
 

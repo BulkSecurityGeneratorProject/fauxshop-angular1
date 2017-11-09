@@ -106,6 +106,10 @@ public class Orders extends AbstractAuditingEntity implements Serializable {
     private String paymentMethod;
 
     @Size(max = 64)
+    @Column(name = "stripe_card_owner", length = 64)
+    private String stripeCardOwner;
+
+    @Size(max = 64)
     @Column(name = "stripe_charge_id", length = 64)
     private String stripeChargeId;
 
@@ -150,6 +154,7 @@ public class Orders extends AbstractAuditingEntity implements Serializable {
         this.id = orderDTO.getId();
         this.orderId = orderDTO.getOrderId();
         this.shippingCost = orderDTO.getShippingCost();
+        this.stripeCardOwner = orderDTO.getStripeCardOwner();
         this.stripeChargeId = orderDTO.getStripeChargeId();
     }
 
@@ -313,11 +318,19 @@ public class Orders extends AbstractAuditingEntity implements Serializable {
         this.paymentMethod = paymentMethod;
     }
 
+    public String getStripeCardOwner() {
+        return stripeCardOwner;
+    }
+
+    public void setStripeCardOwner(String stripeCardOwner) {
+        this.stripeCardOwner = stripeCardOwner;
+    }
+
     public String getStripeChargeId() {
         return stripeChargeId;
     }
 
-    public void setStripeChargeId(String ccType) {
+    public void setStripeChargeId(String stripeChargeId) {
         this.stripeChargeId = stripeChargeId;
     }
 
