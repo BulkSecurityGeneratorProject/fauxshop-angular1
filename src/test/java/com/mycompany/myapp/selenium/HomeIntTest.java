@@ -17,6 +17,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 @SpringBootTest(classes={FauxshopApp.class}, webEnvironment= SpringBootTest.WebEnvironment.DEFINED_PORT)
 @WebAppConfiguration
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@Ignore
 public class HomeIntTest extends TestBaseSetup {
 
     private final Logger log = LoggerFactory.getLogger(HomeIntTest.class);
