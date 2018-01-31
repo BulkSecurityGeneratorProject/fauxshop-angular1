@@ -26,6 +26,7 @@
     vm.tax = 20;
 
     function getAccount() {
+        console.log('$window.localStorage.guestId: ' + $window.localStorage.guestId);
         Principal.identity().then(function(account) {
             vm.account = account;
             vm.isAuthenticated = Principal.isAuthenticated;
