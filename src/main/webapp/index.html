@@ -73,6 +73,13 @@
         ga('create','UA-XXXXX-X');ga('send','pageview');
     </script>-->
 
+    <!-- Here we set our users guestId to be used if they do not log in.
+    Is there a better place to put this? -->
+    <script>
+            var guestId = $window.localStorage.getItem('ID') || Math.floor(Math.random() * (100000000000000 - 1000000000000 + 1)) + 1000000000000;
+            $window.localStorage.setItem('guestId',guestId);
+    </script>
+
     <!-- build:js app/vendor.js -->
     <!-- bower:js -->
     <script src="bower_components/jquery/dist/jquery.js"></script>

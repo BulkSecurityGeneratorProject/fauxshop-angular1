@@ -5,9 +5,9 @@
         .module('fauxshopApp')
         .controller('HomeController', HomeController);
 
-    HomeController.$inject = ['$scope', 'Principal', 'LoginService', 'CartService', '$state'];
+    HomeController.$inject = ['$window', '$scope', '$state', 'Principal', 'LoginService', 'CartService'];
 
-    function HomeController ($scope, Principal, LoginService, CartService, $state) {
+    function HomeController ($window, $scope, $state, Principal, LoginService, CartService) {
         var vm = this;
 
         vm.account = null;

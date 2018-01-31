@@ -5,9 +5,9 @@
         .module('fauxshopApp')
         .controller('ProductController', ProductController);
 
-    ProductController.$inject = ['$q', '$scope', 'Principal', 'ProductsService', 'LoginService', 'CartService', 'productToDisplay', '$state'];
+    ProductController.$inject = ['$q', '$window', '$scope', 'Principal', 'ProductsService', 'LoginService', 'CartService', 'productToDisplay', '$state'];
 
-    function ProductController ($q, $scope, Principal, ProductsService, LoginService, CartService, productToDisplay, $state) {
+    function ProductController ($q, $window, $scope, Principal, ProductsService, LoginService, CartService, productToDisplay, $state) {
         var vm = this;
 
         vm.product = productToDisplay;
@@ -34,18 +34,30 @@
             vm.isAuthenticated = Principal.isAuthenticated;
             if (vm.account != null){
                 getCartInvoices();
+            } else {
+                getGuestCartInvoices();
             }
         });
     }
 
     function addToCart(productId) {
-        var savedCart = CartService.addToCart(vm.account.id, productId, 1).save();
-        $q.when(savedCart != null)
-            .then($state.go('cart', {}, { reload: true}));
+        if (vm.account != null) {
+            var savedCart = CartService.addToCart(vm.account.id, productId, 1).save();
+            $q.when(savedCart != null)
+                .then($state.go('cart', {}, { reload: true}));
+        } else {
+            var savedCart = CartService.addToCart($window.localStorage.guestId, productId, 1).save();
+            $q.when(savedCart != null)
+                .then($state.go('cart', {}, { reload: true}));
+        }
     }
 
     function getCartInvoices() {
         vm.cartInvoices = CartService.getCartByUserId(vm.account.id).get();
+    }
+
+    function getGuestCartInvoices() {
+        vm.cartInvoices = CartService.getCartByUserId($window.localStorage.guestId).get();
     }
 
     }

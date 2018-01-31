@@ -5,9 +5,9 @@
         .module('fauxshopApp')
         .controller('TermsAndConditionsController', TermsAndConditionsController);
 
-    TermsAndConditionsController.$inject = ['$stateParams', '$state', '$scope', 'Auth', 'LoginService', 'CartService', 'User', 'Principal'];
+    TermsAndConditionsController.$inject = ['$window', '$stateParams', '$state', '$scope', 'Auth', 'LoginService', 'CartService', 'User', 'Principal'];
 
-    function TermsAndConditionsController ($stateParams, $state, $scope, Auth, LoginService, CartService, User, Principal) {
+    function TermsAndConditionsController ($window, $stateParams, $state, $scope, Auth, LoginService, CartService, User, Principal) {
         var vm = this;
 
         vm.account = null;
@@ -27,6 +27,8 @@
             vm.isAuthenticated = Principal.isAuthenticated;
             if (vm.account != null){
                 getCartInvoices();
+            } else {
+                getGuestCartInvoices();
             }
         });
     }
@@ -37,6 +39,10 @@
 
     function getCartInvoices() {
         vm.cartInvoices = CartService.getCartByUserId(vm.account.id).get();
+    }
+
+    function getGuestCartInvoices() {
+        vm.cartInvoices = CartService.getCartByUserId($window.localStorage.guestId).get();
     }
 
     Auth.activateAccount({key: $stateParams.key}).then(function () {
