@@ -5,9 +5,9 @@
         .module('fauxshopApp')
         .controller('PrivacyController', PrivacyController);
 
-    PrivacyController.$inject = ['$stateParams', '$state', '$scope', 'Auth', 'LoginService', 'CartService', 'User', 'Principal'];
+    PrivacyController.$inject = ['$window', '$stateParams', '$state', '$scope', 'Auth', 'LoginService', 'CartService', 'User', 'Principal'];
 
-    function PrivacyController ($stateParams, $state, $scope, Auth, LoginService, CartService, User, Principal) {
+    function PrivacyController ($window, $stateParams, $state, $scope, Auth, LoginService, CartService, User, Principal) {
         var vm = this;
 
         vm.account = null;
@@ -21,31 +21,38 @@
 
         getAccount();
 
-    function getAccount() {
-        Principal.identity().then(function(account) {
-            vm.account = account;
-            vm.isAuthenticated = Principal.isAuthenticated;
-            if (vm.account != null){
-                getCartInvoices();
-            }
+        function getAccount() {
+            console.log('$window.localStorage.guestId: ' + $window.localStorage.guestId);
+            Principal.identity().then(function(account) {
+                vm.account = account;
+                vm.isAuthenticated = Principal.isAuthenticated;
+                if (vm.account != null){
+                    getCartInvoices();
+                } else {
+                    getGuestCartInvoices();
+                }
+            });
+        }
+
+        function getGuestCartInvoices() {
+            vm.cartInvoices = CartService.getCartByUserId($window.localStorage.guestId).get();
+        }
+
+        function register () {
+            $state.go('register');
+        }
+
+        function getCartInvoices() {
+            vm.cartInvoices = CartService.getCartByUserId(vm.account.id).get();
+        }
+
+        Auth.activateAccount({key: $stateParams.key}).then(function () {
+            vm.error = null;
+            vm.success = 'OK';
+        }).catch(function () {
+            vm.success = null;
+            vm.error = 'ERROR';
         });
-    }
 
-    function register () {
-        $state.go('register');
-    }
-
-    function getCartInvoices() {
-        vm.cartInvoices = CartService.getCartByUserId(vm.account.id).get();
-    }
-
-    Auth.activateAccount({key: $stateParams.key}).then(function () {
-        vm.error = null;
-        vm.success = 'OK';
-    }).catch(function () {
-        vm.success = null;
-        vm.error = 'ERROR';
-    });
-
-    }
+        }
 })();

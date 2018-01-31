@@ -38,16 +38,16 @@
         });
     }
 
+    function getGuestCartInvoices() {
+        vm.cartInvoices = CartService.getCartByUserId($window.localStorage.guestId).get();
+    }
+
     function register () {
         $state.go('register');
     }
 
     function getCartInvoices() {
         vm.cartInvoices = CartService.getCartByUserId(vm.account.id).get();
-    }
-
-    function getGuestCartInvoices() {
-        vm.cartInvoices = CartService.getCartByUserId($window.localStorage.guestId).get();
     }
 
     function createOrdersRecord() {

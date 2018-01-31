@@ -22,13 +22,20 @@
         getAccount();
 
         function getAccount() {
+            console.log('$window.localStorage.guestId: ' + $window.localStorage.guestId);
             Principal.identity().then(function(account) {
                 vm.account = account;
                 vm.isAuthenticated = Principal.isAuthenticated;
                 if (vm.account != null){
                     getCartInvoices();
+                } else {
+                    getGuestCartInvoices();
                 }
             });
+        }
+
+        function getGuestCartInvoices() {
+            vm.cartInvoices = CartService.getCartByUserId($window.localStorage.guestId).get();
         }
 
         function register () {

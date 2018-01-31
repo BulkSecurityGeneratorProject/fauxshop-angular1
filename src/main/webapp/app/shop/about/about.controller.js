@@ -5,9 +5,9 @@
         .module('fauxshopApp')
         .controller('AboutController', AboutController);
 
-    AboutController.$inject = ['$stateParams', '$state', '$scope', 'Auth', 'LoginService', 'CartService', 'User', 'Principal'];
+    AboutController.$inject = ['$window', '$stateParams', '$state', '$scope', 'Auth', 'LoginService', 'CartService', 'User', 'Principal'];
 
-    function AboutController ($stateParams, $state, $scope, Auth, LoginService, CartService, User, Principal) {
+    function AboutController ($window, $stateParams, $state, $scope, Auth, LoginService, CartService, User, Principal) {
         var vm = this;
 
         vm.account = null;
@@ -21,14 +21,21 @@
 
         getAccount();
 
-    function getAccount() {
-        Principal.identity().then(function(account) {
-            vm.account = account;
-            vm.isAuthenticated = Principal.isAuthenticated;
-            if (vm.account != null){
-                getCartInvoices();
-            }
-        });
+        function getAccount() {
+            console.log('$window.localStorage.guestId: ' + $window.localStorage.guestId);
+            Principal.identity().then(function(account) {
+                vm.account = account;
+                vm.isAuthenticated = Principal.isAuthenticated;
+                if (vm.account != null){
+                    getCartInvoices();
+                } else {
+                    getGuestCartInvoices();
+                }
+            });
+        }
+
+    function getGuestCartInvoices() {
+        vm.cartInvoices = CartService.getCartByUserId($window.localStorage.guestId).get();
     }
 
     function register () {

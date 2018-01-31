@@ -5,9 +5,9 @@
         .module('fauxshopApp')
         .controller('CheckoutController', CheckoutController);
 
-    CheckoutController.$inject = ['$stateParams', '$scope', '$state', 'CheckoutService', 'Auth', 'LoginService', 'CartService', 'ProductsService', 'StripeService', 'User', 'Principal'];
+    CheckoutController.$inject = ['$window', '$stateParams', '$scope', '$state', 'CheckoutService', 'Auth', 'LoginService', 'CartService', 'ProductsService', 'StripeService', 'User', 'Principal'];
 
-    function CheckoutController ($stateParams, $scope, $state, CheckoutService, Auth, LoginService, CartService, ProductsService, StripeService, User, Principal) {
+    function CheckoutController ($window, $stateParams, $scope, $state, CheckoutService, Auth, LoginService, CartService, ProductsService, StripeService, User, Principal) {
         var vm = this;
 
         vm.checkoutData = loadCheckoutData();
@@ -91,13 +91,20 @@
         }
 
         function getAccount() {
+            console.log('$window.localStorage.guestId: ' + $window.localStorage.guestId);
             Principal.identity().then(function(account) {
                 vm.account = account;
                 vm.isAuthenticated = Principal.isAuthenticated;
                 if (vm.account != null){
                     getCartInvoices();
+                } else {
+                    getGuestCartInvoices();
                 }
             });
+        }
+
+        function getGuestCartInvoices() {
+            vm.cartInvoices = CartService.getCartByUserId($window.localStorage.guestId).get();
         }
 
         function getCartInvoices() {
