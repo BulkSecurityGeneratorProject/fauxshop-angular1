@@ -31,7 +31,7 @@ public class StripeResource {
     }
 
     /**
-     * POST  /charge/{amount}/{cardInfo}
+     * POST  /charge/{amount}
      *
      * @return the ResponseEntity with status 201 (Created) and the chargeMap if it worked, or 500 (Internal Server Error) if it failed
      */

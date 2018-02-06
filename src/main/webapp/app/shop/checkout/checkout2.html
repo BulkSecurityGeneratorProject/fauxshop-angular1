@@ -144,6 +144,28 @@
 
                         </div>
                 </form>
+
+                <div id="raiblocks-button"></div>
+                <script>
+                    brainblocks.Button.render({
+
+                    // Pass in payment options
+
+                    payment: {
+                        destination: 'xrb_1whgk6ufhsdz5rwuwkuw9754s3joxffxbhgh1971sim8t53aaetzer1w1z6w',
+                        currency:    'rai',
+                        amount:         '2000'
+                    },
+
+                    // Handle successful payments
+
+                    onPayment: function(data) {
+                        console.log('Payment successful!', data.token);
+                    }
+
+                    }, '#raiblocks-button');
+                </script>
+
             </div>
 
             <form class="form" role="form" ng-submit="vm.checkout($event)">

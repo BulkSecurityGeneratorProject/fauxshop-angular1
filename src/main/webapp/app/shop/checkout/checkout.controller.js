@@ -23,6 +23,7 @@
         $scope.phone = vm.checkoutData.phone;
         $scope.createdOrdersRecordId = vm.checkoutData.createdOrdersRecordId;
 
+        var amount = 2000;
         vm.tax = 20;
         vm.checkout = checkout;
         vm.goToCheckout2 = goToCheckout2;
@@ -66,6 +67,12 @@
         }
 
         function createOrderDTO() {
+            var userId;
+            if (vm.account != null) {
+            userId = vm.account.id;
+            } else {
+            userId = $window.localStorage.guestId;
+            }
             return JSON.stringify({type:"OrderDTO", deliveryAddress1:$scope.address1,
             deliveryAddress2:$scope.address2,
             deliveryCity:$scope.city,
@@ -73,7 +80,7 @@
             deliveryName:$scope.firstName + " " + $scope.lastName,
             deliveryPostcode:$scope.postcode,
             deliveryState:$scope.state,
-            id:vm.account.id,
+            id:userId,
             orderId:$scope.createdOrdersRecordId,
             shippingCost:vm.shipping()
             });
@@ -91,7 +98,6 @@
         }
 
         function getAccount() {
-            console.log('$window.localStorage.guestId: ' + $window.localStorage.guestId);
             Principal.identity().then(function(account) {
                 vm.account = account;
                 vm.isAuthenticated = Principal.isAuthenticated;
