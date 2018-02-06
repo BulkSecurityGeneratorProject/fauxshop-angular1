@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('jhipangoneApp')
+        .module('fauxshopApp')
         .config(stateConfig);
 
     stateConfig.$inject = ['$stateProvider'];
@@ -14,7 +14,7 @@
             url: '/message',
             data: {
                 authorities: ['ROLE_USER'],
-                pageTitle: 'jhipangoneApp.message.home.title'
+                pageTitle: 'fauxshopApp.message.home.title'
             },
             views: {
                 'content@': {
@@ -36,7 +36,7 @@
             url: '/message/{id}',
             data: {
                 authorities: ['ROLE_USER'],
-                pageTitle: 'jhipangoneApp.message.detail.title'
+                pageTitle: 'fauxshopApp.message.detail.title'
             },
             views: {
                 'content@': {

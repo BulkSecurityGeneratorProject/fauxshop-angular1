@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('jhipangoneApp')
+        .module('fauxshopApp')
         .controller('MessageDetailController', MessageDetailController);
 
     MessageDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'Message'];
@@ -13,7 +13,7 @@
         vm.message = entity;
         vm.previousState = previousState.name;
 
-        var unsubscribe = $rootScope.$on('jhipangoneApp:messageUpdate', function(event, result) {
+        var unsubscribe = $rootScope.$on('fauxshopApp:messageUpdate', function(event, result) {
             vm.message = result;
         });
         $scope.$on('$destroy', unsubscribe);

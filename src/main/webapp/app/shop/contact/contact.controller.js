@@ -55,4 +55,8 @@
     });
 
     }
+
+    function saveMessage(event) {
+        console.log('test');
+    }
 })();

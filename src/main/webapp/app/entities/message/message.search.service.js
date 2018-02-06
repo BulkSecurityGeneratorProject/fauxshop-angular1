@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('jhipangoneApp')
+        .module('fauxshopApp')
         .factory('MessageSearch', MessageSearch);
 
     MessageSearch.$inject = ['$resource'];

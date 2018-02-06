@@ -1,12 +1,12 @@
 <div>
-    <h2 data-translate="jhipangoneApp.message.home.title">Messages</h2>
+    <h2 data-translate="fauxshopApp.message.home.title">Messages</h2>
     <jhi-alert></jhi-alert>
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-4 no-padding-left">
                 <button class="btn btn-primary" ui-sref="message.new" >
                     <span class="glyphicon glyphicon-plus"></span>
-                    <span class="hidden-xs-down"  data-translate="jhipangoneApp.message.home.createLabel">
+                    <span class="hidden-xs-down"  data-translate="fauxshopApp.message.home.createLabel">
                         Create new Message
                     </span>
                 </button>
@@ -14,7 +14,7 @@
             <div class="col-xs-8 no-padding-right">
                 <form name="searchForm" class="form-inline">
                     <div class="input-group pull-right" >
-                        <input type="text" class="form-control" ng-model="vm.searchQuery" id="searchQuery" placeholder="{{ 'jhipangoneApp.message.home.search' | translate }}">
+                        <input type="text" class="form-control" ng-model="vm.searchQuery" id="searchQuery" placeholder="{{ 'fauxshopApp.message.home.search' | translate }}">
                         <span  class="input-group-btn width-min" >
                             <button class="btn btn-info" ng-click="vm.search(vm.searchQuery)">
                                 <span class="glyphicon glyphicon-search"></span>
@@ -36,9 +36,9 @@
             <thead>
                 <tr>
                     <th><span data-translate="global.field.id">ID</span></th>
-                    <th><span data-translate="jhipangoneApp.message.name">Name</span></th>
-                    <th><span data-translate="jhipangoneApp.message.email">Email</span></th>
-                    <th><span data-translate="jhipangoneApp.message.message">Message</span></th>
+                    <th><span data-translate="fauxshopApp.message.name">Name</span></th>
+                    <th><span data-translate="fauxshopApp.message.email">Email</span></th>
+                    <th><span data-translate="fauxshopApp.message.message">Message</span></th>
                     <th></th>
                 </tr>
             </thead>

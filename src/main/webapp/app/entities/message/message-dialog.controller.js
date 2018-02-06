@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('jhipangoneApp')
+        .module('fauxshopApp')
         .controller('MessageDialogController', MessageDialogController);
 
     MessageDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Message'];
@@ -32,7 +32,7 @@
         }
 
         function onSaveSuccess (result) {
-            $scope.$emit('jhipangoneApp:messageUpdate', result);
+            $scope.$emit('fauxshopApp:messageUpdate', result);
             $uibModalInstance.close(result);
             vm.isSaving = false;
         }

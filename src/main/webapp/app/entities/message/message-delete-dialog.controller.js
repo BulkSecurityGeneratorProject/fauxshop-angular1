@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('jhipangoneApp')
+        .module('fauxshopApp')
         .controller('MessageDeleteController',MessageDeleteController);
 
     MessageDeleteController.$inject = ['$uibModalInstance', 'entity', 'Message'];

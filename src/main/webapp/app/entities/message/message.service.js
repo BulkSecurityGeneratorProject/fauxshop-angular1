@@ -1,7 +1,7 @@
 (function() {
     'use strict';
     angular
-        .module('jhipangoneApp')
+        .module('fauxshopApp')
         .factory('Message', Message);
 
     Message.$inject = ['$resource'];

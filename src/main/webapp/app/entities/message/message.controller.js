@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('jhipangoneApp')
+        .module('fauxshopApp')
         .controller('MessageController', MessageController);
 
     MessageController.$inject = ['Message', 'MessageSearch'];
