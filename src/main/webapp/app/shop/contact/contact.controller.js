@@ -5,11 +5,12 @@
         .module('fauxshopApp')
         .controller('ContactController', ContactController);
 
-    ContactController.$inject = ['$window', '$stateParams', '$state', '$scope', 'Auth', 'LoginService', 'CartService', 'User', 'Principal'];
+    ContactController.$inject = ['$window', '$stateParams', '$state', '$scope', 'Auth', 'LoginService', 'CartService', 'MessageService', 'User', 'Principal'];
 
-    function ContactController ($window, $stateParams, $state, $scope, Auth, LoginService, CartService, User, Principal) {
+    function ContactController ($window, $stateParams, $state, $scope, Auth, LoginService, CartService, MessageService, User, Principal) {
         var vm = this;
 
+        vm.saveMessage = saveMessage;
         vm.account = null;
         vm.isAuthenticated = null;
         vm.login = LoginService.open;
@@ -54,9 +55,12 @@
         vm.error = 'ERROR';
     });
 
+    function saveMessage(event) {
+        MessageService.createMessage(
+            JSON.stringify({type:"MessageDTO", name:$scope.name, email:$scope.email, message:$scope.message})
+        )
     }
 
-    function saveMessage(event) {
-        console.log('test');
+
     }
 })();

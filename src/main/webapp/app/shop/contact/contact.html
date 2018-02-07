@@ -51,13 +51,13 @@
             </div>
             <div class="col-xs-12 col-sm-8">
 
-                <form class="myform" novalidate id="mycomment" ng-submit="saveMessage($event)">
+                    <form class="form" role="form" ng-submit="vm.saveMessage()">
                     <div class="row clearfix">
                         <div class="col-xs-12 col-sm-6">
                             <div class="form-group">
                                 <label class="control-label">Name</label>
                                 <div class="controls">
-                                    <input name="name" id="name" placeholder="Your name" class="form-control input-lg requiredField" type="text" data-error-empty="Enter name">
+                                    <input name="name" ng-model="name" placeholder="Your name" class="form-control input-lg requiredField" type="text" data-error-empty="Enter name">
                                 </div>
                             </div>
                         </div>
@@ -65,7 +65,7 @@
                             <div class="form-group">
                                 <label class="control-label">Email</label>
                                 <div class=" controls">
-                                    <input name="email" id="email" placeholder="Your email" class="form-control input-lg requiredField" type="email" data-error-invalid="Invalid email address" data-error-empty="Enter email">
+                                    <input name="email" ng-model="email" placeholder="Your email" class="form-control input-lg requiredField" type="email" data-error-invalid="Invalid email address" data-error-empty="Enter email">
                                 </div>
                             </div>
                         </div>
@@ -73,7 +73,7 @@
                     <div class="form-group">
                         <label class="control-label">Message</label>
                         <div class="controls">
-                            <textarea name="message" id="message" placeholder="Your message" class="form-control input-lg requiredField" rows="5" data-error-empty="Enter message"></textarea>
+                            <textarea name="message" ng-model="message" placeholder="Your message" class="form-control input-lg requiredField" rows="5" data-error-empty="Enter message"></textarea>
                         </div>
                     </div>
                     <p><button name="submit" type="submit" class="btn btn-store btn-block" data-error-message="Error!" data-sending-message="Sending..." data-ok-message="Message Sent">Send Message</button></p>

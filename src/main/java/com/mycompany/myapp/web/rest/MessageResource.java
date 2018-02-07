@@ -4,6 +4,7 @@ import com.codahale.metrics.annotation.Timed;
 import com.mycompany.myapp.domain.Message;
 
 import com.mycompany.myapp.repository.MessageRepository;
+import com.mycompany.myapp.service.dto.MessageDTO;
 import com.mycompany.myapp.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
@@ -16,8 +17,6 @@ import java.net.URISyntaxException;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 /**
  * REST controller for managing Message.
@@ -45,36 +44,16 @@ public class MessageResource {
      */
     @PostMapping("/messages")
     @Timed
-    public ResponseEntity<Message> createMessage(@RequestBody Message message) throws URISyntaxException {
+    public ResponseEntity<Message> createMessage(@RequestBody MessageDTO message) throws URISyntaxException {
         log.debug("REST request to save Message : {}", message);
-        if (message.getId() != null) {
-            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new message cannot already have an ID")).body(null);
-        }
-        Message result = messageRepository.save(message);
+        Message messageToCreate = new Message();
+        messageToCreate.setName(message.getName());
+        messageToCreate.setEmail(message.getEmail());
+        messageToCreate.setMessage(message.getMessage());
+
+        Message result = messageRepository.save(messageToCreate);
         return ResponseEntity.created(new URI("/api/messages/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
-            .body(result);
-    }
-
-    /**
-     * PUT  /messages : Updates an existing message.
-     *
-     * @param message the message to update
-     * @return the ResponseEntity with status 200 (OK) and with body the updated message,
-     * or with status 400 (Bad Request) if the message is not valid,
-     * or with status 500 (Internal Server Error) if the message couldn't be updated
-     * @throws URISyntaxException if the Location URI syntax is incorrect
-     */
-    @PutMapping("/messages")
-    @Timed
-    public ResponseEntity<Message> updateMessage(@RequestBody Message message) throws URISyntaxException {
-        log.debug("REST request to update Message : {}", message);
-        if (message.getId() == null) {
-            return createMessage(message);
-        }
-        Message result = messageRepository.save(message);
-        return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, message.getId().toString()))
             .body(result);
     }
 
