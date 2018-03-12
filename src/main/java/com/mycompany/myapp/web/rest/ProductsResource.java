@@ -51,4 +51,23 @@ public class ProductsResource {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
+    /**
+     * GET  /products : retrieves all products
+     * @return the ResponseEntity with status 200 (OK) and the list of products
+     */
+    @GetMapping("/products")
+    @Timed
+    public ResponseEntity<List<ProductsDTO>> getProducts() {
+        List<ProductsDTO> productsDTOS = new ArrayList<ProductsDTO>();
+        List<Products> products = productsService.getProducts();
+
+        for (Products product : products) {
+            Optional<ProductsDescription> productsDescription = productsDescriptionService.getProductsDescriptionByProductsId(product.getProductsId());
+            ProductsDTO newProductsDTO = new ProductsDTO(product, productsDescription.get());
+            productsDTOS.add(newProductsDTO);
+        }
+
+        return new ResponseEntity<>(productsDTOS, HttpStatus.OK);
+    }
 }
