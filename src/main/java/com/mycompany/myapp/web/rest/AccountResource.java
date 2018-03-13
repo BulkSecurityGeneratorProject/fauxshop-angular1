@@ -124,6 +124,29 @@ public class AccountResource {
     }
 
     /**
+     * GET  /account/{login}/{password} : get the user with the given login and password
+     *
+     * @return the ResponseEntity with status 200 (OK) and the current user in body. 401 (UNAUTHORIZED) if the passwords
+     * do not match
+     */
+    @GetMapping("/account/{login}/{password}")
+    @Timed
+    public ResponseEntity<UserDTO> getAccount(@PathVariable("login") String login,
+                                              @PathVariable("password") String password) {
+
+        // TODO: for some reason the encoded password does not match what is in the database
+        Optional<User> user = userService.getUserWithAuthoritiesByLogin(login);
+        boolean passwordsMatch = userService.passwordMatches(password, user.get().getPassword());
+        if (passwordsMatch){
+            UserDTO userDTO = new UserDTO(user.get());
+            return new ResponseEntity<UserDTO>(userDTO, HttpStatus.OK);
+        } else {
+            // Bad Password
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
+    }
+
+    /**
      * POST  /account : update the current user information.
      *
      * @param userDTO the current user information

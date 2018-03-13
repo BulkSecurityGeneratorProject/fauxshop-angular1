@@ -202,6 +202,14 @@ public class UserService {
         });
     }
 
+    public String encodePassword(String password) {
+        return passwordEncoder.encode(password);
+    }
+
+    public boolean passwordMatches(CharSequence newPassword, String encodedPassword) {
+        return passwordEncoder.matches(newPassword, encodedPassword);
+    }
+
     @Transactional(readOnly = true)
     public Page<UserDTO> getAllManagedUsers(Pageable pageable) {
         return userRepository.findAllByLoginNot(pageable, Constants.ANONYMOUS_USER).map(UserDTO::new);
