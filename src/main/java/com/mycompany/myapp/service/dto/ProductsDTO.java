@@ -26,6 +26,9 @@ public class ProductsDTO {
     @Size(max = 64)
     private String productsImage;
 
+    @Size(max = 64)
+    private String productsImageMobile;
+
     @Digits(integer = 10, fraction = 2)
     private BigDecimal productsPrice;
 
@@ -58,18 +61,19 @@ public class ProductsDTO {
     private Integer productsViewed;
 
     public ProductsDTO(Products products, ProductsDescription productsDescription) {
-        this(products.getProductsId(), products.getProductsQuantity(), products.getProductsModel(), products.getProductsImage(), products.getProductsPrice(),
+        this(products.getProductsId(), products.getProductsQuantity(), products.getProductsModel(), products.getProductsImage(), products.getProductsImageMobile(), products.getProductsPrice(),
             products.getProductsDateAdded(), products.getProductsLastModified(), products.getProductsDateAvailable(), products.getProductsWeight(),
             products.isProductsStatus(), products.getProductsTaxClassId(), products.getManufacturersId(),
             productsDescription.getProductsDescription(), productsDescription.getProductsName(), productsDescription.getProductsURL(),
             productsDescription.getProductsViewed());
     }
 
-    public ProductsDTO(Long productsId, Integer productsQuantity, String productsModel, String productsImage, BigDecimal productsPrice, Instant productsDateAdded, Instant productsLastModified, Instant productsDateAvailable, BigDecimal productsWeight, boolean productsStatus, Integer productsTaxClassId, Integer manufacturersId, String productsDescription, String productsName, String productsURL, Integer productsViewed) {
+    public ProductsDTO(Long productsId, Integer productsQuantity, String productsModel, String productsImage, String productsImageMobile, BigDecimal productsPrice, Instant productsDateAdded, Instant productsLastModified, Instant productsDateAvailable, BigDecimal productsWeight, boolean productsStatus, Integer productsTaxClassId, Integer manufacturersId, String productsDescription, String productsName, String productsURL, Integer productsViewed) {
         this.productsId = productsId;
         this.productsQuantity = productsQuantity;
         this.productsModel = productsModel;
         this.productsImage = productsImage;
+        this.productsImageMobile = productsImageMobile;
         this.productsPrice = productsPrice;
         this.productsDateAdded = productsDateAdded;
         this.productsLastModified = productsLastModified;
@@ -114,6 +118,14 @@ public class ProductsDTO {
 
     public void setProductsImage(String productsImage) {
         this.productsImage = productsImage;
+    }
+
+    public String getProductsImageMobile() {
+        return productsImageMobile;
+    }
+
+    public void setProductsImageMobile(String productsImageMobile) {
+        this.productsImageMobile = productsImageMobile;
     }
 
     public BigDecimal getProductsPrice() {
@@ -220,6 +232,7 @@ public class ProductsDTO {
             ", productsQuantity=" + productsQuantity +
             ", productsModel='" + productsModel + '\'' +
             ", productsImage='" + productsImage + '\'' +
+            ", productsImageMobile='" + productsImageMobile + '\'' +
             ", productsPrice=" + productsPrice +
             ", productsDateAdded=" + productsDateAdded +
             ", productsLastModified=" + productsLastModified +

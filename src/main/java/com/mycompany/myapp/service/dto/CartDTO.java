@@ -36,6 +36,9 @@ public class CartDTO {
     @Size(max = 64)
     private String productsImage;
 
+    @Size(max = 64)
+    private String productsImageMobile;
+
     @Digits(integer = 10, fraction = 2)
     private BigDecimal productsPrice;
 
@@ -68,13 +71,13 @@ public class CartDTO {
     private Integer productsViewed;
 
     public CartDTO(Cart cart, Products products, ProductsDescription prodDescription){
-        this(cart.getCartId(), cart.getId(), cart.getCartItemQuantity(), cart.getCartItemTotalPrice(), products.getProductsId(), products.getProductsQuantity(), products.getProductsModel(), products.getProductsImage(), products.getProductsPrice(),
+        this(cart.getCartId(), cart.getId(), cart.getCartItemQuantity(), cart.getCartItemTotalPrice(), products.getProductsId(), products.getProductsQuantity(), products.getProductsModel(), products.getProductsImage(), products.getProductsImageMobile(), products.getProductsPrice(),
             products.getProductsDateAdded(), products.getProductsLastModified(), products.getProductsDateAvailable(), products.getProductsWeight(),
             products.isProductsStatus(), products.getProductsTaxClassId(), products.getManufacturersId(), prodDescription.getProductsDescription(), prodDescription.getProductsName(), prodDescription.getProductsURL(),
             prodDescription.getProductsViewed());
     }
 
-    public CartDTO(Long cartId, Long id, Integer cartItemQuantity, BigDecimal cartItemTotalPrice, Long productsId, Integer productsQuantity, String productsModel, String productsImage, BigDecimal productsPrice, Instant productsDateAdded, Instant productsLastModified, Instant productsDateAvailable, BigDecimal productsWeight, boolean productsStatus, Integer productsTaxClassId, Integer manufacturersId, String productsDescription, String productsName, String productsURL, Integer productsViewed) {
+    public CartDTO(Long cartId, Long id, Integer cartItemQuantity, BigDecimal cartItemTotalPrice, Long productsId, Integer productsQuantity, String productsModel, String productsImage, String productsImageMobile, BigDecimal productsPrice, Instant productsDateAdded, Instant productsLastModified, Instant productsDateAvailable, BigDecimal productsWeight, boolean productsStatus, Integer productsTaxClassId, Integer manufacturersId, String productsDescription, String productsName, String productsURL, Integer productsViewed) {
         this.cartId = cartId;
         this.id = id;
         this.cartItemQuantity = cartItemQuantity;
@@ -83,6 +86,7 @@ public class CartDTO {
         this.productsQuantity = productsQuantity;
         this.productsModel = productsModel;
         this.productsImage = productsImage;
+        this.productsImageMobile = productsImageMobile;
         this.productsPrice = productsPrice;
         this.productsDateAdded = productsDateAdded;
         this.productsLastModified = productsLastModified;
@@ -159,6 +163,14 @@ public class CartDTO {
 
     public void setProductsImage(String productsImage) {
         this.productsImage = productsImage;
+    }
+
+    public String getProductsImageMobile() {
+        return productsImageMobile;
+    }
+
+    public void setProductsImageMobile(String productsImageMobile) {
+        this.productsImageMobile = productsImageMobile;
     }
 
     public BigDecimal getProductsPrice() {
@@ -265,6 +277,7 @@ public class CartDTO {
             ", productsQuantity=" + productsQuantity +
             ", productsModel='" + productsModel + '\'' +
             ", productsImage='" + productsImage + '\'' +
+            ", productsImageMobile='" + productsImageMobile + '\'' +
             ", productsPrice=" + productsPrice +
             ", productsDateAdded=" + productsDateAdded +
             ", productsLastModified=" + productsLastModified +
@@ -279,5 +292,4 @@ public class CartDTO {
             ", productsViewed=" + productsViewed +
             '}';
     }
-
 }

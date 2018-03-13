@@ -44,6 +44,10 @@ public class Products extends AbstractAuditingEntity implements Serializable {
     @Column(name = "products_image", length = 64)
     private String productsImage;
 
+    @Size(max = 64)
+    @Column(name = "products_image_mobile", length = 64)
+    private String productsImageMobile;
+
     @Digits(integer = 10, fraction = 2)
     @Column(name = "products_price", length = 64)
     private BigDecimal productsPrice;
@@ -99,6 +103,10 @@ public class Products extends AbstractAuditingEntity implements Serializable {
         return productsImage;
     }
 
+    public String getProductsImageMobile() {
+        return productsImageMobile;
+    }
+
     public BigDecimal getProductsPrice() {
         return productsPrice;
     }
@@ -150,4 +158,5 @@ public class Products extends AbstractAuditingEntity implements Serializable {
     public int hashCode() {
         return Objects.hashCode(getProductsId());
     }
+    
 }
