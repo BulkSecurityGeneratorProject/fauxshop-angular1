@@ -1,6 +1,7 @@
 package com.mycompany.myapp.service.dto;
 
 import com.mycompany.myapp.domain.Cart;
+import com.mycompany.myapp.domain.Favorite;
 import com.mycompany.myapp.domain.Products;
 import com.mycompany.myapp.domain.ProductsDescription;
 
@@ -13,17 +14,11 @@ import java.time.Instant;
 /**
  * A DTO representing a cart record.
  */
-public class CartDTO {
+public class FavoriteDTO {
 
-    private Long cartId;
+    private Long favoriteId;
 
     private Long id;
-
-    @Size(min = 1, max = 4)
-    private Integer cartItemQuantity;
-
-    @Digits(integer = 10, fraction = 2)
-    private BigDecimal cartItemTotalPrice;
 
     private Long productsId;
 
@@ -70,18 +65,16 @@ public class CartDTO {
 
     private Integer productsViewed;
 
-    public CartDTO(Cart cart, Products products, ProductsDescription prodDescription){
-        this(cart.getCartId(), cart.getId(), cart.getCartItemQuantity(), cart.getCartItemTotalPrice(), products.getProductsId(), products.getProductsQuantity(), products.getProductsModel(), products.getProductsImage(), products.getProductsImageMobile(), products.getProductsPrice(),
+    public FavoriteDTO(Favorite favorite, Products products, ProductsDescription prodDescription){
+        this(favorite.getFavoriteId(), favorite.getId(), products.getProductsId(), products.getProductsQuantity(), products.getProductsModel(), products.getProductsImage(), products.getProductsImageMobile(), products.getProductsPrice(),
             products.getProductsDateAdded(), products.getProductsLastModified(), products.getProductsDateAvailable(), products.getProductsWeight(),
             products.isProductsStatus(), products.getProductsTaxClassId(), products.getManufacturersId(), prodDescription.getProductsDescription(), prodDescription.getProductsName(), prodDescription.getProductsURL(),
             prodDescription.getProductsViewed());
     }
 
-    public CartDTO(Long cartId, Long id, Integer cartItemQuantity, BigDecimal cartItemTotalPrice, Long productsId, Integer productsQuantity, String productsModel, String productsImage, String productsImageMobile, BigDecimal productsPrice, Instant productsDateAdded, Instant productsLastModified, Instant productsDateAvailable, BigDecimal productsWeight, boolean productsStatus, Integer productsTaxClassId, Integer manufacturersId, String productsDescription, String productsName, String productsURL, Integer productsViewed) {
-        this.cartId = cartId;
+    public FavoriteDTO(Long favoriteId, Long id, Long productsId, Integer productsQuantity, String productsModel, String productsImage, String productsImageMobile, BigDecimal productsPrice, Instant productsDateAdded, Instant productsLastModified, Instant productsDateAvailable, BigDecimal productsWeight, boolean productsStatus, Integer productsTaxClassId, Integer manufacturersId, String productsDescription, String productsName, String productsURL, Integer productsViewed) {
+        this.favoriteId = favoriteId;
         this.id = id;
-        this.cartItemQuantity = cartItemQuantity;
-        this.cartItemTotalPrice = cartItemTotalPrice;
         this.productsId = productsId;
         this.productsQuantity = productsQuantity;
         this.productsModel = productsModel;
@@ -101,12 +94,12 @@ public class CartDTO {
         this.productsViewed = productsViewed;
     }
 
-    public Long getCartId() {
-        return cartId;
+    public Long getFavoriteId() {
+        return favoriteId;
     }
 
-    public void setCartId(Long cartId) {
-        this.cartId = cartId;
+    public void setFavoriteId(Long favoriteId) {
+        this.favoriteId = favoriteId;
     }
 
     public Long getId() {
@@ -115,22 +108,6 @@ public class CartDTO {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Integer getCartItemQuantity() {
-        return cartItemQuantity;
-    }
-
-    public void setCartItemQuantity(Integer cartItemQuantity) {
-        this.cartItemQuantity = cartItemQuantity;
-    }
-
-    public BigDecimal getCartItemTotalPrice() {
-        return cartItemTotalPrice;
-    }
-
-    public void setCartItemTotalPrice(BigDecimal cartItemTotalPrice) {
-        this.cartItemTotalPrice = cartItemTotalPrice;
     }
 
     public Long getProductsId() {
@@ -272,7 +249,7 @@ public class CartDTO {
 
     @Override
     public String toString() {
-        return "CartDTO{" +
+        return "FavoriteDTO{" +
             "productsId=" + productsId +
             ", productsQuantity=" + productsQuantity +
             ", productsModel='" + productsModel + '\'' +
