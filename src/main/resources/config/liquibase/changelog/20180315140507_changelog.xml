@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?><databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+<changeSet author="derekzuk (generated)" id="1521122712266-1">
+<createTable tableName="favorite">
+<column autoIncrement="true" name="favorite_id" type="BIGINT">
+<constraints primaryKey="true" primaryKeyName="favoritePK"/>
+</column>
+<column name="created_by" type="VARCHAR(50)">
+<constraints nullable="false"/>
+</column>
+<column name="created_date" type="timestamp">
+<constraints nullable="false"/>
+</column>
+<column name="last_modified_by" type="VARCHAR(50)"/>
+<column name="last_modified_date" type="timestamp"/>
+<column name="id" type="BIGINT"/>
+<column name="products_id" type="BIGINT"/>
+</createTable>
+</changeSet>
+</databaseChangeLog>
