@@ -5,9 +5,9 @@
         .module('fauxshopApp')
         .factory('CartService', CartService);
 
-    CartService.$inject = ['$http','$resource'];
+    CartService.$inject = ['$http','$resource', '$q'];
 
-    function CartService ($http, $resource) {
+    function CartService ($http, $resource, $q) {
         var service = {
             getCartByUserId: getCartByUserId,
             addToCart: addToCart,
@@ -37,8 +37,7 @@
                 'save': {
                     method: 'POST',
                     transformResponse: function (data) {
-                        data = angular.fromJson(data);
-                        return data;
+                        return angular.fromJson(data);
                     }
                 }
             });

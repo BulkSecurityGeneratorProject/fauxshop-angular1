@@ -97,9 +97,9 @@ public class FavoriteResource {
     }
 
     private Favorite examineExistingFavoriteRecords(Favorite favoriteRecord) {
-        Optional<List<Favorite>> existingCartRecords = favoriteService.findAllById(favoriteRecord.getId());
-        if (existingCartRecords.isPresent()) {
-            for (Favorite existingCartRecord : existingCartRecords.get()) {
+        Optional<List<Favorite>> existingFavoriteRecords = favoriteService.findAllById(favoriteRecord.getId());
+        if (existingFavoriteRecords.isPresent()) {
+            for (Favorite existingCartRecord : existingFavoriteRecords.get()) {
                 if (existingCartRecord.equals(favoriteRecord)){
                     favoriteRecord = existingCartRecord;
                 }

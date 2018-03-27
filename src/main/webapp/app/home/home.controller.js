@@ -15,9 +15,14 @@
         vm.isAuthenticated = null;
         vm.login = LoginService.open;
         vm.register = register;
-        $scope.$on('authenticationSuccess', function() {
-            getAccount();
-        });
+
+        // This bit of code is no longer useful in our application, but I'll leave it with an explanation.
+        // The LoginController.login() function uses the following method to broadcast the 'authenticationSuccess':
+        // $rootScope.$broadcast('authenticationSuccess');
+        // This triggers the code below.
+//        $scope.$on('authenticationSuccess', function() {
+//            getAccount();
+//        });
 
         getAccount();
 

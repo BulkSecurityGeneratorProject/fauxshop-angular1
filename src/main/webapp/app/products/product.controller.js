@@ -5,9 +5,9 @@
         .module('fauxshopApp')
         .controller('ProductController', ProductController);
 
-    ProductController.$inject = ['$q', '$window', '$scope', 'Principal', 'ProductsService', 'LoginService', 'CartService', 'productToDisplay', '$state'];
+    ProductController.$inject = ['$window', '$scope', 'Principal', 'ProductsService', 'LoginService', 'CartService', 'productToDisplay', '$state'];
 
-    function ProductController ($q, $window, $scope, Principal, ProductsService, LoginService, CartService, productToDisplay, $state) {
+    function ProductController ($window, $scope, Principal, ProductsService, LoginService, CartService, productToDisplay, $state) {
         var vm = this;
 
         vm.product = productToDisplay;
@@ -41,15 +41,22 @@
         });
     }
 
+    // This is how promises can be used with the angular $resource http calls
     function addToCart(productId) {
         if (vm.account != null) {
-            var savedCart = CartService.addToCart(vm.account.id, productId, 1).save();
-            $q.when(savedCart != null)
-                .then($state.go('cart', {}, { reload: true}));
+            var savedCart = CartService.addToCart(vm.account.id, productId, 1).save().$promise
+                .then(function (result) {
+                    $state.go('cart', {});
+                });
         } else {
-            var savedCart = CartService.addToCart($window.localStorage.guestId, productId, 1).save();
-            $q.when(savedCart != null)
-                .then($state.go('cart', {}, { reload: true}));
+            var savedCart = CartService.addToCart($window.localStorage.guestId, productId, 1).save().$promise
+                .then(function (result) {
+                    $state.go('cart', {});
+                });
+        }
+
+        function goToCart() {
+            $state.go('cart', {});
         }
     }
 
